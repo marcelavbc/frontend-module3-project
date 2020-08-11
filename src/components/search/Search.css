@@ -1,0 +1,31 @@
+.search-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input {
+    border: solid 2px #13C7B6;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 70%;
+    color: black;
+}
+
+.box {
+    border: solid 2px #13C7B6;
+}
+
+button {
+    background-color: #13C7B6!important;
+    color: #ffffff!important;
+
+}

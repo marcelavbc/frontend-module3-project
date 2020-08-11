@@ -1,0 +1,32 @@
+.input-form {
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    margin-bottom: 40px;
+
+}
+
+.auth {
+    background-color: #13C7B6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding-right: 100px;
+    color: #ffffff;
+}
+
+button {
+    border: 1px solid white!important;
+}
+

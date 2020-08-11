@@ -1,0 +1,39 @@
+.navbar {
+    background-color: #13C7B6;
+    color: #ffffff;
+}
+
+.profile {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-picture {
+    border-radius: 50%;
+}
+
+.navbar p {
+    margin-bottom: 0;
+}
+
+.picture {
+    width: 100px;
+    border-radius: 50%;
+    border: 3px solid #13C7B6;
+}
+
+.title {
+    color: #13C7B6;
+    /* border: 1px solid green; */
+}
+
+.line {
+    border: 2px solid #13C7B6;
+}
+
+input {
+    border: 2px solid #13C7B6;
+}
+
