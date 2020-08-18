@@ -1,39 +1,72 @@
-.navbar {
-    background-color: #13C7B6;
-    color: #ffffff;
-}
-
 .profile {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* border: 3px solid red; */
+}
+
+.profile-container {
+    display: flex;
+}
+
+.edit-form {
+    border-top: 3px solid #ffe2d1;
+    padding-top: 20px;
 }
 
 .profile-picture {
     border-radius: 50%;
-}
-
-.navbar p {
-    margin-bottom: 0;
-}
-
-.picture {
-    width: 100px;
-    border-radius: 50%;
     border: 3px solid #13C7B6;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+
 }
 
-.title {
+.edit-photo {
+    border: 3px solid #ffe2d1;
+}
+
+.teste {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.fa-power-off {
+    color: #f05d5e !important;
+}
+
+.back {
+    background-color: #13C7B6;
+}
+
+.photo {
+    margin: 8px;
+}
+
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+}
+
+[type="file"]+label {
+    background: #ffe2d1;
+    border: none;
+    border-radius: 5px;
     color: #13C7B6;
-    /* border: 1px solid green; */
+    cursor: pointer;
+    outline: none;
+    padding: 0.5rem;
+}
+.link {
+    color: #f05d5e;
+
 }
 
-.line {
-    border: 2px solid #13C7B6;
-}
-
-input {
-    border: 2px solid #13C7B6;
+.bookTitle {
+    color: #f05d5e
 }
 

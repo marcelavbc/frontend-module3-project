@@ -1,0 +1,140 @@
+.panel-group {
+    margin-top: 0px;
+}
+
+
+.panel-collapse {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height .5s ease;
+    background-color: #f05d5e;
+    color: #ffe2d1;
+}
+
+.panel-close {
+    max-height: 0;
+}
+
+.recipe-card {
+    margin-bottom: 5px;
+    padding: 0 !important;
+    background-color: #13C7B6 !important;
+    color: #ffe2d1;
+
+}
+
+.recipe-image {
+    width: 100%;
+    height: 246px;
+    object-fit: contain;
+}
+
+.card-title {
+    margin: 12px 0;
+}
+
+.card-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f05d5e;
+    padding: 8px;
+}
+
+.icon {
+    color: #ffe2d1;
+}
+
+.wrapper {
+    position: relative;
+    float: left;
+}
+
+.badge {
+    width: auto;
+    height: auto;
+    margin: 0;
+    position: absolute;
+    top: -5px;
+    right: -20px;
+}
+
+.minuts {
+    right: -33px;
+}
+
+/* .miss-ingredients-list {
+    list-style: none;
+} */
+
+/* DETAILS */
+
+.recipe {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+.image-detail {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.recipe-info {
+    /* border: solid red 2px; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.centered {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffe2d1;
+    background-color: #f05d5e;
+    width: 90%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.recipe-data {
+    /* border: solid red 2px; */
+    display: flex;
+    justify-content: center;
+}
+
+.recipe-icons {
+    background-color: #13C7B6;
+    padding: 5px;
+    display: flex;
+    color: #ffe2d1;
+    justify-content: space-evenly;
+    margin-top: 10px;
+
+}
+
+.line-hr {
+    margin: 8px 0;
+}
+
+.cook-instructions p {
+    /* border: solid 1px green; */
+    /* color: #004e98; */
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0
+}

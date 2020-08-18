@@ -5,19 +5,43 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #ffe2d1;
+
 }
 
 .home h1 {
     font-family: 'Amita', cursive;
-    font-size: 7rem;
+    font-size: 6rem;
     font-weight: 700;
-    color: #ffffff;
 }
 
-.home a {
-    color: #ffffff
+button {
+    margin: 0 5px !important;
+    color: #ffe2d1!important;
+    border: 1px solid #ffe2d1!important;
 }
 
-.logo {
-    width: 100px;
+button:hover {
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #F05D5E;
+    color: #ffe2d1!important;
+}
+
+img {
+    width: 80px;
+}
+
+@media (min-width:600px) {
+    .home h1 {
+        font-size: 10rem;
+    }
+
+    button {
+        font-size: 1.6rem !important;
+    }
+
+    img {
+        width: 100px;
+    }
 }

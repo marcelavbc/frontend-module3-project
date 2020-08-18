@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import AuthService from './auth-services';
-import './Auth.css'
+import AuthService from '../../auth/auth-services';
+import { Link } from 'react-router-dom';
+import GoogleButton from 'react-google-button'
 
 export default class Login extends Component {
     constructor(props) {
@@ -37,7 +38,8 @@ export default class Login extends Component {
     render() {
         return (
             <div className="auth">
-                <form onSubmit={this.handleFormSubmit}>
+                <h2>Login!</h2>
+                <form onSubmit={this.handleFormSubmit} className="form-div">
                     <input
                         className="input-form"
                         type="text"
@@ -55,16 +57,19 @@ export default class Login extends Component {
                         value={this.state.password}
                         onChange={e => this.handleChange(e)}
                     />
-
-                    <button className="btn text-white" type="submit">
+                    <button className="btn log-btn" type="submit">
                         Let's Cook!
                     </button>
                 </form>
-
-
-                {/* <p>Already have account?
-                <Link to={"/"}> Login</Link>
-                </p> */}
+                <GoogleButton label="Sign up with Google"
+                    type="light"
+                    className="google-button"
+                    onClick={() => { console.log('Google button clicked') }}
+                />
+                <div className="d-flex flex-column align-items-center">
+                    <p>Don't have an account yet?</p>
+                    <Link to={"/signup"}><button className="btn log-btn">Sign up!</button></Link>
+                </div>
             </div>
         )
     }

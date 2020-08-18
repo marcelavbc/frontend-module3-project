@@ -1,31 +1,42 @@
-.search-page {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.input-search {
+    border: none;
+    border-bottom: 1px solid #13C7B6;
+    width: 100%;
+    padding: 5px;
+    color: #004e98;
 }
 
-.input {
-    border: solid 2px #13C7B6;
+.btn-add {
+    background-color: #f05d5e!important;
+    /* padding: 0px!important;
+    margin: 0px!important;
+    width: 20px!important;
+    height: 20px!important; */
 }
 
-.search-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+.input-search::placeholder{
+    color: #004e98;
 }
 
-input {
-    width: 70%;
-    color: black;
+.selected {
+    color: #004e98!important;
+    margin: 5px
 }
 
-.box {
-    border: solid 2px #13C7B6;
+.cookButton-div {
+    text-align: center;
 }
 
-button {
+.btn-letscook {
+    background-color: #f05d5e!important;
+    margin-top: 10px!important;
+}
+.btn-letscook:hover {
     background-color: #13C7B6!important;
-    color: #ffffff!important;
+}
 
+.recipe-box {
+    margin: 5px!important;
+    border-radius: 5px;
 }
