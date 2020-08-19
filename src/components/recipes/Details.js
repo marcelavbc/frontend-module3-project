@@ -10,6 +10,7 @@ export default class Details extends Component {
         this.state = {
             id: this.props.match.params.id,
             recipes: this.props.recipes,
+            single: {}
         }
     }
 
@@ -25,31 +26,42 @@ export default class Details extends Component {
 
 
     render() {
+        let result = '';
+        // let method = ''
+        if (this.state.single) {
+            console.log('ingredientes: ', this.state.single.extendedIngredients[0].name)
+            // let copyIngredients = this.state.single.extendedIngredients
+            // result = copyIngredients.map((ele, i) => {
+            //     return (
+            //         <>
+            //             <li className="" key={i}>{ele.name + ' - '} {ele.amount} {ele.unit} </li>
+            //             <hr className="line-hr"></hr>
+            //         </>
+            //     )
+            // })
 
-        // let copyIngredients = this.state.single.extendedIngredients
-        // console.log('single recipe ingredients: ', copyIngredients)
-        // let result = copyIngredients.map((ele, i) => {
-        //     return (
-        //         <>
-        //             <li className="" key={i}>{ele.name + ' - '} {ele.amount} {ele.unit} </li>
-        //             <hr className="line-hr"></hr>
-        //         </>
-        //     )
-        // })
+            // let copyToMethods = this.state.single.analyzedInstructions[0].steps
+            // console.log('single recipe method: ', copyToMethods)
+            // method = copyToMethods.map((ele, i) => {
+            //     return (
+            //         <>
+            //             <li className="" key={i}>{i + 1 + ')'} {ele.step}</li>
+            //             <hr className="line-hr"></hr>
+            //         </>
+            //     )
+            // })
+        }
 
-        // let copyToMethods = this.state.single.analyzedInstructions[0].steps
-        // console.log('single recipe method: ', copyToMethods)
-        // let method = copyToMethods.map((ele, i) => {
-        //     return (
-        //         <>
-        //             <li className="" key={i}>{i + 1 + ')'} {ele.step}</li>
-        //             <hr className="line-hr"></hr>
-        //         </>
-        //     )
-        // })
-        console.log('recipes in details:', this.props)
-        console.log('Id in details:', this.state.id)
-        console.log('Single in details:', this.state.single.vegetarian)
+
+        
+        // console.log('recipes in details:', this.props)
+        // console.log('Id in details:', this.state.id)
+        // console.log('Single in details:', this.state.single)
+        if (this.state.single) {
+            console.log(this.state.single.title)
+        }
+
+
 
 
 
@@ -61,15 +73,15 @@ export default class Details extends Component {
                         <Navbar text='Recipe' link='/search' user={this.props.loggedInUser} />
                     </div>
 
-                    {/* <div className="row mt-5 mx-1 recipe-info">
+                    <div className="row mt-5 mx-1 recipe-info">
                         <div className="col-12 p-0">
                             <img className="image-detail" src={this.state.single.image} alt={this.state.single.title} />
                             <p className="centered m-0">{this.state.single.title}</p>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className="row">
-                        {/* <div className="col recipe-icons">
+                        <div className="col recipe-icons">
                             <div className="d-flex align-items-center">
                                 <i className="icon far fa-clock"></i>
                                 <p className="m-0 mx-1">{this.state.single.readyInMinutes + '\''}</p>
@@ -81,10 +93,10 @@ export default class Details extends Component {
                             <div className="d-flex align-items-center">
                                 <i className="icon fas fa-bookmark"></i>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                     <div className="row">
-                        {/* <div className="col-12">
+                        <div className="col-12">
                             <div className="cook-instructions">
                                 <p>Ingredients:</p>
                                 <ul>
@@ -93,16 +105,16 @@ export default class Details extends Component {
 
                             </div>
 
-                        </div> */}
-                        {/* <div className="col-12">
+                        </div>
+                        <div className="col-12">
                             <div className="cook-instructions">
                                 <p>Method:</p>
                                 <ul>
-                                    {method}
+                                    {/* {method} */}
                                 </ul>
                             </div>
 
-                        </div> */}
+                        </div>
                     </div>
 
 
