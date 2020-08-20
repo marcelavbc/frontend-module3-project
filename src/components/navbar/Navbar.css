@@ -1,12 +1,18 @@
 .navbar {
-    background-color: #13c7b6;
-    color: #ffe2d1;
+    background-color: var(--primary);
+    color: var(--light);
 }
 
-
-
-nav i{
- color: #ffe2d1!important
+nav i {
+    color: var(--light) !important
 }
 
+.navbar img{
+    width: 25px;
+    height: 25px;
+}
 
+.navbar p {
+    font-size: 18px!important;
+    margin: 0
+}

@@ -10,8 +10,8 @@ export default class Navbar extends Component {
         return (
             <nav className="navbar col">
                 <Link to={this.props.link}><i className="fas fa-chevron-left"></i></Link>
-                {this.props.text}
-                <i className="fas fa-utensils"></i>
+                <p>{this.props.text}</p>
+                <img src="/images/search.png" alt="search"/>
             </nav>
         )
     }

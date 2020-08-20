@@ -44,14 +44,26 @@ export default class Search extends Component {
 
     getIngredients = (event) => {
         let ingredient = event.target.value.toLowerCase()
-        axios.get(`https://api.spoonacular.com/food/ingredients/autocomplete?query=${ingredient}&number=5&apiKey=8fe7b3ccbf9c46789a2329e91dd4509c`)
+        axios({
+            "method": "GET",
+            "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
+            "headers": {
+                "content-type": "application/octet-stream",
+                "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+                "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+                "useQueryString": true
+            }, "params": {
+                "number": "5",
+                "query": ingredient
+            }
+        })
             .then(responseFromApi => {
                 this.setState({
                     data: responseFromApi.data,
                     ingredient: ingredient
                 })
             })
-            
+
     }
 
     deleteItem = (item) => {
@@ -68,8 +80,25 @@ export default class Search extends Component {
 
     letsCook = () => {
         let param = this.state.listAllIngredients.toString()
-        // console.log('param:', param)
-        axios.get(`https://api.spoonacular.com/recipes/complexSearch?number=2&includeIngredients=${param}&addRecipeInformation=true&ignorePantry=true&fillIngredients=true&apiKey=8fe7b3ccbf9c46789a2329e91dd4509c`)
+        console.log('param:', param)
+
+        axios({
+            "method": "GET",
+            "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex",
+            "headers": {
+                "content-type": "application/octet-stream",
+                "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+                "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+                "useQueryString": true
+            }, "params": {
+                "includeIngredients": param,
+                "fillIngredients": "true",
+                "addRecipeInformation": "true",
+                "limitLicense": "false",
+                "offset": "0",
+                "number": "10"
+            }
+        })
             .then(responseRecipes => {
                 console.log('responseRecipes: ', responseRecipes.data.results)
                 this.setState({
@@ -81,7 +110,7 @@ export default class Search extends Component {
                 const copyRecipe = this.state.recipes
                 const copyIngredients = this.state.listAllIngredients
                 this.props.liftUpRecipesSearched(copyRecipe)
-                this.props.ingredients(copyIngredients) 
+                this.props.ingredients(copyIngredients)
             })
     }
 
@@ -118,13 +147,13 @@ export default class Search extends Component {
         if (this.state.isClicked) {
             // console.log('recipes to map:', this.state.recipes)
             listRecipes = this.state.recipes.map((ele, i) => {
-                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\'' } serving={ele.servings} recipes={ele}/>
+                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} />
             })
         }
         // console.log('state in search', this.state)
 
         return (
-            <div className="profile container">
+            <div className="profile container-fluid">
                 <div>
                     <div>
                         <div className="row">

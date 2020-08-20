@@ -15,15 +15,13 @@ export default class InputFormMethods extends Component {
     }
 
     handleChange = (index, event) => {
-        console.log(index, event.target.name)
+        // console.log(index, event.target.name)
         const values = [...this.state.analyzedInstructions]
         values[index][event.target.name] = event.target.value
         this.setState({
             analyzedInstructions: values
         })
-        console.log(this.state)
-
-        // this.props.liftIngredientsState(values)
+        this.props.liftMethodsState(values)
     }
 
     addInput = () => {
@@ -38,7 +36,7 @@ export default class InputFormMethods extends Component {
         this.setState({
             analyzedInstructions: values
         })
-        // this.props.liftIngredientsState(values)
+        this.props.liftMethodsState(values)
     }
 
     render() {

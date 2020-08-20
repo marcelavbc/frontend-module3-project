@@ -1,13 +1,20 @@
 body{
   margin: 0;
   padding: 0;
+  --primary: #f58f00;
+  --secondary: #016fb9;
+  --text: #020887;
+  --light: #EFEDE6
+
 }
 
-.container {
+.container-fluid {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
+
 
 

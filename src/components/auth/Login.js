@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../../auth/auth-services';
 import { Link } from 'react-router-dom';
-import GoogleButton from 'react-google-button'
 
 export default class Login extends Component {
     constructor(props) {
@@ -37,7 +36,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="auth">
+            <div className="container-fluid auth">
                 <h2>Login!</h2>
                 <form onSubmit={this.handleFormSubmit} className="form-div">
                     <input
@@ -61,14 +60,10 @@ export default class Login extends Component {
                         Let's Cook!
                     </button>
                 </form>
-                <GoogleButton label="Sign up with Google"
-                    type="light"
-                    className="google-button"
-                    onClick={() => { console.log('Google button clicked') }}
-                />
-                <div className="d-flex flex-column align-items-center">
-                    <p>Don't have an account yet?</p>
-                    <Link to={"/signup"}><button className="btn log-btn">Sign up!</button></Link>
+
+                <div className="already">
+                    <p className="m-0 mr-3">Don't have an account yet?</p>
+                    <Link to={"/signup"}>Sign up!</Link>
                 </div>
             </div>
         )

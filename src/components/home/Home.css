@@ -1,47 +1,46 @@
 .home {
-    background-color: #13C7B6;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: #ffe2d1;
-
+    justify-content: center;
+    margin: 10px;
+    border: 5px solid var(--primary);
+    border-radius: 5px;
 }
 
 .home h1 {
     font-family: 'Amita', cursive;
     font-size: 6rem;
     font-weight: 700;
+    color: var(--primary)
 }
 
-button {
+
+.btn-home {
     margin: 0 5px !important;
-    color: #ffe2d1!important;
-    border: 1px solid #ffe2d1!important;
+    color: var(--primary) !important;
+    border: 1px solid var(--primary) !important;
 }
 
-button:hover {
-    padding-left: 25px;
-    padding-right: 25px;
-    background-color: #F05D5E;
-    color: #ffe2d1!important;
-}
 
-img {
-    width: 80px;
-}
 
 @media (min-width:600px) {
+    .home {
+        background-image: url(/images/brooke-lark-08bOYnH_r_E-unsplash.jpg);
+        background-size: cover;
+        /* border: none */
+    }
+
     .home h1 {
         font-size: 10rem;
     }
 
-    button {
+    .btn-home {
         font-size: 1.6rem !important;
     }
 
-    img {
-        width: 100px;
+    .btn-home:hover {
+        padding: 6px 24px;
     }
 }

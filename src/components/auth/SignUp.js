@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from '../../auth/auth-services';
 import { Link } from 'react-router-dom';
-import GoogleButton from 'react-google-button'
-import axios from 'axios'
+// import axios from 'axios'
 import './Auth.css'
 
 class Signup extends Component {
@@ -38,23 +37,23 @@ class Signup extends Component {
         this.setState({ [name]: value });
     }
 
-    handleFileUpLoad = (event) => {
-        console.log("file upload...")
-        const uploadData = new FormData()
-        uploadData.append("avatar", event.target.files[0])
-        axios.post('http://localhost:5000/api/upload', uploadData)
-            .then(response => {
-                console.log("file uploaded sucessfully", response.data)
-                this.setState({
-                    avatar: response.data.path
-                })
-            })
-    }
+    // handleFileUpLoad = (event) => {
+    //     console.log("file upload...")
+    //     const uploadData = new FormData()
+    //     uploadData.append("avatar", event.target.files[0])
+    //     axios.post('http://localhost:5000/api/upload', uploadData)
+    //         .then(response => {
+    //             console.log("file uploaded sucessfully", response.data)
+    //             this.setState({
+    //                 avatar: response.data.path
+    //             })
+    //         })
+    // }
 
 
     render() {
         return (
-            <div className="auth">
+            <div className="container-fluid auth">
                 <h2>Sign up!</h2>
                 <form onSubmit={this.handleFormSubmit} className="form-div">
                     <input
@@ -83,25 +82,22 @@ class Signup extends Component {
                         value={this.state.password}
                         onChange={e => this.handleChange(e)}
                     />
-                    <input
+                    {/* <input
                         type="file"
                         name="avatar"
                         onChange={this.handleFileUpLoad}
-                    />
+                        className="edit-profile-input"
+                    /> */}
 
                     <button className="btn log-btn" type="submit">
                         Let's Cook!
                     </button>
                 </form>
 
-                <GoogleButton label="Sign up with Google"
-                    type="light"
-                    className="google-button"
-                    onClick={() => { console.log('Google button clicked') }}
-                />
-                <div className="d-flex flex-column align-items-center">
-                    <p>Already have account?</p>
-                    <Link to={"/login"}><button className="btn log-btn">Login</button></Link>
+                {/* <a href="/auth/google">Google</a> */}
+                <div className="already">
+                    <p className="m-0 mr-3">Already have account?</p>
+                    <Link to={"/login"}>Login!</Link>
                 </div>
 
             </div>
