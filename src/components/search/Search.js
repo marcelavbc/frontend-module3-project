@@ -50,7 +50,7 @@ export default class Search extends Component {
             "headers": {
                 "content-type": "application/octet-stream",
                 "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-                "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+                "x-rapidapi-key": "",
                 "useQueryString": true
             }, "params": {
                 "number": "5",
@@ -88,7 +88,7 @@ export default class Search extends Component {
             "headers": {
                 "content-type": "application/octet-stream",
                 "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-                "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+                "x-rapidapi-key": "",
                 "useQueryString": true
             }, "params": {
                 "includeIngredients": param,
