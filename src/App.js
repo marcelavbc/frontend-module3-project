@@ -33,7 +33,10 @@ export default class App extends Component {
     this.setState({
       recipes: recipesObject
     })
+    console.log('get recipes', recipesObject)
+
   }
+
 
   getSelectedIngredients = (list) => {
     this.setState({
@@ -41,24 +44,9 @@ export default class App extends Component {
     })
   }
 
-  // getSingleRecipe = (id) => {
-  //   // let recipeDetail = this.state.recipes.find(ele => {
-  //   //   console.log('ele', ele)
-  //   //   console.log('ele', ele.title)
-  //   //   return ele.id = id}) 
-  //   console.log('id', id)
-  //   // console.log('recipeDetail', recipeDetail)
-
-  //   this.setState({
-  //     singleRecipe: id
-  //   })
-  //   console.log("app.state.singleRecipe", this.state.singleRecipe)
-
-  // }
-
-
 
   render() {
+    console.log('in app:', this.state)
     return (
       <div>
         <Switch>
@@ -68,8 +56,8 @@ export default class App extends Component {
           <Route path="/logout" render={props => <Logout {...props} getUser={this.getTheUser} />} />
           <Route path="/profile" render={props => <Profile {...props} user={this.state.loggedInUser} getUser={this.getTheUser} />} />
           <Route path="/footer" render={props => <Footer {...props} user={this.state.loggedInUser} />} />
-          <Route path="/search" render={props => <Search {...props} user={this.state.loggedInUser} liftUpRecipesSearched={this.getAllRecipe} ingredients={this.getSelectedIngredients} getSingleRecipe={this.getSingleRecipe}/>} />
-          <Route path="/recipe/:id" render={props => <Details {...props}  recipes={this.state.recipes } single={this.state.singleRecipe}/>} />
+          <Route path="/search" render={props => <Search {...props} user={this.state.loggedInUser} liftUpRecipesSearched={this.getAllRecipe} ingredients={this.getSelectedIngredients} />} />
+          <Route path="/recipe/:id" render={props => <Details {...props} recipe={this.state.recipes} />} />
           <Route path="/add" render={props => <AddRecipe {...props} user={this.state.loggedInUser} />} />
         </Switch>
       </div>

@@ -35,9 +35,14 @@
 }
 
 .recipe-box {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
+    margin: 5px !important;
+    padding: 10px !important;
     display: flex;
     justify-content: space-around;
+
+
+   
 }
 
 @media (min-width:600px) {
