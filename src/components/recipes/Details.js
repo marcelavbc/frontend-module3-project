@@ -9,56 +9,46 @@ export default class Details extends Component {
         super(props)
         this.state = {
             id: this.props.match.params.id,
-            recipes: this.props.recipes,
-            single: {}
         }
     }
 
 
 
     componentDidMount() {
-        let id = this.state.id
-        let singleRecipe = this.state.recipes.find(ele => ele.id = id)
+        let recipe_id = this.state.id
+        console.log('data', this.props.recipe)
+        let single = this.props.recipe.find(ele => ele.id = recipe_id)
         this.setState({
-            single: singleRecipe
+            single: single
         })
     }
 
 
     render() {
         let result = '';
-        // let method = ''
+        let method = '';
+        let image = '';
+        let title = '';
+        let minuts = '';
+        let servings = '';
+
         if (this.state.single) {
-            console.log('ingredientes: ', this.state.single.extendedIngredients[0].name)
-            // let copyIngredients = this.state.single.extendedIngredients
-            // result = copyIngredients.map((ele, i) => {
-            //     return (
-            //         <>
-            //             <li className="" key={i}>{ele.name + ' - '} {ele.amount} {ele.unit} </li>
-            //             <hr className="line-hr"></hr>
-            //         </>
-            //     )
-            // })
+            console.log(this.state.single.analyzedInstructions[0].steps)
+            image = this.state.single.image
+            title = this.state.single.title
+            minuts = this.state.single.readyInMinutes
+            servings = this.state.single.servings
+            result = this.state.single.extendedIngredients.map((ele, i) => {
+                return (
+                    <li key={i}>{ele.amount} {ele.unit} {ele.name}</li>
+                )
+            })
 
-            // let copyToMethods = this.state.single.analyzedInstructions[0].steps
-            // console.log('single recipe method: ', copyToMethods)
-            // method = copyToMethods.map((ele, i) => {
-            //     return (
-            //         <>
-            //             <li className="" key={i}>{i + 1 + ')'} {ele.step}</li>
-            //             <hr className="line-hr"></hr>
-            //         </>
-            //     )
-            // })
-        }
-
-
-        
-        // console.log('recipes in details:', this.props)
-        // console.log('Id in details:', this.state.id)
-        // console.log('Single in details:', this.state.single)
-        if (this.state.single) {
-            console.log(this.state.single.title)
+            method = this.state.single.analyzedInstructions[0].steps.map((ele, i) => {
+                return (
+                    <li key={i}>{ele.number + ')'} {ele.step}</li>
+                )
+            })
         }
 
 
@@ -68,6 +58,7 @@ export default class Details extends Component {
 
         return (
             <div className="recipe container">
+
                 <div>
                     <div className="row">
                         <Navbar text='Recipe' link='/search' user={this.props.loggedInUser} />
@@ -75,26 +66,28 @@ export default class Details extends Component {
 
                     <div className="row mt-5 mx-1 recipe-info">
                         <div className="col-12 p-0">
-                            <img className="image-detail" src={this.state.single.image} alt={this.state.single.title} />
-                            <p className="centered m-0">{this.state.single.title}</p>
+                            <img className="image-detail" src={image} alt={title} />
+                            <p className="centered m-0">{title}</p>
                         </div>
                     </div>
+
 
                     <div className="row">
                         <div className="col recipe-icons">
                             <div className="d-flex align-items-center">
                                 <i className="icon far fa-clock"></i>
-                                <p className="m-0 mx-1">{this.state.single.readyInMinutes + '\''}</p>
+                                <p className="m-0 mx-1">{minuts}</p>
                             </div>
                             <div className="d-flex align-items-center">
                                 <i className="icon fas fa-utensils"></i>
-                                <p className="m-0 mx-1">{this.state.single.servings}</p>
+                                <p className="m-0 mx-1">{servings}</p>
                             </div>
                             <div className="d-flex align-items-center">
                                 <i className="icon fas fa-bookmark"></i>
                             </div>
                         </div>
                     </div>
+
                     <div className="row">
                         <div className="col-12">
                             <div className="cook-instructions">
@@ -104,13 +97,12 @@ export default class Details extends Component {
                                 </ul>
 
                             </div>
-
                         </div>
                         <div className="col-12">
                             <div className="cook-instructions">
                                 <p>Method:</p>
                                 <ul>
-                                    {/* {method} */}
+                                    {method}
                                 </ul>
                             </div>
 

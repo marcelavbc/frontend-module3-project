@@ -28,13 +28,12 @@ export default class Recipes extends Component {
         })
     }
 
-
-
     render() {
+        console.log(this.props)
         return (
             <div className="recipe-card col-md-3">
-                    <h5 className="card-title d-flex align-items-center justify-content-center">{this.props.title}</h5>
-                    <img className="recipe-image" src={this.props.src} alt={this.props.title} />
+                <h5 className="card-title d-flex align-items-center justify-content-center">{this.props.title}</h5>
+                <img className="recipe-image" src={this.props.src} alt={this.props.title} />
                 <div className="card-icons">
                     <div className="wrapper">
                         <i className="icon far fa-clock"></i>
@@ -48,8 +47,8 @@ export default class Recipes extends Component {
                         <i className={this.state.open ? "icon fas fa-question-circle" : "icon far fa-question-circle"} onClick={this.open}></i>
                         <span className="badge">{this.props.missed}</span>
                     </div>
-                    <Link to={`/recipe/${this.props.id}`}><i className="icon fas fa-info" onClick={this.handleIconClick}></i></Link>
-                    <i className={this.state.saved ? "icon fas fa-bookmark" : "icon far fa-bookmark"}></i>
+                    <Link to={`/recipe/${this.props.id}`}><i className="icon fas fa-info"></i></Link>
+                    <i className={this.state.saved ? "icon fas fa-bookmark" : "icon far fa-bookmark"} onClick={this.save}></i>
                 </div>
 
                 <div className={this.state.open ? "panel-collapse" : "panel-collapse panel-close"}>

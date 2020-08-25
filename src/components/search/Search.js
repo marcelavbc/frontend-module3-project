@@ -16,7 +16,6 @@ export default class Search extends Component {
             ingredient: '',
             listAllIngredients: [],
             isClicked: false,
-            recipeInfo: {}
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -38,9 +37,19 @@ export default class Search extends Component {
             listAllIngredients: copyList,
             ingredient: ''
         })
-
-
     }
+
+    getSingleRecipe = (recipe) => {
+        console.log("get Single called")
+        console.log("recipe", recipe)
+        // this.setState({
+        //     single: 'hello'
+        // })
+        
+        // console.log('state:', this.state)
+        // this.props.upStaterecipe(this.state.single)
+    }
+
 
     getIngredients = (event) => {
         let ingredient = event.target.value.toLowerCase()
@@ -63,7 +72,6 @@ export default class Search extends Component {
                     ingredient: ingredient
                 })
             })
-
     }
 
     deleteItem = (item) => {
@@ -191,10 +199,10 @@ export default class Search extends Component {
                         </div>
                         <div className="row recipe-box">
                             {listRecipes}
-                            {/* <Recipes title="Cinnamon something else just to opopo" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
-                            <Recipes title="Cinnamon something else just to test" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
-                            <Recipes title="Cinnamon Apple bla bla bla bla and something else just to test" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
-                            <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} />
+                            {/* <Recipes title="Cinnamon something else just to opopo" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} infoClicked={this.getSingleRecipe} />
+                            <Recipes title="Cinnamon something else just to test" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} infoClicked={this.getSingleRecipe} />
+                            <Recipes title="Cinnamon Apple bla bla bla bla and something else just to test" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} infoClicked={this.getSingleRecipe}/>
+                            <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} infoClicked={this.getSingleRecipe}/>
                             <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} />
                             <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} />
                             <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
@@ -203,7 +211,6 @@ export default class Search extends Component {
                             <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
                             <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
                             <Recipes title="Jalapeño Burger" src="https://spoonacular.com/recipeImages/jalapeno-burger-2-98730.jpg" likes='90' missed='0' missing={['suggar', 'Cinnamon']} /> */}
-
                         </div>
                     </div>
                 </div>
