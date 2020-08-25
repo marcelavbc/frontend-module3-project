@@ -1,23 +1,13 @@
 .profile-container {
-    /* border: 1px solid black; */
     display: flex;
 }
 
 .profile-info-div {
-    /* border: 1px solid blue; */
     margin: 10px 5px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
-}
-
-.user-data {
-    /* border: 1px solid red; */
-}
-
-.user-nickname {
-    /* border: 2px solid green; */
 }
 
 .nickname {
@@ -111,7 +101,6 @@
     outline: none;
     margin-bottom: 5px;
     color: var(--secondary)
-    
 }
 
 .quote-input::placeholder {
@@ -129,10 +118,10 @@
 }
 
 .save {
-    background-color: var(--primary)!important;
-    padding: 5px!important;
-    color: var(--light)!important;
-    font-size: 12px!important;
+    background-color: var(--primary) !important;
+    padding: 5px !important;
+    color: var(--light) !important;
+    font-size: 12px !important;
     margin-left: 10px;
 
 }
@@ -148,9 +137,75 @@
 
 /*RECIPE BOOK*/
 
-.recipe-book{
+.recipe-book {
     /* border: 1px solid black; */
     width: 100%;
     margin: 10px
+}
+
+
+@media (min-width:600px) {
+
+    .profile-info-div {
+        margin: 10px 80px;
+    }
+
+    .profile-picture {
+        width: 250px;
+        height: 250px;
+    }
+
+    .edit-icon {
+        width: 50px;
+        height: 50px;
+        top: 150px;
+    }
+
+    .nickname {
+        font-size: 30px;
+    }
+
+    .quote {
+        font-size: 18px;
+        font-style: italic;
+        margin-right: 10px !important;
+    }
+
+    .fa-pencil-alt {
+        font-size: 20px;
+    }
+
+    .quote-input {
+        width: 600px !important
+    }
+
+    .form-div-edit {
+        display: flex;
+        flex-direction: column
+    }
+
+    .quote-input::placeholder {
+        font-size: 18px
+    }
+
+    .quote-input::-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        font-size: 18px
+    }
+
+    .quote-input::-ms-input-placeholder {
+        /* Microsoft Edge */
+        font-size: 18px
+    }
+
+    .save {
+        width: 10%;
+        font-size: 18px !important;
+    }
+
+    .fa-power-off {
+        font-size: 30px !important
+    }
 
 }
+

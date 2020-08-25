@@ -1,26 +1,22 @@
 .input-search {
     border: none;
-    border-bottom: 1px solid #13C7B6;
+    border-bottom: 1px solid var(--primary);
     width: 100%;
     padding: 5px;
-    color: #004e98;
+    color: var(--text);
 }
 
 .btn-add {
-    background-color: #f05d5e!important;
-    /* padding: 0px!important;
-    margin: 0px!important;
-    width: 20px!important;
-    height: 20px!important; */
+    background-color: var(--bg) !important;
 }
 
 
-.input-search::placeholder{
-    color: #004e98;
+.input-search::placeholder {
+    color: var(--text);
 }
 
 .selected {
-    color: #004e98!important;
+    color: var(--text) !important;
     margin: 5px
 }
 
@@ -29,14 +25,28 @@
 }
 
 .btn-letscook {
-    background-color: #f05d5e!important;
-    margin-top: 10px!important;
+    background-color: var(--bg) !important;
+    margin-top: 10px !important;
+    color: var(--light) !important
 }
+
 .btn-letscook:hover {
-    background-color: #13C7B6!important;
+    background-color: var(--primary) !important;
 }
 
 .recipe-box {
-    margin: 5px!important;
-    border-radius: 5px;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (min-width:600px) {
+    .search-main {
+        display: flex;
+        justify-content: center;
+    }
+
+    .input-search {
+        width: 50%;
+    }
 }

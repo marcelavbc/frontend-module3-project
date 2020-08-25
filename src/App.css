@@ -1,11 +1,11 @@
 body{
   margin: 0;
   padding: 0;
-  --primary: #f58f00;
+  --primary: #13c7b6;
   --secondary: #016fb9;
   --text: #020887;
-  --light: #EFEDE6
-
+  --light: #EFEDE6;
+  --bg: #bb342f
 }
 
 .container-fluid {
