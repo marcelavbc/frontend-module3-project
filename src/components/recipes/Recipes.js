@@ -31,11 +31,9 @@ export default class Recipes extends Component {
 
 
     render() {
-
-
         return (
-            <div className="recipe-card card col-md-3 mx-3">
-                 <h5 className="card-title text-center">{this.props.title}</h5>
+            <div className="recipe-card col-md-3">
+                    <h5 className="card-title d-flex align-items-center justify-content-center">{this.props.title}</h5>
                     <img className="recipe-image" src={this.props.src} alt={this.props.title} />
                 <div className="card-icons">
                     <div className="wrapper">
@@ -58,7 +56,7 @@ export default class Recipes extends Component {
                     <ul>
                         {this.props.missing.map((ele, i) => <li className="miss-ingredients-list" key={i}>{ele.name}</li>)}
                     </ul>
-                </div> 
+                </div>
             </div>
         )
     }
