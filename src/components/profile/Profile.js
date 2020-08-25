@@ -48,7 +48,7 @@ export default class Profile extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const newQuote = this.state.quote
-        axios.put('http://localhost:5000/api/edit', {newQuote}, { withCredentials: true })
+        axios.put('http://localhost:5000/api/edit', { newQuote }, { withCredentials: true })
 
     }
 
@@ -89,15 +89,16 @@ export default class Profile extends Component {
 
         } else {
             quote = (
-                <form onSubmit={() => this.handleSubmit()}>
+                <form onSubmit={() => this.handleSubmit()} className="form-div-edit">
                     <input
                         type="text"
                         name="quote"
                         placeholder={this.state.loggedInUser.quote}
                         className="quote-input"
-                        onChange={(event)=>this.handleChangeQuote(event)}
+                        onChange={(event) => this.handleChangeQuote(event)}
                     />
-                    <input type="submit" value="Save" className="save btn"/>
+
+                    <input type="submit" value="Save" className="save btn" />
                 </form>
             )
             pencil = null
@@ -106,7 +107,7 @@ export default class Profile extends Component {
 
 
         return (
-            <div className="profile container-fluid">
+            <div className="container-fluid">
                 <div>
                     <div className="row">
                         <Navbar user={this.state.loggedInUser} text='Profile' link='/login' />

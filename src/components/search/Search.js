@@ -84,29 +84,32 @@ export default class Search extends Component {
 
         axios({
             "method": "GET",
-            "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex",
+            "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch",
             "headers": {
                 "content-type": "application/octet-stream",
                 "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
                 "x-rapidapi-key": "",
                 "useQueryString": true
             }, "params": {
+                "addRecipeInformation": "true",
+                "instructionsRequired": "true",
+                "number": "10",
                 "includeIngredients": param,
                 "fillIngredients": "true",
-                "addRecipeInformation": "true",
-                "limitLicense": "false",
-                "offset": "0",
-                "number": "10"
             }
         })
             .then(responseRecipes => {
-                console.log('responseRecipes: ', responseRecipes.data.results)
+                console.log('responseRecipes: ', responseRecipes.data)
+                console.log('responseRecipes results: ', responseRecipes.data.results)
                 this.setState({
                     recipes: responseRecipes.data.results,
                     isClicked: !this.state.isClicked,
                 })
+
             })
             .then(() => {
+                console.log('this.state.recipes: ', this.state.recipes)
+
                 const copyRecipe = this.state.recipes
                 const copyIngredients = this.state.listAllIngredients
                 this.props.liftUpRecipesSearched(copyRecipe)
@@ -153,29 +156,30 @@ export default class Search extends Component {
         // console.log('state in search', this.state)
 
         return (
-            <div className="profile container-fluid">
+            <div className="container-fluid">
                 <div>
+                    <div className="row">
+                        <Navbar user={this.state.loggedInUser} text='Search' link='/profile' />
+                    </div>
                     <div>
-                        <div className="row">
-                            <Navbar user={this.state.loggedInUser} text='Search' link='/profile' />
-                        </div>
-                        <div className="row profile-container mt-3">
-                            <div className="col-12">
-                                <input
+                        <div className="row mt-3">
+                            <div className="col-12 input-type-search text-center">
+                                <p><input
                                     placeholder="Type to search and click to select! "
                                     className="input-search"
                                     type="text"
                                     name="ingredients"
                                     onChange={this.getIngredients}
                                     value={this.state.ingredient}
-                                />
+                                /></p>
+
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-6 border-right">
+                        <div className="row search-main">
+                            <div className="col col-md-3">
                                 {ingredientSearch}
                             </div>
-                            <div className=" col-6">
+                            <div className="col col-md-3">
                                 {selectedTittle}
                                 {list}
                             </div>
@@ -186,13 +190,19 @@ export default class Search extends Component {
                             </div>
                         </div>
                         <div className="row recipe-box">
-
                             {listRecipes}
-
-                            {/* <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3}/>
-                            <Recipes title="Cinnamon" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed='0' missing={['suggar', 'Cinnamon']} />
-                            <Recipes title="Cinnam" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']}  /> */}
-
+                            <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
+                            <Recipes title="Jalapeño Burger" src="https://spoonacular.com/recipeImages/jalapeno-burger-2-98730.jpg" likes='90' missed='0' missing={['suggar', 'Cinnamon']} />
+                            <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} />
+                            <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} />
+                            <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} />
+                            <Recipes title="X-Salad Burguer" src="https://spoonacular.com/recipeImages/stuffed-bacon-cheddar-bbq-burger-2-98388.jpg" likes='90' missed='2' missing={['suggar', 'Cinnamon']} />
+                            <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
+                            <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
+                            <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
+                            <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
+                            <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
+                            <Recipes title="Cinnamon Apple" src="https://spoonacular.com/recipeImages/47950-312x231.jpg" likes='90' missed={3} missing={['suggar', 'Cinnamon']} id={73420} minutes={120 + '\''} serving={3} />
 
                         </div>
                     </div>
