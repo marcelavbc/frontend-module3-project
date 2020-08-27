@@ -42,42 +42,40 @@ export default class Profile extends Component {
         this.setState({
             quote: event.target.value
         })
-        console.log(this.state.quote)
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         const newQuote = this.state.quote
-        axios.put('http://localhost:5000/api/edit', { newQuote }, { withCredentials: true })
+        console.log(newQuote)
+        axios.put('http://localhost:5000/api/profile/edit', {quote: newQuote }, { withCredentials: true })
+        .then(response => 
+            this.setState({
+                loggedInUser: {
+                    ...this.state.loggedInUser,
+                    quote: response.data.quote
+                },
+                editQuote: false,
+
+
+            }))
+        .catch(err =>console.log(err))
 
     }
 
     handleFileUpLoad = (event) => {
-        console.log("file upload...")
-        const uploadData = new FormData()
-        uploadData.append("avatar", event.target.files[0])
-        axios.post('http://localhost:5000/api/upload', uploadData) //sobe a foto
-            .then(response => {
-                console.log("file uploaded sucessfully", response.data)
-                axios.put('http://localhost:5000/api/edit', { avatar: response.data.path }, { withCredentials: true })//atualiza foto
-                    .then(() => {
-                        console.log("resposta: ", response.data)
-                        this.setState({ //atualiza foto no state do componente. 
-                            avatar: response.data.path
-                        })
-                        //atualizar o estado no componente pai para que conheça nova foto
-                        //obter objeto do usuário atual => this.props.user
-                        //criar cópia do objeto
-                        //mudar imagem da cópia 
-                        //chamar callback que vai atualizar estado no pai
-                        const copyUser = { ...this.props.user }
-                        console.log('user:', this.props.user)
-                        copyUser.avatar = response.data.path
-                        console.log('Copyuser:', copyUser)
-                        this.props.getUser(copyUser)
-                    })
-            })
-    }
+    const uploadData = new FormData();
+    uploadData.append("avatar", event.target.files[0])
+    axios.put('http://localhost:5000/api/profile/updateavatar', uploadData, { withCredentials: true }) 
+    .then(response => 
+        this.setState({
+            loggedInUser: {
+                ...this.state.loggedInUser,
+                avatar: response.data.avatar
+            }
+
+        }))
+}
 
     render() {
         console.log("profile state; ", this.state)
@@ -89,7 +87,7 @@ export default class Profile extends Component {
 
         } else {
             quote = (
-                <form onSubmit={() => this.handleSubmit()} className="form-div-edit">
+                <form onSubmit={(event) => this.handleSubmit(event)} className="form-div-edit">
                     <input
                         type="text"
                         name="quote"

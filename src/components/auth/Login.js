@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: '', password: '' };
+        this.state = { username: '', password: ''};
         this.service = new AuthService();
     }
 
@@ -20,6 +20,8 @@ export default class Login extends Component {
                     username: "",
                     password: "",
                 });
+                console.log('response in login component:', response)
+
                 this.props.getUser(response)
                 this.props.history.push(`/profile/`);
             })

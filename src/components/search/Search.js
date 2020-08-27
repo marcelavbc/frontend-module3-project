@@ -53,13 +53,14 @@ export default class Search extends Component {
 
     getIngredients = (event) => {
         let ingredient = event.target.value.toLowerCase()
+
         axios({
             "method": "GET",
             "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete",
             "headers": {
                 "content-type": "application/octet-stream",
                 "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-                "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+                "x-rapidapi-key": process.env.REACT_APP_KEY_SPOONCULAR_API_KEY,
                 "useQueryString": true
             }, "params": {
                 "number": "5",
@@ -90,13 +91,14 @@ export default class Search extends Component {
         let param = this.state.listAllIngredients.toString()
         console.log('param:', param)
 
+
         axios({
             "method": "GET",
             "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch",
             "headers": {
                 "content-type": "application/octet-stream",
                 "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-                "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+                "x-rapidapi-key": process.env.REACT_APP_KEY_SPOONCULAR_API_KEY,
                 "useQueryString": true
             }, "params": {
                 "addRecipeInformation": "true",
@@ -161,7 +163,6 @@ export default class Search extends Component {
                 return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} />
             })
         }
-        // console.log('state in search', this.state)
 
         return (
             <div className="container-fluid">

@@ -16,3 +16,10 @@ nav i {
     font-size: 18px!important;
     margin: 0
 }
+
+@media (min-width:600px) {
+    .navbar {
+        display: flex;
+        justify-content: space-evenly!important;
+    }
+}

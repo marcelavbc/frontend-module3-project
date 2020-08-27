@@ -12,8 +12,6 @@ export default class Details extends Component {
         }
     }
 
-
-
     componentDidMount() {
         let recipe_id = this.state.id
         console.log('data', this.props.recipe)
@@ -58,7 +56,6 @@ export default class Details extends Component {
 
         return (
             <div className="recipe container">
-
                 <div>
                     <div className="row">
                         <Navbar text='Recipe' link='/search' user={this.props.loggedInUser} />
@@ -70,8 +67,6 @@ export default class Details extends Component {
                             <p className="centered m-0">{title}</p>
                         </div>
                     </div>
-
-
                     <div className="row">
                         <div className="col recipe-icons">
                             <div className="d-flex align-items-center">

@@ -5,8 +5,7 @@
     align-items: center;
     justify-content: center;
     margin: 10px;
-    border: 5px solid var(--primary);
-    border-radius: 5px;
+    
 }
 
 .home h1 {
@@ -29,7 +28,6 @@
     .home {
         background-image: url(/images/brooke-lark-08bOYnH_r_E-unsplash.jpg);
         background-size: cover;
-        /* border: none */
     }
 
     .home h1 {

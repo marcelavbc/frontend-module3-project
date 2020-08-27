@@ -7,7 +7,7 @@ import './Auth.css'
 class Signup extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: '', password: '', email: '', avatar: '' };
+        this.state = { username: '', password: '', email: '', avatar: '', quote: '' };
         this.service = new AuthService();
     }
 
@@ -17,14 +17,16 @@ class Signup extends Component {
         const password = this.state.password;
         const email = this.state.email;
         const avatar = this.state.avatar;
+        const quote = this.state.quote
 
-        this.service.signup(username, password, email, avatar)
+        this.service.signup(username, password, email, avatar, quote)
             .then(response => {
                 this.setState({
                     username: "",
                     password: "",
                     email: "",
                     avatar: "",
+                    quote: ""
                 });
                 this.props.getUser(response)//método do pai App.js, enviado a SignUp via props. Usamos aqui para enviar de volta ao pai o objeto de Signup
                 this.props.history.push(`/profile/`);
@@ -36,20 +38,6 @@ class Signup extends Component {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
-
-    // handleFileUpLoad = (event) => {
-    //     console.log("file upload...")
-    //     const uploadData = new FormData()
-    //     uploadData.append("avatar", event.target.files[0])
-    //     axios.post('http://localhost:5000/api/upload', uploadData)
-    //         .then(response => {
-    //             console.log("file uploaded sucessfully", response.data)
-    //             this.setState({
-    //                 avatar: response.data.path
-    //             })
-    //         })
-    // }
-
 
     render() {
         return (
@@ -82,13 +70,7 @@ class Signup extends Component {
                         value={this.state.password}
                         onChange={e => this.handleChange(e)}
                     />
-                    {/* <input
-                        type="file"
-                        name="avatar"
-                        onChange={this.handleFileUpLoad}
-                        className="edit-profile-input"
-                    /> */}
-
+                
                     <button className="btn log-btn" type="submit">
                         Let's Cook!
                     </button>
