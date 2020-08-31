@@ -9,7 +9,7 @@ export default class InputForm extends Component {
         this.state = {
             extendedIngredients: [
                 {
-                    ingredients: '',
+                    name: '',
                     amount: 0,
                     unit: ''
                 }]
@@ -26,9 +26,9 @@ export default class InputForm extends Component {
         this.props.liftIngredientsState(values)
     }
 
-    addInput = (event) => {
+    addInput = () => {
         this.setState((preState) => ({
-            extendedIngredients: [...preState.extendedIngredients, { ingredients: '', amount: 0, unit: '' }]
+            extendedIngredients: [...preState.extendedIngredients, { name: '', amount: 0, unit: '' }]
         }))
     }
 
@@ -77,7 +77,7 @@ export default class InputForm extends Component {
                                 className="add-input col mx-1"
                                 type="text"
                                 placeholder="sugar"
-                                name="ingredients"
+                                name="name"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
                             <i className="icon-add col-1 fas fa-plus text-center" onClick={this.addInput}></i>

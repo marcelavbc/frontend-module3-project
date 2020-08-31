@@ -7,9 +7,12 @@ import axios from 'axios'
 import InputFormMethods from './InputFormMethods'
 
 
+
 export default class AddRecipe extends Component {
     constructor(props) {
         super(props)
+        const form = new FormData()
+        form.append('owner', this.props.user._id)
         this.state = {
             loggedInUser: this.props.user,
             title: '',
@@ -17,63 +20,72 @@ export default class AddRecipe extends Component {
             servings: 0,
             extendedIngredients: [],
             analyzedInstructions: [],
-            image: ''
+            image: '', 
+            owner: this.props.user._id, 
+            form: form
         }
     }
 
     handleChange = (e) => {
+        const form = this.state.form
+        form.set(e.target.name, e.target.value)
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            form:form
         })
     }
 
     liftIngredientsState = (obj) => {
+        const form = this.state.form
+        form.set("extendedIngredients", JSON.stringify(obj))
         this.setState({
-            extendedIngredients: obj
+            extendedIngredients: obj,
+            form: form
         })
     }
 
     liftMethodsState = (obj) => {
+        const form = this.state.form
+        form.set("analyzedInstructions", JSON.stringify(obj))
         this.setState({
-            analyzedInstructions: obj
+            analyzedInstructions: obj,
+            form: form
         })
     }
 
     handleFormSubmit = (event) => {
         event.preventDefault()
-        console.log('submited')
-        const body = {
-            title: this.state.title,
-            readyInMinutes: this.state.readyInMinutes,
-            servings: this.state.servings,
-            extendedIngredients: this.state.extendedIngredients,
-            // image: this.state.image, 
-            analyzedInstructions: this.state.analyzedInstructions
-        }
-        axios.post("http://localhost:5000/api/recipes", body, {withCredentials:true})
+        console.log('salvando')
+        axios.post("http://localhost:5000/api/profile/recipes", this.state.form, {withCredentials:true})
         .then(response => {
+            console.log('salvei')
+
             this.setState({
                 title: '',
                 readyInMinutes: 0,
                 servings: 0,
                 extendedIngredients: [],
                 analyzedInstructions: [],
-                // image: ''
-            })
+                image: ''
+            })  
         })
 
     }
 
-    // handleFileUpLoad = (event) => {
-    //     console.log('uploaded')
+    handleFileUpLoad = (event) => {
+        console.log('event.target.files[0]', event.target.files[0])
+        const uploadImage = this.state.form
+        uploadImage.set("image", event.target.files[0])
+        this.setState({
+            form: uploadImage
+        })
 
-    // }
+    }
 
     render() {
-        console.log('state in AddRecipe', this.state)
 
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <div>
                     <div className="row">
                         <Navbar user={this.state.loggedInUser} text='Add a Recipe' link='/profile' />
@@ -92,11 +104,12 @@ export default class AddRecipe extends Component {
                             <InputForm liftIngredientsState={this.liftIngredientsState} />
                             <h3 className="add-titles">Methods:</h3>
                             <InputFormMethods liftMethodsState={this.liftMethodsState} />
-                            {/* <input
+                            <input
                                 type="file"
+                                id="file"
                                 name="image"
-                                onChange={this.handleFileUpLoad}
-                            /> */}
+                                onChange={e => this.handleFileUpLoad(e)}
+                            />
 
                             <input className="btn btn-info" type="submit" value="Save" onSubmit={this.handleFormSubmit} />
                         </form>

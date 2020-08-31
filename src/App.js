@@ -10,6 +10,8 @@ import Search from './components/search/Search';
 import Footer from './components/profile/Profile';
 import Details from './components/recipes/Details'
 import AddRecipe from './components/addRecipe/AddRecipe';
+import FindUser from './components/users/FindUser';
+import UsersProfile from './components/users/UsersProfile';
 
 
 export default class App extends Component {
@@ -59,6 +61,8 @@ export default class App extends Component {
           <Route path="/search" render={props => <Search {...props} user={this.state.loggedInUser} liftUpRecipesSearched={this.getAllRecipe} ingredients={this.getSelectedIngredients} />} />
           <Route path="/recipe/:id" render={props => <Details {...props} recipe={this.state.recipes} />} />
           <Route path="/add" render={props => <AddRecipe {...props} user={this.state.loggedInUser} />} />
+          <Route exact path="/users" render={props => <FindUser {...props}  user={this.state.loggedInUser}/>}/>
+          <Route path="/users/:id" render={props=> <UsersProfile {...props} user={this.state.loggedInUser}/>}/>
         </Switch>
       </div>
     )

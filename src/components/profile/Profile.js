@@ -14,8 +14,10 @@ export default class Profile extends Component {
             avatar: this.props.user.avatar,
             show: false,
             editQuote: false,
-            quote: this.props.user.quote
+            quote: this.props.user.quote,
+            myRecipes: {}
         }
+        // this.showRecipes = this.showRecipes.bind(this)
     }
 
 
@@ -47,37 +49,57 @@ export default class Profile extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const newQuote = this.state.quote
-        console.log(newQuote)
-        axios.put('http://localhost:5000/api/profile/edit', {quote: newQuote }, { withCredentials: true })
-        .then(response => 
-            this.setState({
-                loggedInUser: {
-                    ...this.state.loggedInUser,
-                    quote: response.data.quote
-                },
-                editQuote: false,
+        axios.put('http://localhost:5000/api/profile/editQuote', { quote: newQuote }, { withCredentials: true })
+            .then(response =>
+                this.setState({
+                    loggedInUser: {
+                        ...this.state.loggedInUser,
+                        quote: response.data.quote
+                    },
+                    editQuote: false,
 
-
-            }))
-        .catch(err =>console.log(err))
-
+                })
+            )
+            .catch(err => console.log(err))
     }
 
     handleFileUpLoad = (event) => {
-    const uploadData = new FormData();
-    uploadData.append("avatar", event.target.files[0])
-    axios.put('http://localhost:5000/api/profile/updateavatar', uploadData, { withCredentials: true }) 
-    .then(response => 
-        this.setState({
-            loggedInUser: {
-                ...this.state.loggedInUser,
-                avatar: response.data.avatar
-            }
+        const uploadData = new FormData();
+        uploadData.append("avatar", event.target.files[0])
+        console.log('upload data', event.target.files[0])
+        axios.put('http://localhost:5000/api/profile/updateavatar', uploadData, { withCredentials: true })
+            .then(response =>
+                // console.log(response)
+                this.setState({
+                    loggedInUser: {
+                        ...this.state.loggedInUser,
+                        avatar: response.data.avatar
+                    }
+                })
+            )
+    }
 
-        }))
-}
+
+
+    // showRecipes = () => {
+    //     axios.get('http://localhost:5000/api/profile/recipes')
+    //         .then(response => {
+    //             console.log(response)
+    //             this.setState({
+    //                 myRecipes: response.data
+    //             })
+    //         })
+    // }
+
+    // componentDidMount = () => {
+    //     this.showRecipes()
+        
+    // }
+
+
 
     render() {
+
         console.log("profile state; ", this.state)
         let quote = '';
         let pencil = ''
@@ -102,7 +124,12 @@ export default class Profile extends Component {
             pencil = null
         }
 
-
+        let recipeList;
+        if (this.state.myRecipes) {
+            console.log(this.state.myRecipes)
+        } else {
+            console.log('no hay recipe')
+        }
 
         return (
             <div className="container-fluid">
@@ -150,22 +177,8 @@ export default class Profile extends Component {
                             <hr></hr>
                         </section>
 
-
-
                     </div>
 
-                    {/* <div className="row">
-                        <div className="col">
-                            <h4 className="bookTitle">My Recipe Book</h4>
-                            <hr></hr>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <RecipesBook/>
-                            <hr></hr>
-                        </div>
-                    </div> */}
                 </div>
                 <div className="row">
 

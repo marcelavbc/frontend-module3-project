@@ -11,7 +11,7 @@ export default class Navbar extends Component {
             <nav className="navbar col">
                 <Link to={this.props.link}><i className="fas fa-chevron-left"></i></Link>
                 <p>{this.props.text}</p>
-                <img src="/images/search.png" alt="search"/>
+                <Link to='/users'><img src="/images/search.png" alt="search"/></Link>
             </nav>
         )
     }

@@ -8,26 +8,32 @@ export default class InputFormMethods extends Component {
         this.state = {
             analyzedInstructions: [
                 {
-                    number: 0,
-                    step: ''
+                    steps: [
+                        {
+                            number: 0,
+                            step: ''
+                        }
+                    ]
+
                 }]
         }
     }
 
     handleChange = (index, event) => {
         // console.log(index, event.target.name)
-        const values = [...this.state.analyzedInstructions]
+        const values = [...this.state.analyzedInstructions[0].steps]
         values[index][event.target.name] = event.target.value
+        // console.log('values:', values)
         this.setState({
-            analyzedInstructions: values
+            analyzedInstructions: [{steps: values}]
         })
-        this.props.liftMethodsState(values)
+        this.props.liftMethodsState([{steps: values}])
     }
 
     addInput = () => {
-        this.setState((preState) => ({
-            analyzedInstructions: [...preState.analyzedInstructions, { number: 0, step: '' }]
-        }))
+        this.setState({
+            analyzedInstructions: [{steps: [...this.state.analyzedInstructions[0].steps, { number: 0, step: '' }]}]
+        })
     }
 
     removeInput = (index) => {
@@ -45,14 +51,14 @@ export default class InputFormMethods extends Component {
         return (
             <div>
 
-                {analyzedInstructions.map((ele, index) => {
+                {analyzedInstructions[0].steps.map((ele, index) => {
                     return (
                         <div key={index} className="form-group row">
                             <input
                                 className="add-input col-2"
                                 type="number"
                                 name="number"
-                                placeholder={index+1}
+                                placeholder={index + 1}
                                 onChange={(event) => this.handleChange(index, event)}
                             />
                             <input

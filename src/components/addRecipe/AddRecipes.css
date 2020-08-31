@@ -58,3 +58,13 @@
     margin-bottom: 2px!important;
     margin-right: 35px;
 }
+
+.save-recipe {
+    background-color: var(--primary)!important;
+    color: var(--light)!important;
+    margin-top: 20px;
+}
+
+.file-input-recipe {
+    
+}
