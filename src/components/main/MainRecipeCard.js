@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 
 export default class MainRecipeCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            saved: false
+            saved: false,
+            loggedInUser: this.props.logged
         }
     }
 
@@ -18,12 +18,14 @@ export default class MainRecipeCard extends Component {
     }
 
     render() {
+
+        console.log(this.state)
         return (
             <div className="col-6 mt-2 d-flex ">
                 <div className="main-card card">
                     <div className="top-card-main">
                         <img className="avatar-main" src={this.props.avatar} alt={this.props.username} />
-                        <p className="main-card-user">@{this.props.username}</p>
+                        <p className="main-card-user">{'@' + this.props.username}</p>
                     </div>
 
                     <img className="recipe-image-main" src={this.props.src} alt={this.props.title} />
@@ -32,7 +34,7 @@ export default class MainRecipeCard extends Component {
                         <div className="main-icons">
                             <p><i className="icon-main fas fa-utensils mr-2"></i>4</p>
                             <p><i className="icon-main far fa-clock mr-2"></i>60 min</p>
-                            <p><i className={this.state.saved ? "icon-main fas fa-bookmark" : "icon-main far fa-bookmark"} onClick={this.save}></i></p>
+                            {/* <p><i className={this.state.saved ? "icon-main fas fa-bookmark" : "icon-main far fa-bookmark"} onClick={this.save}></i></p> */}
                         </div>
                     </div>
                 </div>

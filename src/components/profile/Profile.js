@@ -5,6 +5,7 @@ import Footer from '../footer/Footer'
 import Navbar from '../navbar/Navbar';
 import { Modal } from 'react-bootstrap'
 import axios from 'axios'
+import MainRecipeCard from '../main/MainRecipeCard'
 // import RecipesBook from '../recipes/RecipesBook';
 export default class Profile extends Component {
     constructor(props) {
@@ -39,9 +40,11 @@ export default class Profile extends Component {
     }
 
     handleChangeQuote = (event) => {
+        console.log(event.target.value)
         this.setState({
             quote: event.target.value
         })
+        console.log(this.state.quote)
     }
 
     handleSubmit = (event) => {
@@ -94,8 +97,6 @@ export default class Profile extends Component {
 
 
     render() {
-
-        console.log("profile state; ", this.state)
         let quote = '';
         let pencil = ''
         if (!this.state.editQuote) {
@@ -121,9 +122,12 @@ export default class Profile extends Component {
 
         let recipeList;
         if (this.state.myRecipes) {
-            recipeList = this.state.myRecipes.map((ele, i) => {
-                return <p key={i}>{ele.title}</p>
+            recipeList = this.state.myRecipes.slice(0).reverse().map((ele, i) => {
+                return <MainRecipeCard key={i} title={ele.title} username={ele.owner.username} avatar={ele.owner.avatar} src={ele.imagePath} id={ele._id}/>
             })
+            console.log('allrecipes in state' , this.state.myRecipes)
+
+        
         } else {
             recipeList = null
         }
@@ -135,7 +139,7 @@ export default class Profile extends Component {
                         <Navbar user={this.state.loggedInUser} text='Profile' link='/main' />
                     </div>
 
-                    <div className="row profile-container">
+                    <div className="row profile-container mb-5  mt-5">
                         <section className="profile-info-div">
                             <div className="col user-data">
                                 <img className="profile-picture" src={this.state.loggedInUser.avatar} alt={this.state.loggedInUser.username} />
@@ -168,12 +172,11 @@ export default class Profile extends Component {
                                 <hr></hr>
                             </div>
                         </section>
-
-                        <section className="recipe-book">
-                            <h5>My Recipe Book</h5>
-                            <hr></hr>
+                        <h5 className="book-h5 ml-4">Recipe Book</h5>
+                            
+                        <div className="recipe-book row">
                             {recipeList}
-                        </section>
+                        </div>
 
                     </div>
 

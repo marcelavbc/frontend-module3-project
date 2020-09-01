@@ -9,10 +9,9 @@ export default class FindUserSearchBar extends Component {
     handleSearch(event) {
         this.props.functionToFilter(event.target.value)
     }
-
     render() {
         return (
-            <div className="">
+            <div className="mb-2 mt-5">
                 <form className="" autoComplete="new-search">
                     <input
                         autoComplete="off"

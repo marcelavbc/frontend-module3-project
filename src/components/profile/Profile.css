@@ -1,5 +1,4 @@
 .profile-container {
-    display: flex;
 }
 
 .profile-info-div {
@@ -20,10 +19,7 @@
 .quote {
     font-size: 12px;
     font-style: italic;
-}
-
-.user-nickname p {
-    margin: 0
+    margin: 0 8px 0 0;
 }
 
 .profile-picture {
@@ -40,7 +36,7 @@
     position: absolute;
     top: 55px;
     left: 5px;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     border-radius: 50%;
     padding: 3px
 }
@@ -83,12 +79,12 @@
 
 .fa-window-close,
 .fa-pencil-alt {
-    color: var(--primary)
+    color: var(--secondary)
 }
 
 .fa-pencil-alt {
     font-size: 12px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--secondary);
     border-radius: 50%;
     padding: 3px
 }
@@ -127,7 +123,7 @@
 }
 
 .fa-power-off {
-    color: red;
+    color: var(--bg);
 }
 
 .edit-profile-input {
@@ -139,8 +135,12 @@
 
 .recipe-book {
     /* border: 1px solid black; */
-    width: 100%;
-    margin: 10px
+    margin: 0px!important;
+}
+
+.book-h5 {
+    color: var(--bg);
+    font-size: 20px
 }
 
 

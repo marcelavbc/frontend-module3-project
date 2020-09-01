@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Recipes.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 
 export default class Recipes extends Component {
@@ -23,9 +24,13 @@ export default class Recipes extends Component {
 
     save = () => {
         console.log('saved')
-        this.setState({
-            saved: !this.state.saved
+        axios.post('http://localhost:5000/api/profile/savedRecipes', {recipeId: this.props.id}, { withCredentials: true })
+        .then(data => {
+            this.setState({
+                saved: !this.state.saved
+            })
         })
+        
     }
 
     render() {

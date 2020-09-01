@@ -45,7 +45,7 @@ export default class Search extends Component {
         // this.setState({
         //     single: 'hello'
         // })
-        
+
         // console.log('state:', this.state)
         // this.props.upStaterecipe(this.state.single)
     }
@@ -166,15 +166,16 @@ export default class Search extends Component {
 
         return (
             <div className="container-fluid">
-                <div>
+                <div className="mb-5 mt-1">
                     <div className="row">
                         <Navbar user={this.state.loggedInUser} text='Search' link='/profile' />
                     </div>
                     <div>
-                        <div className="row margin-to-nav mt-4">
+                        <div className="row mt-5">
                             <div className="col-12 input-type-search text-center">
                                 <p><input
-                                    placeholder="Type to search and click to select! "
+                                    placeholder="Type to search and click to select!"
+                                    autoComplete="off"
                                     className="input-search"
                                     type="text"
                                     name="ingredients"

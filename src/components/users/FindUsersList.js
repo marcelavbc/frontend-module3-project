@@ -21,7 +21,7 @@ export default class FindUsersList extends Component {
             })
         }
         return (
-            <div>
+            <div className="mb-5">
                 <ul>{rows}</ul>
             </div>
         )
