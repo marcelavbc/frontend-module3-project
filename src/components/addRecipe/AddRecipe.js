@@ -20,18 +20,21 @@ export default class AddRecipe extends Component {
             servings: 0,
             extendedIngredients: [],
             analyzedInstructions: [],
-            image: '', 
-            owner: this.props.user._id, 
+            image: '',
+            owner: this.props.user._id,
             form: form
         }
     }
 
     handleChange = (e) => {
+        console.log(e.target.name)
+
         const form = this.state.form
         form.set(e.target.name, e.target.value)
+        // console.log(e.target.name, e.target.value)
         this.setState({
             [e.target.name]: e.target.value,
-            form:form
+            form: form
         })
     }
 
@@ -56,19 +59,19 @@ export default class AddRecipe extends Component {
     handleFormSubmit = (event) => {
         event.preventDefault()
         console.log('salvando')
-        axios.post("http://localhost:5000/api/profile/recipes", this.state.form, {withCredentials:true})
-        .then(response => {
-            console.log('salvei')
-
-            this.setState({
-                title: '',
-                readyInMinutes: 0,
-                servings: 0,
-                extendedIngredients: [],
-                analyzedInstructions: [],
-                image: ''
-            })  
-        })
+        axios.post("http://localhost:5000/api/profile/recipes", this.state.form, { withCredentials: true })
+            .then(response => {
+                console.log('salvei')
+                this.setState({
+                    title: '',
+                    readyInMinutes: 0,
+                    servings: 0,
+                    extendedIngredients: [],
+                    analyzedInstructions: [],
+                    image: ''
+                })
+                this.props.history.push('/main')
+            })
 
     }
 
@@ -88,31 +91,60 @@ export default class AddRecipe extends Component {
             <div className="container-fluid">
                 <div>
                     <div className="row">
-                        <Navbar user={this.state.loggedInUser} text='Add a Recipe' link='/profile' />
+                        <Navbar user={this.state.loggedInUser} text='Add a Recipe' link='/main' />
                     </div>
 
                     <div className="row add">
-                        <form onSubmit={this.handleFormSubmit} className="form-div col-12">
-                            <input
-                                className="add-input"
-                                type="text"
-                                placeholder="Title"
-                                name="title"
-                                onChange={e => this.handleChange(e)}
-                            />
-                            <h3 className="add-titles">Ingredients:</h3>
-                            <InputForm liftIngredientsState={this.liftIngredientsState} />
-                            <h3 className="add-titles">Methods:</h3>
-                            <InputFormMethods liftMethodsState={this.liftMethodsState} />
-                            <input
-                                type="file"
-                                id="file"
-                                name="image"
-                                onChange={e => this.handleFileUpLoad(e)}
-                            />
+                        <div className="col-12">
+                            <form onSubmit={this.handleFormSubmit} autoComplete="new-search">
+                                <div className="form-group">
+                                    <input
+                                        className="add-input w-100 text-center"
+                                        type="text"
+                                        placeholder="Title"
+                                        name="title"
+                                        onChange={e => this.handleChange(e)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <i className="icon-add far fa-clock mr-2"></i>
+                                    <input
+                                        className="add-input add-number"
+                                        type="number"
+                                        placeholder="in minutes"
+                                        name="readyInMinutes"
+                                        onChange={e => this.handleChange(e)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <i className="icon-add fas fa-utensils mr-2"></i>
+                                    <input
+                                        className="add-input add-number"
+                                        type="number"
+                                        placeholder="Servings"
+                                        name="servings"
+                                        onChange={e => this.handleChange(e)}
+                                    />
+                                </div>
 
-                            <input className="btn btn-info" type="submit" value="Save" onSubmit={this.handleFormSubmit} />
-                        </form>
+                                <p className="add-titles">Ingredients:</p>
+                                <InputForm liftIngredientsState={this.liftIngredientsState} />
+                                <p className="add-titles">Methods:</p>
+                                <InputFormMethods liftMethodsState={this.liftMethodsState} />
+
+                                <div className="input-group input-group-add">
+                                    <div className="custom-file">
+                                        <input type="file" className="custom-file-input" name="image" id="file" onChange={e => this.handleFileUpLoad(e)} />
+                                        <label className="custom-file-label" htmlFor="file">Choose file</label>
+                                    </div>
+                                    <div className="input-group-append">
+                                        <input className="btn btn-save-add" type="submit" value="Send" onSubmit={this.handleFormSubmit} />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
                     </div>
 
                 </div>

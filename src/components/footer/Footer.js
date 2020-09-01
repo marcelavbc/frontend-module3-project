@@ -6,7 +6,7 @@ import './Footer.css'
 export default class Footer extends Component {
     render() {
         return (
-            <nav className="navbar col">
+            <nav className="navbar fixed-bottom col">
                 <Link to="/search"><i className="fas fa-search"></i></Link>
                 <Link to="/add"><i className="fas fa-plus"></i></Link>
                 <i className="far fa-bell"></i>

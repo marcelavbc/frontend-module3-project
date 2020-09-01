@@ -15,9 +15,7 @@ export default class Profile extends Component {
             show: false,
             editQuote: false,
             quote: this.props.user.quote,
-            myRecipes: {}
         }
-        // this.showRecipes = this.showRecipes.bind(this)
     }
 
 
@@ -80,21 +78,18 @@ export default class Profile extends Component {
     }
 
 
+    componentDidMount() {
+        this.showRecipes()
+    }
 
-    // showRecipes = () => {
-    //     axios.get('http://localhost:5000/api/profile/recipes')
-    //         .then(response => {
-    //             console.log(response)
-    //             this.setState({
-    //                 myRecipes: response.data
-    //             })
-    //         })
-    // }
-
-    // componentDidMount = () => {
-    //     this.showRecipes()
-        
-    // }
+    showRecipes = () => {
+        axios.get('http://localhost:5000/api/profile/recipes', { withCredentials: true })
+            .then(response => {
+                this.setState({
+                    myRecipes: response.data
+                })
+            })
+    }
 
 
 
@@ -126,16 +121,18 @@ export default class Profile extends Component {
 
         let recipeList;
         if (this.state.myRecipes) {
-            console.log(this.state.myRecipes)
+            recipeList = this.state.myRecipes.map((ele, i) => {
+                return <p key={i}>{ele.title}</p>
+            })
         } else {
-            console.log('no hay recipe')
+            recipeList = null
         }
 
         return (
             <div className="container-fluid">
                 <div>
                     <div className="row">
-                        <Navbar user={this.state.loggedInUser} text='Profile' link='/login' />
+                        <Navbar user={this.state.loggedInUser} text='Profile' link='/main' />
                     </div>
 
                     <div className="row profile-container">
@@ -155,7 +152,7 @@ export default class Profile extends Component {
                                             id="file"
                                             name="avatar"
                                             onChange={this.handleFileUpLoad}
-                                            className="custom-file-input"
+                                            className="custom-file-input custom-file-input-profile"
                                         />
                                     </Modal.Body>
                                 </Modal>
@@ -175,6 +172,7 @@ export default class Profile extends Component {
                         <section className="recipe-book">
                             <h5>My Recipe Book</h5>
                             <hr></hr>
+                            {recipeList}
                         </section>
 
                     </div>

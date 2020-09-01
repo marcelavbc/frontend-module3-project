@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Footer from '../footer/Footer'
 import Navbar from '../navbar/Navbar'
+import axios from 'axios'
 import './Recipes.css'
 
 
@@ -12,7 +13,9 @@ export default class Details extends Component {
         }
     }
 
+  
     componentDidMount() {
+
         let recipe_id = this.state.id
         console.log('data', this.props.recipe)
         let single = this.props.recipe.find(ele => ele.id = recipe_id)

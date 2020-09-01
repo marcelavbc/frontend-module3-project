@@ -29,7 +29,7 @@ class Signup extends Component {
                     quote: ""
                 });
                 this.props.getUser(response)//método do pai App.js, enviado a SignUp via props. Usamos aqui para enviar de volta ao pai o objeto de Signup
-                this.props.history.push(`/profile/`);
+                this.props.history.push(`/main/`);
             })
             .catch(error => console.log(error))
     }

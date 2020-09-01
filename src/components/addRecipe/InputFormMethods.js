@@ -25,14 +25,14 @@ export default class InputFormMethods extends Component {
         values[index][event.target.name] = event.target.value
         // console.log('values:', values)
         this.setState({
-            analyzedInstructions: [{steps: values}]
+            analyzedInstructions: [{ steps: values }]
         })
-        this.props.liftMethodsState([{steps: values}])
+        this.props.liftMethodsState([{ steps: values }])
     }
 
     addInput = () => {
         this.setState({
-            analyzedInstructions: [{steps: [...this.state.analyzedInstructions[0].steps, { number: 0, step: '' }]}]
+            analyzedInstructions: [{ steps: [...this.state.analyzedInstructions[0].steps, { number: 0, step: '' }] }]
         })
     }
 
@@ -49,31 +49,31 @@ export default class InputFormMethods extends Component {
         // console.log('state in form:', this.state)
         let { analyzedInstructions } = this.state
         return (
-            <div>
+            <div className="inputs-ingredients">
 
                 {analyzedInstructions[0].steps.map((ele, index) => {
                     return (
-                        <div key={index} className="form-group row">
+                        <div key={index} className="form-group input-ingredients row">
                             <input
-                                className="add-input col-2"
+                                className="add-input add-number col-2"
                                 type="number"
                                 name="number"
                                 placeholder={index + 1}
                                 onChange={(event) => this.handleChange(index, event)}
                             />
                             <input
-                                className="add-input col-8"
+                                className="add-input add-number col-8"
                                 type="text"
                                 placeholder="Instruction"
                                 name="step"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
 
-                            <i className="icon-add col-1 fas fa-plus text-center" onClick={this.addInput}></i>
                             <i className="icon-add col-1 fas fa-trash text-center" onClick={() => this.removeInput(index)}></i>
                         </div>
                     )
                 })}
+                <p className="add-indgredient align-self-center" onClick={this.addInput}><i className="fas fa-plus mr-1" onClick={this.addInput}></i>Add</p>
             </div>
         )
     }

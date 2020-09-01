@@ -45,46 +45,47 @@ export default class InputForm extends Component {
         // console.log('state in form:', this.state)
         let { extendedIngredients } = this.state
         return (
-            <div>
+            <div className="inputs-ingredients">
 
                 {extendedIngredients.map((ele, index) => {
 
                     return (
+
                         <div key={index} className="form-group input-ingredients row">
-                            <div className="add-font col-12">
+                            <div className="add-font col-12 mb-0">
                                 <p>Amount:</p>
                                 <p>Unit:</p>
                                 <p>Name:</p>
                             </div>
 
                             <input
-                                className="add-input col-3"
+                                className="add-input add-number col-3"
                                 type="number"
-                                placeholder="30"
                                 name="amount"
+                                autoComplete="off"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
 
                             <input
                                 className="add-input col-3 mx-1"
                                 type="text"
-                                placeholder="gr."
                                 name="unit"
+                                autoComplete="off"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
 
                             <input
                                 className="add-input col mx-1"
                                 type="text"
-                                placeholder="sugar"
                                 name="name"
+                                autoComplete="off"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
-                            <i className="icon-add col-1 fas fa-plus text-center" onClick={this.addInput}></i>
                             <i className="icon-add col-1 fas fa-trash text-center" onClick={() => this.removeInput(index)}></i>
                         </div>
                     )
                 })}
+                <p className="add-indgredient align-self-center" onClick={this.addInput}><i className="fas fa-plus mr-1" onClick={this.addInput}></i>Add</p>
             </div>
         )
     }

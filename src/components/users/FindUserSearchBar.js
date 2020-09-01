@@ -15,7 +15,7 @@ export default class FindUserSearchBar extends Component {
             <div className="">
                 <form className="" autoComplete="new-search">
                     <input
-                    autoComplete="off"
+                        autoComplete="off"
                         type="text"
                         name="search"
                         onChange={this.handleSearch} />

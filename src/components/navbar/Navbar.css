@@ -3,6 +3,7 @@
     color: var(--light);
 }
 
+
 nav i {
     color: var(--light) !important
 }
@@ -15,6 +16,13 @@ nav i {
 .navbar p {
     font-size: 18px!important;
     margin: 0
+}
+
+.logo {
+    font-family: 'Amita', cursive;
+    color: var(--light);
+    margin-bottom: 0!important;
+    font-style: none;
 }
 
 @media (min-width:600px) {

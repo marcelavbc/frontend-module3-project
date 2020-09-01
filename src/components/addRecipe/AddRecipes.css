@@ -1,5 +1,4 @@
 .add {
-    /* border: 1px solid green; */
     margin: 8px !important;
     /* display: flex;
     flex-direction: column; */
@@ -8,39 +7,46 @@
 .add-input {
     border: none;
     background: transparent;
-    border-bottom: 2px solid #f05d5e;
+    border-bottom: 2px solid var(--bg);
     outline: none;
-    color: #004e98;
+    color: var(--text);
     font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.add-number {
+    width: 80px;
+}
+
+.icon-add {
+    color: var(--primary)
 }
 
 .add-input::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #004e98;
+    color: var(--text);
     opacity: 0.5;
-    /* Firefox */
 }
 
 .add-input:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #13C7B6;
+    color: var(--primary);
 }
 
 .add-input::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #13C7B6;
+    color: var(--primary);
 }
 
 .add-titles {
-    font-size: 18px;
-    color: #004e98;
-    margin: 15px;
+    font-size: 16px;
+    color: var(--text);
 }
 
-.icon-add {
+/* .icon-add {
     padding: 0!important;
     color: #004e98;
-}
+} */
 
 .input-ingredients {
     /* display: flex;
@@ -55,10 +61,34 @@
 }
 
 .add-font p {
-    margin-bottom: 2px!important;
+    margin-bottom: 2px !important;
     margin-right: 35px;
 }
 
+.inputs-ingredients {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.add-indgredient {
+    font-size: 16px;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    padding: 2px 4px;
+    color: var(--primary)
+}
+
+.input-group-add {
+    background-color: var(--primary)!important;
+    color: var(--light)!important;
+    margin-top: 20px;
+}
+
+.btn-save-add {
+    color: var(--light)!important
+}
+/*
 .save-recipe {
     background-color: var(--primary)!important;
     color: var(--light)!important;
@@ -67,4 +97,4 @@
 
 .file-input-recipe {
     
-}
+} */

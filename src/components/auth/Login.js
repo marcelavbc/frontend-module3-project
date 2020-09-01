@@ -23,7 +23,7 @@ export default class Login extends Component {
                 console.log('response in login component:', response)
 
                 this.props.getUser(response)
-                this.props.history.push(`/profile/`);
+                this.props.history.push(`/main`);
             })
             .catch(error => console.log("the error:", error))
     }

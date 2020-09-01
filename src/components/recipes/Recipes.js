@@ -29,10 +29,9 @@ export default class Recipes extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className="recipe-card col-md-3">
-                <h5 className="card-title d-flex align-items-center justify-content-center">{this.props.title}</h5>
+                <h5 className="card-title recipe-title d-flex align-items-center justify-content-center">{this.props.title}</h5>
                 <img className="recipe-image" src={this.props.src} alt={this.props.title} />
                 <div className="card-icons">
                     <div className="wrapper">

@@ -45,11 +45,11 @@
     padding: 3px
 }
 
-.custom-file-input::-webkit-file-upload-button {
+.custom-file-input-profile::-webkit-file-upload-button {
     visibility: hidden;
 }
 
-.custom-file-input::before {
+.custom-file-input-profile::before {
     content: 'Select a photo';
     display: inline-block;
     border: 1px solid var(--primary);
@@ -65,15 +65,15 @@
     color: var(--primary)
 }
 
-.custom-file-input:hover::before {
+.custom-file-input-profile:hover::before {
     border-color: black;
 }
 
-.custom-file-input:active::before {
+.custom-file-input-profile:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
-.custom-file-input {
+.custom-file-input-profile {
     opacity: 1 !important;
 }
 

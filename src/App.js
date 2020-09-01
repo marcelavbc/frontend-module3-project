@@ -12,6 +12,7 @@ import Details from './components/recipes/Details'
 import AddRecipe from './components/addRecipe/AddRecipe';
 import FindUser from './components/users/FindUser';
 import UsersProfile from './components/users/UsersProfile';
+import MainPage from './components/main/MainPage';
 
 
 export default class App extends Component {
@@ -56,13 +57,14 @@ export default class App extends Component {
           <Route path="/signup" render={props => <Signup {...props} getUser={this.getTheUser} />} />
           <Route path="/login" render={props => <Login {...props} getUser={this.getTheUser} />} />
           <Route path="/logout" render={props => <Logout {...props} getUser={this.getTheUser} />} />
+          <Route path="/main" render={props => <MainPage {...props} getUser={this.getTheUser} user={this.state.loggedInUser}/>}  />
           <Route path="/profile" render={props => <Profile {...props} user={this.state.loggedInUser} getUser={this.getTheUser} />} />
           <Route path="/footer" render={props => <Footer {...props} user={this.state.loggedInUser} />} />
           <Route path="/search" render={props => <Search {...props} user={this.state.loggedInUser} liftUpRecipesSearched={this.getAllRecipe} ingredients={this.getSelectedIngredients} />} />
           <Route path="/recipe/:id" render={props => <Details {...props} recipe={this.state.recipes} />} />
           <Route path="/add" render={props => <AddRecipe {...props} user={this.state.loggedInUser} />} />
-          <Route exact path="/users" render={props => <FindUser {...props}  user={this.state.loggedInUser}/>}/>
-          <Route path="/users/:id" render={props=> <UsersProfile {...props} user={this.state.loggedInUser}/>}/>
+          <Route exact path="/users" render={props => <FindUser {...props} user={this.state.loggedInUser} />} />
+          <Route path="/users/:id" render={props => <UsersProfile {...props} user={this.state.loggedInUser} />} />
         </Switch>
       </div>
     )
