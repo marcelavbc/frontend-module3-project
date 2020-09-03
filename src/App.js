@@ -8,7 +8,7 @@ import Profile from './components/profile/Profile';
 import Logout from './components/auth/Logout';
 import Search from './components/search/Search';
 import Footer from './components/profile/Profile';
-import Details from './components/recipes/Details'
+import RecipeDetails from './components/recipes/RecipeDetails'
 import AddRecipe from './components/addRecipe/AddRecipe';
 import FindUser from './components/users/FindUser';
 import UsersProfile from './components/users/UsersProfile';
@@ -61,7 +61,7 @@ export default class App extends Component {
           <Route path="/profile" render={props => <Profile {...props} user={this.state.loggedInUser} getUser={this.getTheUser} />} />
           <Route path="/footer" render={props => <Footer {...props} user={this.state.loggedInUser} />} />
           <Route path="/search" render={props => <Search {...props} user={this.state.loggedInUser} liftUpRecipesSearched={this.getAllRecipe} ingredients={this.getSelectedIngredients} />} />
-          <Route path="/recipe/:id" render={props => <Details {...props} recipe={this.state.recipes} />} />
+          <Route path="/recipe/:id" render={props => <RecipeDetails {...props} recipe={this.state.recipes} />} />
           <Route path="/add" render={props => <AddRecipe {...props} user={this.state.loggedInUser} />} />
           <Route exact path="/users" render={props => <FindUser {...props} user={this.state.loggedInUser} />} />
           <Route path="/users/:id" render={props => <UsersProfile {...props} user={this.state.loggedInUser} />} />

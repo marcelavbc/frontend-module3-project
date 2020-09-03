@@ -27,10 +27,10 @@ export default class Recipes extends Component {
         axios.post('http://localhost:5000/api/profile/savedRecipes', {recipeId: this.props.id}, { withCredentials: true })
         .then(data => {
             this.setState({
-                saved: !this.state.saved
+                saved: !this.state.saved, 
+                savedRecipes: data
             })
-        })
-        
+        })   
     }
 
     render() {

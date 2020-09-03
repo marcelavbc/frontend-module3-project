@@ -131,17 +131,6 @@
     overflow: hidden;
 }
 
-/*RECIPE BOOK*/
-
-.recipe-book {
-    /* border: 1px solid black; */
-    margin: 0px!important;
-}
-
-.book-h5 {
-    color: var(--bg);
-    font-size: 20px
-}
 
 
 @media (min-width:600px) {

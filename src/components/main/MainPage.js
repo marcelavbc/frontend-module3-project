@@ -10,6 +10,7 @@ export default class MainPage extends Component {
         super(props)
         this.state = {
             loggedInUser: this.props.user,
+            loggedUserId: this.props.user._id
             
         }
 
@@ -34,7 +35,7 @@ export default class MainPage extends Component {
         if (this.state.allRecipes) {
             console.log(this.state.allRecipes)
             cards = this.state.allRecipes.slice(0).reverse().map((ele, i) => {
-                return <MainRecipeCard key={i} title={ele.title} username={ele.owner.username} avatar={ele.owner.avatar} src={ele.imagePath} id={ele._id} logged={this.state.loggedInUser} />
+                return <MainRecipeCard key={i} title={ele.title} username={ele.owner.username} recipeOwner={ele.owner._id} avatar={ele.owner.avatar} src={ele.imagePath} id={ele._id} servings={ele.servings} readyInMinutes={ele.readyInMinutes} logged={this.state.loggedInUser}/>
             })
         }
         console.log('state in MainPage', this.state)

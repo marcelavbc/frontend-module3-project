@@ -15,18 +15,21 @@ export default class UsersProfile extends Component {
 
 
     componentDidMount() {
-        console.log('this.state.id', this.state.id)
         this.getUserData()
-        console.log('this.state.user', this.state.user)
 
     }
 
     getUserData() {
         axios.get(`http://localhost:5000/api/users/${this.state.id}`)
             .then(response => {
-                console.log('response', response)
+                console.log('response', response.data[0])
+                let user = response.data[0]
+                let userRecipes = response.data
+                userRecipes.shift()
+                console.log('array without first element:' , userRecipes)
                 this.setState({
-                    user: response.data
+                    user: user,
+                    recipes : userRecipes
                 })
             })
     }
@@ -35,17 +38,20 @@ export default class UsersProfile extends Component {
         let image;
         let name;
         let quote;
+        let userRecipes;
 
         if (this.state.user) {
             image = this.state.user.avatar
             name = this.state.user.username
             quote = this.state.user.quote
+            userRecipes = this.state.recipes.map((ele, i) => {
+                return <p>{ele.title}</p>
+            })
         } else {
             image = null
             name = null
             quote = null
-
-
+            userRecipes =null
         }
 
         return (
@@ -55,7 +61,7 @@ export default class UsersProfile extends Component {
                         <Navbar user={this.state.loggedUser} text={name} link='/users' />
                     </div>
 
-                    <div className="row profile-container">
+                    <div className="row mb-5 mt-5">
                         <section className="profile-info-div">
                             <div className="col user-data">
                                 <img className="profile-picture" src={image} alt={name} />
@@ -71,10 +77,13 @@ export default class UsersProfile extends Component {
                             </div>
                         </section>
 
-                        <section className="recipe-book">
+                        <div className="recipe-book row">
+                            <div className="col ml-2 mt-3">
                             <h5>Recipes</h5>
-                            <hr></hr>
-                        </section>
+                            {userRecipes}
+                            </div>
+                            
+                        </div>
 
                     </div>
 

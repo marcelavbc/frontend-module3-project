@@ -137,6 +137,50 @@
     /* color: #004e98; */
 }
 
+.recipe-div {
+    margin: 10px;
+    display: flex;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid green */
+}
+
+.info-file {
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red */
+}
+
+.info-icon-profile {
+    color: var(--bg);
+    font-size: 14px;
+    border: none !important;
+    margin: 0 8px
+}
+
+.text-title {
+    font-size: 14px;
+    color: var(--text)
+}
+
+.recipes-icons {
+    display: flex;
+    align-items: center
+}
+
+.my-recipe-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.img-details {
+    width: 100%
+}
+
 
 
 li {
