@@ -24,7 +24,7 @@ export default class FindUser extends Component {
     getAllUsers() {
         axios.get('http://localhost:5000/api/users')
             .then(response => {
-                console.log('response', response.data)
+                // console.log('response', response.data)
                 this.setState({
                     users: response.data
                 })
@@ -32,7 +32,7 @@ export default class FindUser extends Component {
     }
 
     filter(query) {
-        console.log("query to filter: ", query)
+        // console.log("query to filter: ", query)
         this.setState({
             filter: query
         })

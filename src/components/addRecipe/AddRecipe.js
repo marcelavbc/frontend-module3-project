@@ -27,7 +27,7 @@ export default class AddRecipe extends Component {
     }
 
     handleChange = (e) => {
-        console.log(e.target.name)
+        // console.log(e.target.name)
 
         const form = this.state.form
         form.set(e.target.name, e.target.value)
@@ -76,7 +76,7 @@ export default class AddRecipe extends Component {
     }
 
     handleFileUpLoad = (event) => {
-        console.log('event.target.files[0]', event.target.files[0])
+        // console.log('event.target.files[0]', event.target.files[0])
         const uploadImage = this.state.form
         uploadImage.set("image", event.target.files[0])
         this.setState({
@@ -134,7 +134,12 @@ export default class AddRecipe extends Component {
 
                                 <div className="input-group input-group-add">
                                     <div className="custom-file">
-                                        <input type="file" className="custom-file-input" name="image" id="file" onChange={e => this.handleFileUpLoad(e)} />
+                                        <input type="file" 
+                                        className="custom-file-input" 
+                                        name="image" 
+                                        id="file" 
+                                        multiple
+                                        onChange={e => this.handleFileUpLoad(e)} />
                                         <label className="custom-file-label" htmlFor="file">Choose file</label>
                                     </div>
                                     <div className="input-group-append">

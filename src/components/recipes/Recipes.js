@@ -10,6 +10,7 @@ export default class Recipes extends Component {
         this.state = {
             open: false,
             saved: false,
+            savedRecipes: this.props.saved
         }
 
         this.open = this.open.bind(this)
@@ -26,10 +27,14 @@ export default class Recipes extends Component {
         console.log('saved')
         axios.post('http://localhost:5000/api/profile/savedRecipes', {recipeId: this.props.id}, { withCredentials: true })
         .then(data => {
+            console.log('data in recipes cards', data)
+            let copySaved = this.state.savedRecipes
+            copySaved.push(data)
             this.setState({
                 saved: !this.state.saved, 
-                savedRecipes: data
+                savedRecipes: copySaved
             })
+            console.log('state after save:', this.state.savedRecipes)
         })   
     }
 

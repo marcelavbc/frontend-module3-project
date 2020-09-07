@@ -28,7 +28,6 @@ export default class RecipeDetails extends Component {
             })
     }
 
-
     render() {
         let title;
         let src;
@@ -38,7 +37,7 @@ export default class RecipeDetails extends Component {
         let analyzedInstructions;
         let owner;
         let userId;
-
+        console.log(this.state)
         if (this.state.recipe) {
             console.log(this.state.recipe)
             title = <p>{this.state.recipe.title || this.state.recipe.recipe.title}</p>
@@ -66,7 +65,6 @@ export default class RecipeDetails extends Component {
             owner = null
         }
 
-        console.log('recipein details page', this.state.recipe)
         return (
             <div className="container-fluid">
                 <div className="mb-5 mt-5">

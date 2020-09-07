@@ -10,10 +10,8 @@ export default class MainPage extends Component {
         super(props)
         this.state = {
             loggedInUser: this.props.user,
-            loggedUserId: this.props.user._id
-            
+            loggedUserId: this.props.user._id,
         }
-
     }
 
     getAllrecipes = () => {
@@ -22,7 +20,6 @@ export default class MainPage extends Component {
                 this.setState({
                     allRecipes: response.data
                 })
-                console.log('response: ', response.data)
             })
     }
 
@@ -30,26 +27,41 @@ export default class MainPage extends Component {
         this.getAllrecipes()
     }
 
+
     render() {
         let cards;
         if (this.state.allRecipes) {
-            console.log(this.state.allRecipes)
+            // console.log(this.state.allRecipes)
             cards = this.state.allRecipes.slice(0).reverse().map((ele, i) => {
-                return <MainRecipeCard key={i} title={ele.title} username={ele.owner.username} recipeOwner={ele.owner._id} avatar={ele.owner.avatar} src={ele.imagePath} id={ele._id} servings={ele.servings} readyInMinutes={ele.readyInMinutes} logged={this.state.loggedInUser}/>
+                console.log('ele in main', ele)
+                return <MainRecipeCard
+                    getSavedRecipe={this.getSavedRecipe}
+                    key={i} title={ele.title}
+                    username={ele.owner.username}
+                    id={ele._id}
+                    recipeOwner={ele.owner._id}
+                    avatar={ele.owner.avatar}
+                    src={ele.imagePath}
+                    servings={ele.servings}
+                    readyInMinutes={ele.readyInMinutes}
+                    logged={this.state.loggedInUser}
+                />
             })
         }
-        console.log('state in MainPage', this.state)
         return (
             <div className="container-fluid">
                 <div>
                     <div className="row">
-                        <Navbar user={this.props.loggedInUser} text="What's new?" link='/profile' />
+                        <Navbar
+                            user={this.props.loggedInUser}
+                            text="What's new?"
+                            link='/profile' />
                     </div>
                     <div className="row mb-5  mt-5">
-                            {cards}
+                        {cards}
                     </div>
                 </div>
-                
+
                 <div className="row">
 
                     <Footer user={this.state.loggedInUser} />

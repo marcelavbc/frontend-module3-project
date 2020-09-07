@@ -27,22 +27,25 @@ export default class InputForm extends Component {
     }
 
     addInput = () => {
-        this.setState((preState) => ({
-            extendedIngredients: [...preState.extendedIngredients, { name: '', amount: 0, unit: '' }]
-        }))
+        this.setState({
+            extendedIngredients: [...this.state.extendedIngredients, { name: '', amount: 0, unit: '' }]
+        })
     }
 
     removeInput = (index) => {
-        const values = [...this.state.extendedIngredients]
-        values.splice(index, 1)
+        const values = [...this.state.extendedIngredients].filter((e, i) => {
+            return i !== index
+        })
         this.setState({
             extendedIngredients: values
         })
         this.props.liftIngredientsState(values)
+        // console.log('values: ', values)
     }
 
     render() {
         // console.log('state in form:', this.state)
+
         let { extendedIngredients } = this.state
         return (
             <div className="inputs-ingredients">
@@ -50,8 +53,7 @@ export default class InputForm extends Component {
                 {extendedIngredients.map((ele, index) => {
 
                     return (
-
-                        <div key={index} className="form-group input-ingredients row">
+                        <div key={index} className="form-group input-ingredients row" >
                             <div className="add-font col-12 mb-0">
                                 <p>Amount:</p>
                                 <p>Unit:</p>
@@ -84,9 +86,10 @@ export default class InputForm extends Component {
                             <i className="icon-add col-1 fas fa-trash text-center" onClick={() => this.removeInput(index)}></i>
                         </div>
                     )
-                })}
+                })
+                }
                 <p className="add-indgredient align-self-center" onClick={this.addInput}><i className="fas fa-plus mr-1" onClick={this.addInput}></i>Add</p>
-            </div>
+            </div >
         )
     }
 }

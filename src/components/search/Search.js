@@ -16,6 +16,7 @@ export default class Search extends Component {
             ingredient: '',
             listAllIngredients: [],
             isClicked: false,
+            savedRecipes: this.props.saved
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -43,7 +44,6 @@ export default class Search extends Component {
         console.log("get Single called")
         console.log("recipe", recipe)
         // this.setState({
-        //     single: 'hello'
         // })
 
         // console.log('state:', this.state)
@@ -120,9 +120,9 @@ export default class Search extends Component {
             .then(() => {
                 console.log('this.state.recipes: ', this.state.recipes)
 
-                const copyRecipe = this.state.recipes
+                // const copyRecipe = this.state.recipes
                 const copyIngredients = this.state.listAllIngredients
-                this.props.liftUpRecipesSearched(copyRecipe)
+                // this.props.liftUpRecipesSearched(copyRecipe)
                 this.props.ingredients(copyIngredients)
             })
     }
@@ -160,7 +160,8 @@ export default class Search extends Component {
         if (this.state.isClicked) {
             // console.log('recipes to map:', this.state.recipes)
             listRecipes = this.state.recipes.map((ele, i) => {
-                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} />
+                // console.log('ele in search', ele)
+                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes}/>
             })
         }
 

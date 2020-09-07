@@ -15,10 +15,11 @@ export default class Profile extends Component {
             show: false,
             editQuote: false,
             quote: this.props.user.quote,
+            savedRecipes: this.props.saved,
+            myRecipes: this.props.myRecipes,
             key: 1
         }
         this.handleSelect = this.handleSelect.bind(this);
-
     }
 
     handleSelect(key) {
@@ -38,18 +39,16 @@ export default class Profile extends Component {
     }
 
     handleEditOpen = () => {
-        console.log('click open')
         this.setState({
             editQuote: true
         })
     }
 
     handleChangeQuote = (event) => {
-        console.log(event.target.value)
+        // console.log(event.target.value)
         this.setState({
             quote: event.target.value
         })
-        console.log(this.state.quote)
     }
 
     handleSubmit = (event) => {
@@ -74,17 +73,17 @@ export default class Profile extends Component {
         uploadData.append("avatar", event.target.files[0])
         console.log('upload data', event.target.files[0])
         axios.put('http://localhost:5000/api/profile/updateavatar', uploadData, { withCredentials: true })
-            .then(response =>
-                // console.log(response)
+            .then(response => {
+                console.log('response:', response)
                 this.setState({
                     loggedInUser: {
                         ...this.state.loggedInUser,
                         avatar: response.data.avatar
                     }
                 })
+            }
             )
     }
-
 
     componentDidMount() {
         this.showMyRecipes()
@@ -109,9 +108,15 @@ export default class Profile extends Component {
             })
     }
 
+    updateSaved = (objRecipesSaved) => {
+        this.setState({
+            savedRecipes: objRecipesSaved
+        })
+    }
 
 
     render() {
+        console.log(this.state)
         let quote = '';
         let pencil = ''
         if (!this.state.editQuote) {
@@ -128,7 +133,6 @@ export default class Profile extends Component {
                         className="quote-input"
                         onChange={(event) => this.handleChangeQuote(event)}
                     />
-
                     <input type="submit" value="Save" className="save btn" />
                 </form>
             )
@@ -138,9 +142,19 @@ export default class Profile extends Component {
         let recipeList;
         if (this.state.myRecipes) {
             recipeList = this.state.myRecipes.slice(0).reverse().map((ele, i) => {
-                return <RecipesInProfile key={i} title={ele.title} src={ele.imagePath} servings={ele.servings} readyInMinutes={ele.readyInMinutes} recipeOwner={ele.owner._id} id={ele._id}/>
+                console.log('myRecipes ele', ele)
+                return <RecipesInProfile
+                    key={i}
+                    title={ele.title}
+                    src={ele.imagePath}
+                    servings={ele.servings}
+                    readyInMinutes={ele.readyInMinutes}
+                    recipeOwner={ele.owner._id}
+                    loggedInUser={this.state.loggedInUser}
+                    id={ele._id} 
+                    updateSaved={this.updateSaved}
+                    />
             })
-            console.log('allrecipes in state', this.state.myRecipes)
 
 
         } else {
@@ -150,9 +164,18 @@ export default class Profile extends Component {
         let savedRecipeList;
         if (this.state.savedRecipes) {
             savedRecipeList = this.state.savedRecipes.slice(0).reverse().map((ele, i) => {
-                return (<RecipesInProfile key={i} title={ele.title || ele.recipe.title} src={ele.imagePath || ele.image || ele.recipe.imagePath} servings={ele.servings} readyInMinutes={ele.readyInMinutes} id={ele._id} recipeOwner={null}/>)
+                console.log('saved recipes ele', ele)
+
+                return (<RecipesInProfile
+                    key={i}
+                    title={ele.recipe.title}
+                    src={ele.recipe.imagePath}
+                    servings={ele.servings}
+                    readyInMinutes={ele.readyInMinutes}
+                    id={ele._id}
+                    recipeOwner={null}
+                    loggedInUser={this.state.loggedInUser} />)
             })
-            console.log('allrecipes in state saved', this.state.savedRecipes)
 
 
         } else {

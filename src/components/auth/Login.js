@@ -21,8 +21,9 @@ export default class Login extends Component {
                     password: "",
                 });
                 console.log('response in login component:', response)
-
                 this.props.getUser(response)
+                this.props.showMyRecipes()
+                this.props.showSavedRecipes()
                 this.props.history.push(`/main`);
             })
             .catch(error => console.log("the error:", error))

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Footer from '../footer/Footer'
 import Navbar from '../navbar/Navbar';
 import axios from 'axios'
+import RecipesInProfile from '../recipes/RecipesInProfile';
 
 export default class UsersProfile extends Component {
     constructor(props) {
@@ -22,11 +23,11 @@ export default class UsersProfile extends Component {
     getUserData() {
         axios.get(`http://localhost:5000/api/users/${this.state.id}`)
             .then(response => {
-                console.log('response', response.data[0])
+                // console.log('response', response.data[0])
                 let user = response.data[0]
                 let userRecipes = response.data
                 userRecipes.shift()
-                console.log('array without first element:' , userRecipes)
+                // console.log('array without first element:' , userRecipes)
                 this.setState({
                     user: user,
                     recipes : userRecipes
@@ -45,7 +46,7 @@ export default class UsersProfile extends Component {
             name = this.state.user.username
             quote = this.state.user.quote
             userRecipes = this.state.recipes.map((ele, i) => {
-                return <p>{ele.title}</p>
+                return <RecipesInProfile key={i} title={ele.title} src={ele.imagePath} id={ele._id}/> 
             })
         } else {
             image = null
