@@ -24,12 +24,11 @@ export default class Recipes extends Component {
     }
 
     save = () => {
-        console.log('saved')
         axios.post('http://localhost:5000/api/profile/savedRecipes', {recipeId: this.props.id}, { withCredentials: true })
         .then(data => {
-            console.log('data in recipes cards', data)
+            console.log('data in recipes cards', data.data)
             let copySaved = this.state.savedRecipes
-            copySaved.push(data)
+            copySaved.push(data.data)
             this.setState({
                 saved: !this.state.saved, 
                 savedRecipes: copySaved

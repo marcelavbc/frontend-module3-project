@@ -27,15 +27,12 @@ export default class MainPage extends Component {
         this.getAllrecipes()
     }
 
-
     render() {
         let cards;
         if (this.state.allRecipes) {
             // console.log(this.state.allRecipes)
             cards = this.state.allRecipes.slice(0).reverse().map((ele, i) => {
-                console.log('ele in main', ele)
                 return <MainRecipeCard
-                    getSavedRecipe={this.getSavedRecipe}
                     key={i} title={ele.title}
                     username={ele.owner.username}
                     id={ele._id}
@@ -61,11 +58,9 @@ export default class MainPage extends Component {
                         {cards}
                     </div>
                 </div>
-
                 <div className="row">
-
-                    <Footer user={this.state.loggedInUser} />
-
+                    <Footer 
+                    user={this.state.loggedInUser} />
                 </div>
 
             </div>

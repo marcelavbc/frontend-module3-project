@@ -6,11 +6,13 @@ import Navbar from '../navbar/Navbar';
 import { Modal, Tabs, Tab } from 'react-bootstrap'
 import axios from 'axios'
 import RecipesInProfile from '../recipes/RecipesInProfile'
+import MainRecipeCard from '../main/MainRecipeCard'
 export default class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
             loggedInUser: this.props.user,
+            loggedUserId: this.props.user._id,
             avatar: this.props.user.avatar,
             show: false,
             editQuote: false,
@@ -102,6 +104,7 @@ export default class Profile extends Component {
     showSavedRecipes = () => {
         axios.get('http://localhost:5000/api/profile/savedRecipes', { withCredentials: true })
             .then(response => {
+                console.log('response saved recipes', response)
                 this.setState({
                     savedRecipes: response.data
                 })
@@ -112,6 +115,12 @@ export default class Profile extends Component {
         this.setState({
             savedRecipes: objRecipesSaved
         })
+    }
+
+    updateMyRecipes = (objectResponseDeleted) => {
+        let copyMyRecipes = this.state.myRecipes
+        // copyMyRecipes.find(ele => ele = objectResponseDeleted)
+        console.log('copyMyRecipe', copyMyRecipes)
     }
 
 
@@ -142,18 +151,18 @@ export default class Profile extends Component {
         let recipeList;
         if (this.state.myRecipes) {
             recipeList = this.state.myRecipes.slice(0).reverse().map((ele, i) => {
-                console.log('myRecipes ele', ele)
+                // console.log('myRecipes ele', ele)
                 return <RecipesInProfile
                     key={i}
                     title={ele.title}
                     src={ele.imagePath}
                     servings={ele.servings}
                     readyInMinutes={ele.readyInMinutes}
-                    recipeOwner={ele.owner._id}
                     loggedInUser={this.state.loggedInUser}
-                    id={ele._id} 
-                    updateSaved={this.updateSaved}
-                    />
+                    updateMyRecipes={this.updateMyRecipes}
+                    id={ele._id}
+                    recipeId={ele._id}
+                />
             })
 
 
@@ -165,19 +174,18 @@ export default class Profile extends Component {
         if (this.state.savedRecipes) {
             savedRecipeList = this.state.savedRecipes.slice(0).reverse().map((ele, i) => {
                 console.log('saved recipes ele', ele)
-
                 return (<RecipesInProfile
                     key={i}
-                    title={ele.recipe.title}
-                    src={ele.recipe.imagePath}
-                    servings={ele.servings}
-                    readyInMinutes={ele.readyInMinutes}
+                    title={ele.title || ele.recipe.title}
+                    src={ele.image || ele.recipe.imagePath}
+                    servings={ele.servings || ele.recipe.servings}
+                    readyInMinutes={ele.readyInMinutes || ele.recipe.readyInMinutes}
+                    loggedInUser={this.state.loggedInUser}
+                    updateSaved={this.updateMyRecipes}
                     id={ele._id}
-                    recipeOwner={null}
-                    loggedInUser={this.state.loggedInUser} />)
+                    recipeId={ele.recipeId || ele.recipe._id}
+                />)
             })
-
-
         } else {
             savedRecipeList = null
         }

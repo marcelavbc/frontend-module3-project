@@ -18,10 +18,8 @@ export default class Search extends Component {
             isClicked: false,
             savedRecipes: this.props.saved
         }
-
         this.handleClick = this.handleClick.bind(this)
         this.getIngredients = this.getIngredients.bind(this)
-
     }
 
     handleChange = (event) => {
@@ -119,7 +117,6 @@ export default class Search extends Component {
             })
             .then(() => {
                 console.log('this.state.recipes: ', this.state.recipes)
-
                 // const copyRecipe = this.state.recipes
                 const copyIngredients = this.state.listAllIngredients
                 // this.props.liftUpRecipesSearched(copyRecipe)

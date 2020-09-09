@@ -24,12 +24,13 @@ export default class RecipesInProfile extends Component {
     }
 
     deleteMyRecipe = () => {
-        console.log('delete click')
+        console.log('delete my recipe clicked')
         // console.log(this.props.id)
+        console.log('id', this.props.id)
         axios.delete(`http://localhost:5000/api/profile/recipe/${this.props.id}`)
             .then(response => {
-                console.log(response)
-                this.props.updateSaved(response)
+                console.log('response', response)
+                this.props.updateMyRecipes(response)
             })
 
     }
@@ -53,7 +54,7 @@ export default class RecipesInProfile extends Component {
                         <p className="m-0 text-title">{this.props.title}</p>
                     </div>
                     <div className="recipes-icons mx-2">
-                        <Link to={`/recipe/${this.props.id}`}><i className="fas fa-info info-icon-profile"></i></Link>
+                        <Link to={`/recipe/${this.props.recipeId}`}><i className="fas fa-info info-icon-profile"></i></Link>
                         {edit}
                     </div>
                 </div>

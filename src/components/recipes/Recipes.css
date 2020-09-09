@@ -75,8 +75,6 @@
     margin-left: 10px
 }
 
-/* DETAILS */
-
 .recipe {
     height: 100vh;
     display: flex;
@@ -91,7 +89,6 @@
 }
 
 .recipe-info {
-    /* border: solid red 2px; */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -113,7 +110,6 @@
 }
 
 .recipe-data {
-    /* border: solid red 2px; */
     display: flex;
     justify-content: center;
 }
@@ -132,10 +128,7 @@
     margin: 8px 0;
 }
 
-.cook-instructions p {
-    /* border: solid 1px green; */
-    /* color: #004e98; */
-}
+
 
 .recipe-div {
     margin: 10px;
@@ -144,13 +137,11 @@
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
-    /* border: 1px solid green */
 }
 
 .info-file {
     display: flex;
     align-items: center;
-    /* border: 1px solid red */
 }
 
 .info-icon-profile {
@@ -181,7 +172,36 @@
     width: 100%
 }
 
+.recipe-detail-div {
+    margin: 10px!important;
+    background-color: var(--light);
+    padding-top: 15px;
+    border-radius: 8px;
+}
 
+.details-title {
+    color: var(--secondary);
+    font-size: 25px;
+}
+
+.details-list li{
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.details-list i{
+    color: var(--primary)
+}
+
+.details-info-title{
+    color: var(--text)
+}
+
+.icon-detail-edit {
+    color: green;
+    border-color: green;
+}
 
 li {
     list-style: none;

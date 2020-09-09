@@ -62,7 +62,7 @@ export default class InputFormMethods extends Component {
                                 onChange={(event) => this.handleChange(index, event)}
                             />
                             <input
-                                className="add-input add-number col-8"
+                                className="add-input add-number col-7 mx-1"
                                 type="text"
                                 placeholder="Instruction"
                                 name="step"
@@ -70,10 +70,10 @@ export default class InputFormMethods extends Component {
                             />
 
                             <i className="icon-add col-1 fas fa-trash text-center" onClick={() => this.removeInput(index)}></i>
+                            <i className="fas fa-plus col-1 add-ingredient" onClick={this.addInput}></i>
                         </div>
                     )
                 })}
-                <p className="add-indgredient align-self-center" onClick={this.addInput}><i className="fas fa-plus mr-1" onClick={this.addInput}></i>Add</p>
             </div>
         )
     }
