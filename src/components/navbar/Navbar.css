@@ -8,26 +8,44 @@ nav i {
     color: var(--light) !important
 }
 
-.navbar img{
+.navbar img {
     width: 25px;
     height: 25px;
 }
 
 .navbar p {
-    font-size: 18px!important;
+    font-size: 18px !important;
     margin: 0
 }
 
 .logo {
     font-family: 'Amita', cursive;
     color: var(--light);
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
     font-style: none;
 }
 
 @media (min-width:600px) {
     .navbar {
         display: flex;
-        justify-content: space-evenly!important;
+        justify-content: space-evenly !important;
+        padding: 10px!important;
+    }
+
+    .navbar p {
+        font-size: 25px !important;  
+    }
+
+    .navbar img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo {
+        font-size: 35px
+    }
+    nav i {
+        font-size: 20px;
+        padding: 5px 0
     }
 }

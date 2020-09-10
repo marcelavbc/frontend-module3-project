@@ -178,13 +178,10 @@ export default class AddRecipe extends Component {
                                     <InputForm liftIngredientsState={this.liftIngredientsState} />
                                     <p className="add-titles">Methods:</p>
                                     <InputFormMethods liftMethodsState={this.liftMethodsState} />
-
                                     <div className="input-group-append">
                                         <input className="btn btn-save-add mt-3" type="submit" value="Send" onSubmit={this.handleFormSubmit} />
                                     </div>
                                 </div>
-
-
                             </form>
                         </div>
 

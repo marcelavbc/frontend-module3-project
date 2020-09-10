@@ -77,8 +77,8 @@ class Signup extends Component {
                 </form>
 
                 {/* <a href="/auth/google">Google</a> */}
-                <div className="already">
-                    <p className="m-0 mr-3">Already have account?</p>
+                <div className="already d-flex flex-column mt-3">
+                    <p className="m-0 mr-3 mb-3">Already have account?</p>
                     <Link to={"/login"}>Login!</Link>
                 </div>
 

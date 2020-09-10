@@ -10,47 +10,96 @@ export default class InputForm extends Component {
             extendedIngredients: [
                 {
                     name: '',
-                    amount: 0,
+                    amount: '',
                     unit: ''
                 }]
         }
+        this.handleInputVluleChange = this.handleInputVluleChange.bind(this);
+        this.handleAddingredient = this.handleAddingredient.bind(this);
+        this.handleRemoveInput = this.handleRemoveInput.bind(this);
+
+
+
     }
 
-    handleChange = (index, event) => {
-        // console.log(index, event.target.name)
-        const values = [...this.state.extendedIngredients]
-        values[index][event.target.name] = event.target.value
-        this.setState({
-            extendedIngredients: values
-        })
-        this.props.liftIngredientsState(values)
+    handleInputVluleChange(e, idx) {
+        let nextSocialData = this.state.extendedIngredients.slice();
+        nextSocialData[idx].name = e.target.value;
+        this.setState({ extendedIngredients: nextSocialData });
+        this.props.liftIngredientsState(nextSocialData)
     }
 
-    addInput = () => {
-        this.setState({
-            extendedIngredients: [...this.state.extendedIngredients, { name: '', amount: 0, unit: '' }]
-        })
+    handleAddingredient() {
+        let array = this.state.extendedIngredients;
+        array.push({ id: array.length + 1});
+        this.setState({ extendedIngredients: array });
     }
 
-    removeInput = (index) => {
-        const values = [...this.state.extendedIngredients].filter((e, i) => {
-            return i !== index
-        })
-        this.setState({
-            extendedIngredients: values
-        })
-        this.props.liftIngredientsState(values)
-        // console.log('values: ', values)
+    handleRemoveInput(idx) {
+        let someArray = this.state.extendedIngredients;
+        someArray.splice(idx, 1);
+        this.setState({ extendedIngredients: someArray });
     }
 
     render() {
         // console.log('state in form:', this.state)
-
         let { extendedIngredients } = this.state
+        console.log(extendedIngredients)
         return (
             <div className="inputs-ingredients">
+                <div>
+                    <button
+                        className="new-button btn btn-primary mb-4"
+                        type="button"
+                        onClick={this.handleAddingredient}>
+                        <span>
+                            <span className="buttonText">Click to add a new ingredient</span>
+                        </span>
+                    </button>
+                </div>
 
-                {extendedIngredients.map((ele, index) => {
+                <table className="table mt-3 bordered table-hover  white-table addNewSocial">
+                    <tbody>
+                        {extendedIngredients.map((ele, idx) => {
+                            console.log(ele)
+                            return <tr key={idx}>
+                                <td className="col-6 socialInput">
+                                    <input
+                                        type='number'
+                                        placeholder={`Add Amount`}
+                                        value={ele.name}
+                                        onChange={e => this.handleInputVluleChange(e, idx)}
+                                    />
+                                </td>
+
+                                {/* <td className="col-6 socialInput">
+                                    <input
+                                        type='text'
+                                        placeholder={`Add unit`}
+                                        value={ele.name}
+                                        onChange={e => this.handleInputVluleChange(e, idx)}
+                                    />
+                                </td>
+                                <td className="col-6 socialInput">
+                                    <input
+                                        type='text'
+                                        placeholder={`Add ingredient name`}
+                                        value={ele.name}
+                                        onChange={e => this.handleInputVluleChange(e, idx)}
+                                    />
+                                </td> */}
+                                <td className="col-2 closingLink">
+                                    <div
+                                        className="fas fa-fw fa-times"
+                                        onClick={() => this.handleRemoveInput(idx)}>remove
+                                    </div>
+                                </td>
+                            </tr>
+                        })}
+                    </tbody>
+                </table>
+
+                {/* {extendedIngredients.map((ele, index) => {
 
                     return (
                         <div key={index} className="form-group input-ingredients row" >
@@ -88,7 +137,7 @@ export default class InputForm extends Component {
                         </div>
                     )
                 })
-                }
+                } */}
             </div>
         )
     }

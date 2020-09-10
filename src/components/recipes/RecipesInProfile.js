@@ -16,33 +16,38 @@ export default class RecipesInProfile extends Component {
     }
 
     deleteRecipe = () => {
-        console.log('clicked to delete', this.props.id)
-        axios.delete(`http://localhost:5000/api/profile/savedInternalRecipes/${this.props.id}`)
-            .then(response => {
-                console.log(response)
-            })
+        console.log('clicked to delete', this.props)
+        if (typeof this.props.recipeId === 'number') {
+            console.log(this.props.id)
+            axios.delete(`http://localhost:5000/api/profile/savedApiRecipes/${this.props.id}`, { withCredentials: true })
+                .then(response => {
+                    this.props.updateRecipes(response)
+                })
+        } else if (this.props.recipeOrigin === false) {
+            axios.delete(`http://localhost:5000/api/profile/savedInternalRecipes/${this.props.id}`, { withCredentials: true })
+                .then(response => {
+                    this.props.updateRecipes(response)
+                })
+        } else {
+            axios.delete(`http://localhost:5000/api/profile/recipe/${this.props.id}`, { withCredentials: true })
+                .then(response => {
+                    this.props.updateMyRecipes(response)
+                })
+        }
     }
 
-    deleteMyRecipe = () => {
-        console.log('delete my recipe clicked')
-        // console.log(this.props.id)
-        console.log('id', this.props.id)
-        axios.delete(`http://localhost:5000/api/profile/recipe/${this.props.id}`)
-            .then(response => {
-                console.log('response', response)
-                this.props.updateMyRecipes(response)
-            })
-
-    }
+    // deleteMyRecipe = () => {
+    //     console.log('delete my recipe clicked')
+    //     console.log(this.props.id)
+    //     axios.delete(`http://localhost:5000/api/profile/recipe/${this.props.id}`, { withCredentials: true })
+    //         .then(response => {
+    //         console.log('response', response)
+    //         this.props.updateMyRecipes(response)
+    //     })
+    // }
 
     render() {
-        // console.log(this.props.id)
-        let edit;
-        if (this.props.recipeOwner === null) {
-            edit = <i className="info-icon-profile fas fa-bookmark" onClick={this.deleteRecipe}></i>
-        } else {
-            edit = <i className="info-icon-profile fas fa-trash" onClick={this.deleteMyRecipe}></i>
-        }
+
 
 
 
@@ -55,8 +60,7 @@ export default class RecipesInProfile extends Component {
                     </div>
                     <div className="recipes-icons mx-2">
                         <Link to={`/recipe/${this.props.recipeId}`}><i className="fas fa-info info-icon-profile"></i></Link>
-                        {edit}
-                    </div>
+                        <i className="info-icon-profile fas fa-trash" onClick={this.deleteRecipe}></i>                    </div>
                 </div>
             </div>
         )

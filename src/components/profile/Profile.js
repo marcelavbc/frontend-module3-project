@@ -111,17 +111,8 @@ export default class Profile extends Component {
             })
     }
 
-    updateSaved = (objRecipesSaved) => {
-        this.setState({
-            savedRecipes: objRecipesSaved
-        })
-    }
+    
 
-    updateMyRecipes = (objectResponseDeleted) => {
-        let copyMyRecipes = this.state.myRecipes
-        // copyMyRecipes.find(ele => ele = objectResponseDeleted)
-        console.log('copyMyRecipe', copyMyRecipes)
-    }
 
 
     render() {
@@ -159,9 +150,10 @@ export default class Profile extends Component {
                     servings={ele.servings}
                     readyInMinutes={ele.readyInMinutes}
                     loggedInUser={this.state.loggedInUser}
-                    updateMyRecipes={this.updateMyRecipes}
+                    updateMyRecipes={this.showMyRecipes}
                     id={ele._id}
                     recipeId={ele._id}
+                    recipeOrigin={true}
                 />
             })
 
@@ -184,6 +176,8 @@ export default class Profile extends Component {
                     updateSaved={this.updateMyRecipes}
                     id={ele._id}
                     recipeId={ele.recipeId || ele.recipe._id}
+                    updateRecipes={this.showSavedRecipes}
+                    recipeOrigin={false}
                 />)
             })
         } else {
@@ -198,9 +192,9 @@ export default class Profile extends Component {
                         <Navbar user={this.state.loggedInUser} text='Profile' link='/main' />
                     </div>
 
-                    <div className="row profile-container mb-5 mt-5">
+                    <div className="row profile-container-div mb-5">
                         <section className="profile-info-div">
-                            <div className="col user-data">
+                            <div className="col col-md-2 user-data">
                                 <img className="profile-picture" src={this.state.loggedInUser.avatar} alt={this.state.loggedInUser.username} />
                                 <img className="edit-icon" src="/images/person.png" alt="edit-profile-icon" onClick={() => this.handleOpen()} />
                                 <Modal show={this.state.show} aria-labelledby="contained-modal-title-vcenter" centered>
@@ -233,11 +227,11 @@ export default class Profile extends Component {
                         </section>
                         {/* <h5 className="book-h5 ml-4">Recipe Book</h5> */}
 
-                        <div className="recipe-book row">
-                            <div className="col ml-2 mt-3">
-                                <Tabs className="" activeKey={this.state.key} onSelect={this.handleSelect}>
-                                    <Tab eventKey={1} title="My Recipes">{recipeList}</Tab>
-                                    <Tab eventKey={2} title="Favorites">{savedRecipeList}</Tab>
+                        <div className="recipes-list row">
+                            <div className="col col-md-6 tabs ml-2 mt-3">
+                                <Tabs className="tab-master" activeKey={this.state.key} onSelect={this.handleSelect}>
+                                    <Tab className="tab-second" eventKey={1} title="My Recipes">{recipeList}</Tab>
+                                    <Tab className="tab-second" eventKey={2} title="Favorites">{savedRecipeList}</Tab>
                                 </Tabs>
                             </div>
                         </div>

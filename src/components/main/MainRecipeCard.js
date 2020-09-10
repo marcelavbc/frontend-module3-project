@@ -60,7 +60,7 @@ export default class MainRecipeCard extends Component {
         }
 
         return (
-            <div className="col-12 mt-2 d-flex ">
+            <div className="col-12 col-md-3 mt-2 d-flex mt-md-4 ">
                 <div className="main-card card">
                     <div className="top-card-main">
                         <img className="avatar-main" src={this.props.avatar} alt={this.props.OwnerUsername} />
