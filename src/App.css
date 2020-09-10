@@ -1,10 +1,11 @@
 body {
   margin: 0;
   padding: 0;
-  --primary: #13c7b6;
-  --secondary: #507DBC;
+  --primary: #507DBC;
+  --secondary: #13C7B6;
   --text: #28190E;
   --light: #EFEDE6;
+  /* --bg: #13C7B6 */
   --bg: #FFB400
 }
 

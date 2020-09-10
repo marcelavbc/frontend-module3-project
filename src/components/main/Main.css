@@ -23,14 +23,14 @@
 .main-card-user {
     margin: 2px;
     color: var(--text);
-    font-size: 18px;
+    font-size: 16px;
 }
 
 
 
 .avatar-main {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid var(--primary);

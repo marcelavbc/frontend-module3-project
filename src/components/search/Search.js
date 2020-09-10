@@ -38,15 +38,7 @@ export default class Search extends Component {
         })
     }
 
-    getSingleRecipe = (recipe) => {
-        console.log("get Single called")
-        console.log("recipe", recipe)
-        // this.setState({
-        // })
 
-        // console.log('state:', this.state)
-        // this.props.upStaterecipe(this.state.single)
-    }
 
 
     getIngredients = (event) => {

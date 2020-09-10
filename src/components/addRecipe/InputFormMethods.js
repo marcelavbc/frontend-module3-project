@@ -10,7 +10,7 @@ export default class InputFormMethods extends Component {
                 {
                     steps: [
                         {
-                            number: 0,
+                            number: '',
                             step: ''
                         }
                     ]
@@ -32,15 +32,18 @@ export default class InputFormMethods extends Component {
 
     addInput = () => {
         this.setState({
-            analyzedInstructions: [{ steps: [...this.state.analyzedInstructions[0].steps, { number: 0, step: '' }] }]
+            analyzedInstructions: [{ steps: [...this.state.analyzedInstructions[0].steps, { number: '', step: '' }] }]
         })
     }
 
     removeInput = (index) => {
-        const values = [...this.state.analyzedInstructions]
+        const values = [...this.state.analyzedInstructions[0].steps]
         values.splice(index, 1)
+        const arr = [...this.state.analyzedInstructions]
+        arr.steps = values
+        console.log('arr', arr)
         this.setState({
-            analyzedInstructions: values
+            analyzedInstructions: arr
         })
         this.props.liftMethodsState(values)
     }
@@ -52,13 +55,17 @@ export default class InputFormMethods extends Component {
             <div className="inputs-ingredients">
 
                 {analyzedInstructions[0].steps.map((ele, index) => {
+
                     return (
                         <div key={index} className="form-group input-ingredients row">
                             <input
                                 className="add-input add-number col-2"
                                 type="number"
                                 name="number"
+                                value={ele.number}
+                                key={'number' + index}
                                 placeholder={index + 1}
+                                autoComplete="off"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
                             <input
@@ -66,6 +73,9 @@ export default class InputFormMethods extends Component {
                                 type="text"
                                 placeholder="Instruction"
                                 name="step"
+                                value={ele.step}
+                                key={'step' + index}
+                                autoComplete="off"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
 

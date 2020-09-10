@@ -17,6 +17,14 @@ export default class RecipeDetails extends Component {
 
     componentDidMount() {
         this.getRecipeDetails()
+        axios.get('http://localhost:5000/api/profile/savedRecipes', { withCredentials: true })
+            .then(response => {
+                console.log('response saved recipes', response)
+                this.setState({
+                    savedRecipes: response.data
+                })
+                // this.findIfIsSaved()
+            })
     }
 
     getRecipeDetails = () => {
@@ -29,10 +37,15 @@ export default class RecipeDetails extends Component {
             })
     }
 
-    editRecipe = () => {
-        console.log('edite recipe')
-        return <EditRecipe recipe={this.state.recipe} />
+    findIfIsSaved = () => {
+        const saved = this.state.savedRecipes.find()
+        console.log('is saved', saved)
     }
+
+    // editRecipe = () => {
+    //     console.log('edite recipe')
+    //     return <EditRecipe recipe={this.state.recipe} />
+    // }
 
     render() {
         let title;
@@ -42,12 +55,14 @@ export default class RecipeDetails extends Component {
         let extendedIngredients;
         let analyzedInstructions;
         let owner;
-        let userId;
         let edit;
-        let recipeId;
+        let userId;
+
         console.log('this.state in details', this.state)
+
         if (this.state.recipe) {
             console.log(this.state.recipe)
+            userId = this.state.recipe.owner._id
             title = <p className="details-title mb-0">{this.state.recipe.title || this.state.recipe.recipe.title}</p>
             src = this.state.recipe.image || this.state.recipe.imagePath || this.state.recipe.recipe.imagePath
             servings = this.state.recipe.servings
@@ -58,12 +73,15 @@ export default class RecipeDetails extends Component {
             analyzedInstructions = this.state.recipe.analyzedInstructions[0].steps.map((ele, i) => {
                 return <li className="li-details mb-2" key={i}>{ele.number}) {ele.step}</li>
             })
-            recipeId = this.state.id
-            if (this.state.recipe.creditsText) {
+
+            if (this.state.recipe.cookingMinutes) {
                 owner = null
-            } else if (this.state.recipe.owner.username) {
-                userId = this.state.recipe.owner._id
-                owner = this.state.recipe.owner.username
+                edit = null
+            } else if (this.state.loggedInUser._id !== this.state.recipe.owner._id) {
+                owner = <li>@{this.state.recipe.owner.username}</li>//add link
+                edit = null
+            } else {
+                edit = <i className="fas fa-pencil-alt"></i>
             }
         } else {
             title = null;
@@ -71,10 +89,9 @@ export default class RecipeDetails extends Component {
             servings = null;
             readyInMinutes = null;
             extendedIngredients = null;
-            owner = null
-            recipeId = null
+            edit = null
+            userId = null
         }
-
 
         return (
             <div className="container-fluid">
@@ -85,15 +102,14 @@ export default class RecipeDetails extends Component {
                     <div className="row recipe-detail-div">
                         <div className="col-12 d-flex justify-content-around align-items-center mb-3">
                             {title}
-                            <Link to={`/recipe/${recipeId}/edit`}><i className="icon-detail-edit fas fa-pencil-alt" onClick={this.editRecipe} /></Link>
-
+                            {edit}
                         </div>
                         <div className="col-6">
                             <img className="img-details" src={src} alt={title} />
                         </div>
                         <div className="col-6">
                             <ul className="details-list">
-                                <li>Author: <Link to={`/users/${userId}`}>@{owner}</Link></li>
+                                <Link to={`/users/${userId}`}>{owner}</Link>
                                 <li><i className="far fa-clock mr-1"></i> {readyInMinutes} minutes</li>
                                 <li><i className="fas fa-utensils mr-2"></i>{servings} servings</li>
                             </ul>

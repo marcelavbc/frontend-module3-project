@@ -178,13 +178,12 @@
 
 .recipe-detail-div {
     margin: 10px !important;
-    background-color: var(--light);
     padding-top: 15px;
     border-radius: 8px;
 }
 
 .details-title {
-    color: var(--secondary);
+    color: var(--text);
     font-size: 25px;
 }
 

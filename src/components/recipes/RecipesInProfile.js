@@ -16,7 +16,6 @@ export default class RecipesInProfile extends Component {
     }
 
     deleteRecipe = () => {
-        console.log('clicked to delete', this.props)
         if (typeof this.props.recipeId === 'number') {
             console.log(this.props.id)
             axios.delete(`http://localhost:5000/api/profile/savedApiRecipes/${this.props.id}`, { withCredentials: true })
@@ -26,12 +25,16 @@ export default class RecipesInProfile extends Component {
         } else if (this.props.recipeOrigin === false) {
             axios.delete(`http://localhost:5000/api/profile/savedInternalRecipes/${this.props.id}`, { withCredentials: true })
                 .then(response => {
+                    console.log('response when delete', response)
+                    console.log(this.props.id)
+
                     this.props.updateRecipes(response)
                 })
         } else {
             axios.delete(`http://localhost:5000/api/profile/recipe/${this.props.id}`, { withCredentials: true })
                 .then(response => {
                     this.props.updateMyRecipes(response)
+                    
                 })
         }
     }
