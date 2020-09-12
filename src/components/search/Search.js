@@ -214,7 +214,7 @@ export default class Search extends Component {
             // console.log('recipes to map:', this.state.recipes)
             listRecipes = this.state.recipes.map((ele, i) => {
                 // console.log('ele in search', ele)
-                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes} user={this.props.user} showSavedRecipes={this.props.showSavedRecipes}/>
+                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes} user={this.props.user} showSavedRecipes={this.props.showSavedRecipes} />
             })
         }
 
