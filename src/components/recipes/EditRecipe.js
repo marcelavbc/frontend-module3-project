@@ -26,10 +26,9 @@ export default class EditRecipe extends Component {
     getRecipeDetails = () => {
         axios.get(`http://localhost:5000/api/recipes/${this.state.id}`)
             .then(response => {
-                console.log('response2', response)
                 this.setState({
                     recipe: response.data,
-                    title:response.data.title,
+                    title: response.data.title,
                     show: false
                 })
             })
@@ -57,8 +56,17 @@ export default class EditRecipe extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault()
-        console.log('salvando')
-        axios.put(`http://localhost:5000/api/recipe/${this.state.id}`, { withCredentials: true })
+        //montar obj body 
+        const body = {
+            owner: this.state.recipe.owner,
+            title: this.state.title,
+            servings: this.state.recipe.servings,
+            readyInMinutes: this.state.recipe.readyInMinutes,
+            extendedIngredients: this.state.recipe.extendedIngredients,
+            analyzedInstructions: this.state.recipe.analyzedInstructions,
+            imagePath: this.state.recipe.imagePath
+        }
+        axios.put(`http://localhost:5000/api/recipe/${this.state.id}`, body, { withCredentials: true })
             .then(response => {
                 console.log('response', response)
                 this.props.history.push('/profile')

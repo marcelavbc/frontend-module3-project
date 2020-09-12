@@ -39,21 +39,9 @@ export default class RecipesInProfile extends Component {
         }
     }
 
-    // deleteMyRecipe = () => {
-    //     console.log('delete my recipe clicked')
-    //     console.log(this.props.id)
-    //     axios.delete(`http://localhost:5000/api/profile/recipe/${this.props.id}`, { withCredentials: true })
-    //         .then(response => {
-    //         console.log('response', response)
-    //         this.props.updateMyRecipes(response)
-    //     })
-    // }
+
 
     render() {
-
-
-
-
         return (
             <div>
                 <div className="recipe-div">

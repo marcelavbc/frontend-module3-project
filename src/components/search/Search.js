@@ -38,7 +38,15 @@ export default class Search extends Component {
         })
     }
 
+    getSingleRecipe = (recipe) => {
+        console.log("get Single called")
+        console.log("recipe", recipe)
+        // this.setState({
+        // })
 
+        // console.log('state:', this.state)
+        // this.props.upStaterecipe(this.state.single)
+    }
 
 
     getIngredients = (event) => {
@@ -79,7 +87,63 @@ export default class Search extends Component {
 
     letsCook = () => {
         let param = this.state.listAllIngredients.toString()
+        let idsToShow = []
         console.log('param:', param)
+        // axios({
+        //     "method": "GET",
+        //     "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients",
+        //     "headers": {
+        //         "content-type": "application/octet-stream",
+        //         "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        //         "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+        //         "useQueryString": true
+        //     }, "params": {
+        //         "number": "15",
+        //         "ranking": "1",
+        //         "ignorePantry": "false",
+        //         "ingredients": param
+        //     }
+        // })
+
+        //     .then((response) => {
+        //         console.log(response)
+        //         idsToShow.push(response.id)
+        //         console.log(idsToShow)
+        //         axios({
+        //             "method": "GET",
+        //             "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk",
+        //             "headers": {
+        //                 "content-type": "application/octet-stream",
+        //                 "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        //                 "x-rapidapi-key": "3ae8633d0fmshea232df942d8d7bp19b871jsn75705b922f90",
+        //                 "useQueryString": true
+        //             }, "params": {
+        //                 "ids": idsToShow.toString()
+        //             }
+        //         })
+        //             .then((responseRecipes) => {
+        //                 console.log(responseRecipes)
+        //                 console.log('responseRecipes: ', responseRecipes.data)
+        //                 console.log('responseRecipes results: ', responseRecipes.data.results)
+        //                 this.setState({
+        //                     recipes: responseRecipes.data.results,
+        //                     isClicked: !this.state.isClicked,
+        //                 })
+        //             })
+        //             .then(() => {
+        //                 console.log('this.state.recipes: ', this.state.recipes)
+        //                 // const copyRecipe = this.state.recipes
+        //                 const copyIngredients = this.state.listAllIngredients
+        //                 // this.props.liftUpRecipesSearched(copyRecipe)
+        //                 this.props.ingredients(copyIngredients)
+        //             })
+        //             .catch((error) => {
+        //                 console.log(error)
+        //             })
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     })
 
 
         axios({
@@ -150,7 +214,7 @@ export default class Search extends Component {
             // console.log('recipes to map:', this.state.recipes)
             listRecipes = this.state.recipes.map((ele, i) => {
                 // console.log('ele in search', ele)
-                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes}/>
+                return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} missing={ele.missedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes} user={this.props.user} showSavedRecipes={this.props.showSavedRecipes}/>
             })
         }
 

@@ -46,7 +46,6 @@ export default class App extends Component {
 
   showSavedRecipes = () => {
     axios.get('http://localhost:5000/api/profile/savedRecipes', { withCredentials: true })
-
       .then(response => {
         this.setState({
           savedRecipes: response.data
@@ -78,11 +77,11 @@ export default class App extends Component {
           <Route path="/signup" render={props => <Signup {...props} getUser={this.getTheUser} />} />
           <Route path="/login" render={props => <Login {...props} getUser={this.getTheUser} showMyRecipes={this.showMyRecipes} showSavedRecipes={this.showSavedRecipes}/>} />
           <Route path="/logout" render={props => <Logout {...props} getUser={this.getTheUser} />} />
-          <Route path="/main" render={props => <MainPage {...props} getUser={this.getTheUser} user={this.state.loggedInUser} saved={this.state.savedRecipes} showMyRecipes={this.showMyRecipes}/>} />
+          <Route path="/main" render={props => <MainPage {...props} getUser={this.getTheUser} user={this.state.loggedInUser} saved={this.state.savedRecipes} showMyRecipes={this.showMyRecipes} showSavedRecipes={this.showSavedRecipes}/>} />
           <Route path="/profile" render={props => <Profile {...props} user={this.state.loggedInUser} getUser={this.getTheUser} saved={this.state.savedRecipes}/>} myRecipes={this.state.myRecipes} showMyRecipes={this.showMyRecipes} showSavedRecipes={this.showSavedRecipes}/>
           <Route path="/footer" render={props => <Footer {...props} user={this.state.loggedInUser} />} />
-          <Route path="/search" render={props => <Search {...props} user={this.state.loggedInUser} liftUpRecipesSearched={this.getAllRecipe} ingredients={this.getSelectedIngredients} saved={this.state.savedRecipes} />} />
-          <Route exact path="/recipe/:id" render={props => <RecipeDetails {...props} recipe={this.state.savedRecipes} user={this.state.loggedInUser}/>} />
+          <Route path="/search" render={props => <Search {...props} user={this.state.loggedInUrser} liftUpRecipesSearched={this.getAllRecipe} ingredients={this.getSelectedIngredients} saved={this.state.savedRecipes} showSavedRecipes={this.showSavedRecipes}/>} />
+          <Route exact path="/recipe/:id" render={props => <RecipeDetails {...props} showSavedRecipes={this.showSavedRecipes} savedRecipes={this.state.savedRecipes} user={this.state.loggedInUser}/>} />
           <Route path="/recipe/:id/edit" render={props => <EditRecipe {...props} user={this.state.loggedInUser}/>} />
           <Route path="/add" render={props => <AddRecipe {...props} user={this.state.loggedInUser} />} />
           <Route exact path="/users" render={props => <FindUser {...props} user={this.state.loggedInUser} />} />

@@ -40,7 +40,7 @@ export default class InputFormMethods extends Component {
         const values = [...this.state.analyzedInstructions[0].steps]
         values.splice(index, 1)
         const arr = [...this.state.analyzedInstructions]
-        arr.steps = values
+        arr[0].steps = values
         console.log('arr', arr)
         this.setState({
             analyzedInstructions: arr
@@ -63,7 +63,7 @@ export default class InputFormMethods extends Component {
                                 type="number"
                                 name="number"
                                 value={ele.number}
-                                key={'number' + index}
+                                key={'methodNumber' + index}
                                 placeholder={index + 1}
                                 autoComplete="off"
                                 onChange={(event) => this.handleChange(index, event)}
@@ -74,7 +74,7 @@ export default class InputFormMethods extends Component {
                                 placeholder="Instruction"
                                 name="step"
                                 value={ele.step}
-                                key={'step' + index}
+                                key={'methodStep' + index}
                                 autoComplete="off"
                                 onChange={(event) => this.handleChange(index, event)}
                             />

@@ -41,7 +41,6 @@ export default class InputForm extends Component {
             extendedIngredients: values
         })
         this.props.liftIngredientsState(values)
-        // console.log('values: ', values)
     }
 
     render() {

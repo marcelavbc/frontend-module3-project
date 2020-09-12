@@ -6,17 +6,38 @@ import axios from 'axios'
 
 export default class Recipes extends Component {
     constructor(props) {
+        //buscar se a receita já foi salva
         super(props)
+        let saved = false
+        let recipe;
+        let recipeId;
+        if (this.props.saved) {
+            saved = this.props.saved.some(ele => {
+                if (ele.recipeId) {
+                    return ele.recipeId === this.props.id
+                }
+                return false
+            })
+            recipe = this.props.saved.find(ele => ele.recipeId === this.props.id)
+            if (recipe) {
+                recipeId = recipe._id
+            } else {
+                recipeId = null
+            }
+        }
         this.state = {
             open: false,
-            saved: false,
-            savedRecipes: this.props.saved
+            saved: saved,
+            savedRecipes: this.props.saved,
+            recipeId: recipeId
         }
-
         this.open = this.open.bind(this)
     }
 
+
+
     open = () => {
+
         console.log('clicked')
         this.setState({
             open: !this.state.open
@@ -24,20 +45,34 @@ export default class Recipes extends Component {
     }
 
     save = () => {
-        axios.post('http://localhost:5000/api/profile/savedRecipes', {recipeId: this.props.id}, { withCredentials: true })
-        .then(data => {
-            console.log('data in recipes cards', data.data)
-            let copySaved = this.state.savedRecipes
-            copySaved.push(data.data)
-            this.setState({
-                saved: !this.state.saved, 
-                savedRecipes: copySaved
-            })
-            console.log('state after save:', this.state.savedRecipes)
-        })   
+        if (this.state.saved) {
+            axios.delete(`http://localhost:5000/api/profile/savedApiRecipes/${this.state.recipeId}`, { withCredentials: true })
+                .then(data => {
+                    this.setState({
+                        saved: false
+                    })
+                    this.props.showSavedRecipes()
+
+                })
+                
+        } else {
+            axios.post('http://localhost:5000/api/profile/savedRecipes', { recipeId: this.props.id }, { withCredentials: true })
+                .then(data => {
+                    let copySaved = [...this.state.savedRecipes]
+                    copySaved.push(data.data)
+                    this.setState({
+                        saved: true,
+                        savedRecipes: copySaved
+                    })
+                    this.props.showSavedRecipes()
+                    console.log('state after save:', this.state.savedRecipes)
+                })
+        }
+
     }
 
     render() {
+
         return (
             <div className="recipe-card col-md-3">
                 <h5 className="card-title recipe-title d-flex align-items-center justify-content-center">{this.props.title}</h5>

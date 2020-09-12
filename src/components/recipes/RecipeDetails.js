@@ -5,47 +5,87 @@ import Footer from '../footer/Footer';
 import { Link } from 'react-router-dom';
 import './Recipes.css'
 import EditRecipe from './EditRecipe';
+import AddRecipe from '../addRecipe/AddRecipe';
 
 export default class RecipeDetails extends Component {
     constructor(props) {
         super(props)
+        let saved = false;
+        let origin = 'internal'
+        let savedId = ''
+        if (this.props.savedRecipes) {
+            saved = this.props.savedRecipes.some(ele => {
+                if (ele.recipeId) {
+                    if(ele.recipeId == this.props.match.params.id){
+                        origin = 'api'
+                        savedId = ele._id
+                    }
+                    return ele.recipeId == this.props.match.params.id
+
+                } else {
+                    if(ele.recipe._id == this.props.match.params.id){
+                        savedId = ele._id
+                    
+                    }
+                    return ele.recipe._id == this.props.match.params.id
+                }
+            })
+        }
         this.state = {
+            saved: saved,
             loggedInUser: this.props.user,
             id: this.props.match.params.id,
+            savedRecipes: this.props.savedRecipes,
+            origin: origin, 
+            savedId: savedId
+
         }
     }
 
     componentDidMount() {
         this.getRecipeDetails()
-        axios.get('http://localhost:5000/api/profile/savedRecipes', { withCredentials: true })
-            .then(response => {
-                console.log('response saved recipes', response)
-                this.setState({
-                    savedRecipes: response.data
-                })
-                // this.findIfIsSaved()
-            })
     }
 
     getRecipeDetails = () => {
         axios.get(`http://localhost:5000/api/recipes/${this.state.id}`)
             .then(response => {
-                console.log('response2', response.data)
                 this.setState({
                     recipe: response.data
                 })
             })
     }
 
-    findIfIsSaved = () => {
-        const saved = this.state.savedRecipes.find()
-        console.log('is saved', saved)
+    save = () => {
+        if(this.state.saved){
+            if (this.state.origin == 'api') {
+                axios.delete(`http://localhost:5000/api/profile/savedApiRecipes/${this.state.savedId}`, { withCredentials: true })
+                    .then(response => {
+                        console.log('favorito excluido', response.data)
+                        this.props.showSavedRecipes()
+                        this.setState({
+                            saved: false
+                        })
+                    })
+            } else  {
+                axios.delete(`http://localhost:5000/api/profile/savedInternalRecipes/${this.state.savedId}`, { withCredentials: true })
+                    .then(response => {
+                        console.log('favorito excluido', response.data)
+                        this.props.showSavedRecipes()
+                        this.setState({
+                            saved: false
+                        })
+                    })
+            } 
+        }else {
+            console.log('salver favorito')
+        }
+        
     }
 
-    // editRecipe = () => {
-    //     console.log('edite recipe')
-    //     return <EditRecipe recipe={this.state.recipe} />
-    // }
+
+    editRecipe = () => {
+        return <EditRecipe user={this.state.loggedInUser} recipe={this.state.recipe} />
+    }
 
     render() {
         let title;
@@ -58,11 +98,9 @@ export default class RecipeDetails extends Component {
         let edit;
         let userId;
 
-        console.log('this.state in details', this.state)
-
         if (this.state.recipe) {
             console.log(this.state.recipe)
-            userId = this.state.recipe.owner._id
+
             title = <p className="details-title mb-0">{this.state.recipe.title || this.state.recipe.recipe.title}</p>
             src = this.state.recipe.image || this.state.recipe.imagePath || this.state.recipe.recipe.imagePath
             servings = this.state.recipe.servings
@@ -74,14 +112,16 @@ export default class RecipeDetails extends Component {
                 return <li className="li-details mb-2" key={i}>{ele.number}) {ele.step}</li>
             })
 
-            if (this.state.recipe.cookingMinutes) {
+            if (!this.state.recipe.owner) {
                 owner = null
-                edit = null
+                edit = <i className={this.state.saved ? "icon fas fa-bookmark" : "icon far fa-bookmark"} onClick={this.save}></i>
+                userId = null
             } else if (this.state.loggedInUser._id !== this.state.recipe.owner._id) {
-                owner = <li>@{this.state.recipe.owner.username}</li>//add link
-                edit = null
+                userId = this.state.recipe.owner._id
+                owner = <Link to={`/users/${userId}`}><li>@{this.state.recipe.owner.username}</li></Link>//add link
+                edit = <i className={this.state.saved ? "icon fas fa-bookmark" : "icon far fa-bookmark"} onClick={this.save}></i>
             } else {
-                edit = <i className="fas fa-pencil-alt"></i>
+                edit = <Link to={`/recipe/${this.state.id}/edit`}><i className="fas fa-pencil-alt" onClick={this.editRecipe}></i></Link>
             }
         } else {
             title = null;
@@ -90,7 +130,6 @@ export default class RecipeDetails extends Component {
             readyInMinutes = null;
             extendedIngredients = null;
             edit = null
-            userId = null
         }
 
         return (
@@ -109,7 +148,7 @@ export default class RecipeDetails extends Component {
                         </div>
                         <div className="col-6">
                             <ul className="details-list">
-                                <Link to={`/users/${userId}`}>{owner}</Link>
+                                {owner}
                                 <li><i className="far fa-clock mr-1"></i> {readyInMinutes} minutes</li>
                                 <li><i className="fas fa-utensils mr-2"></i>{servings} servings</li>
                             </ul>
