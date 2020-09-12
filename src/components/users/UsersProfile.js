@@ -21,7 +21,7 @@ export default class UsersProfile extends Component {
     }
 
     getUserData() {
-        axios.get(`http://localhost:5000/api/users/${this.state.id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/users/${this.state.id}`)
             .then(response => {
                 // console.log('response', response.data[0])
                 let user = response.data[0]

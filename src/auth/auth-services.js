@@ -3,15 +3,11 @@ import axios from 'axios';
 class AuthService {
     constructor() {
         let service = axios.create({
-            baseURL: 'http://localhost:5000/api',
+            baseURL: `${process.env.REACT_APP_API_URL}/api`,
             withCredentials: true
         });
         this.service = service;
     }
-
-    //We will receive the username and password from the component and request the http://localhost:5000/api/signup URL. 
-    // The second argument inside this post request is the data we are sending to server. 
-    // When receiving the response, we will pass it to the component.
     signup = (username, password, email) => {
         return this.service.post('/signup', { username, password, email })
             .then(response => response.data)

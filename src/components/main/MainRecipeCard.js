@@ -13,7 +13,7 @@ export default class MainRecipeCard extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/profile/savedRecipes', { withCredentials: true })
+        axios.get(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { withCredentials: true })
             .then(data => {
                 let filteredArray = data.data.filter(ele => !ele.title) //filter only internal recipes
                 let savedRecipeId;
@@ -32,7 +32,7 @@ export default class MainRecipeCard extends Component {
 
     save = () => {
         if (this.state.saved) {
-            axios.delete(`http://localhost:5000/api/profile/savedInternalRecipes/${this.state.savedRecipeId}`, { withCredentials: true })
+            axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedInternalRecipes/${this.state.savedRecipeId}`, { withCredentials: true })
                 .then(data => {
                     this.setState({
                         saved: false
@@ -41,7 +41,7 @@ export default class MainRecipeCard extends Component {
         } else {
             console.log('save button clicked')
 
-            axios.post('http://localhost:5000/api/profile/savedRecipes', { recipeId: this.props.id }, { withCredentials: true })
+            axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
                 .then(data => {
                     this.setState({
                         saved: true,

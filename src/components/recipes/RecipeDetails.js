@@ -47,7 +47,7 @@ export default class RecipeDetails extends Component {
     }
 
     getRecipeDetails = () => {
-        axios.get(`http://localhost:5000/api/recipes/${this.state.id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/${this.state.id}`)
             .then(response => {
                 this.setState({
                     recipe: response.data
@@ -58,7 +58,7 @@ export default class RecipeDetails extends Component {
     save = () => {
         if(this.state.saved){
             if (this.state.origin == 'api') {
-                axios.delete(`http://localhost:5000/api/profile/savedApiRecipes/${this.state.savedId}`, { withCredentials: true })
+                axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedApiRecipes/${this.state.savedId}`, { withCredentials: true })
                     .then(response => {
                         console.log('favorito excluido', response.data)
                         this.props.showSavedRecipes()
@@ -67,7 +67,7 @@ export default class RecipeDetails extends Component {
                         })
                     })
             } else  {
-                axios.delete(`http://localhost:5000/api/profile/savedInternalRecipes/${this.state.savedId}`, { withCredentials: true })
+                axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedInternalRecipes/${this.state.savedId}`, { withCredentials: true })
                     .then(response => {
                         console.log('favorito excluido', response.data)
                         this.props.showSavedRecipes()

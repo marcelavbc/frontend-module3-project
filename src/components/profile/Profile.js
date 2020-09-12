@@ -56,7 +56,7 @@ export default class Profile extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const newQuote = this.state.quote
-        axios.put('http://localhost:5000/api/profile/editQuote', { quote: newQuote }, { withCredentials: true })
+        axios.put(`${process.env.REACT_APP_API_URL}/api/profile/editQuote`, { quote: newQuote }, { withCredentials: true })
             .then(response =>
                 this.setState({
                     loggedInUser: {
@@ -74,7 +74,7 @@ export default class Profile extends Component {
         const uploadData = new FormData();
         uploadData.append("avatar", event.target.files[0])
         console.log('upload data', event.target.files[0])
-        axios.put('http://localhost:5000/api/profile/updateavatar', uploadData, { withCredentials: true })
+        axios.put(`${process.env.REACT_APP_API_URL}/api/profile/updateavatar`, uploadData, { withCredentials: true })
             .then(response => {
                 console.log('response:', response)
                 this.setState({
@@ -93,7 +93,7 @@ export default class Profile extends Component {
     }
 
     showMyRecipes = () => {
-        axios.get('http://localhost:5000/api/profile/recipes', { withCredentials: true })
+        axios.get(`${process.env.REACT_APP_API_URL}/api/profile/recipes`, { withCredentials: true })
             .then(response => {
                 this.setState({
                     myRecipes: response.data
@@ -102,7 +102,7 @@ export default class Profile extends Component {
     }
 
     showSavedRecipes = () => {
-        axios.get('http://localhost:5000/api/profile/savedRecipes', { withCredentials: true })
+        axios.get(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { withCredentials: true })
             .then(response => {
                 console.log('response saved recipes', response)
                 this.setState({

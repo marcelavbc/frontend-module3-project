@@ -35,7 +35,7 @@ export default class App extends Component {
   }
 
   showMyRecipes = () => {
-    axios.get('http://localhost:5000/api/profile/recipes', { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_API_URL}/api/profile/recipes`, { withCredentials: true })
       .then(response => {
         console.log('my recipes:', response.data)
         this.setState({
@@ -45,7 +45,7 @@ export default class App extends Component {
   }
 
   showSavedRecipes = () => {
-    axios.get('http://localhost:5000/api/profile/savedRecipes', { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { withCredentials: true })
       .then(response => {
         this.setState({
           savedRecipes: response.data

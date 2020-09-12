@@ -24,7 +24,7 @@ export default class EditRecipe extends Component {
     }
 
     getRecipeDetails = () => {
-        axios.get(`http://localhost:5000/api/recipes/${this.state.id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/${this.state.id}`)
             .then(response => {
                 this.setState({
                     recipe: response.data,
@@ -66,7 +66,7 @@ export default class EditRecipe extends Component {
             analyzedInstructions: this.state.recipe.analyzedInstructions,
             imagePath: this.state.recipe.imagePath
         }
-        axios.put(`http://localhost:5000/api/recipe/${this.state.id}`, body, { withCredentials: true })
+        axios.put(`${process.env.REACT_APP_API_URL}/api/recipe/${this.state.id}`, body, { withCredentials: true })
             .then(response => {
                 console.log('response', response)
                 this.props.history.push('/profile')

@@ -46,7 +46,7 @@ export default class Recipes extends Component {
 
     save = () => {
         if (this.state.saved) {
-            axios.delete(`http://localhost:5000/api/profile/savedApiRecipes/${this.state.recipeId}`, { withCredentials: true })
+            axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedApiRecipes/${this.state.recipeId}`, { withCredentials: true })
                 .then(data => {
                     this.setState({
                         saved: false
@@ -56,7 +56,7 @@ export default class Recipes extends Component {
                 })
                 
         } else {
-            axios.post('http://localhost:5000/api/profile/savedRecipes', { recipeId: this.props.id }, { withCredentials: true })
+            axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
                 .then(data => {
                     let copySaved = [...this.state.savedRecipes]
                     copySaved.push(data.data)

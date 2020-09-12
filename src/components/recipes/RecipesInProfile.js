@@ -18,12 +18,12 @@ export default class RecipesInProfile extends Component {
     deleteRecipe = () => {
         if (typeof this.props.recipeId === 'number') {
             console.log(this.props.id)
-            axios.delete(`http://localhost:5000/api/profile/savedApiRecipes/${this.props.id}`, { withCredentials: true })
+            axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedApiRecipes/${this.props.id}`, { withCredentials: true })
                 .then(response => {
                     this.props.updateRecipes(response)
                 })
         } else if (this.props.recipeOrigin === false) {
-            axios.delete(`http://localhost:5000/api/profile/savedInternalRecipes/${this.props.id}`, { withCredentials: true })
+            axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedInternalRecipes/${this.props.id}`, { withCredentials: true })
                 .then(response => {
                     console.log('response when delete', response)
                     console.log(this.props.id)
@@ -31,7 +31,7 @@ export default class RecipesInProfile extends Component {
                     this.props.updateRecipes(response)
                 })
         } else {
-            axios.delete(`http://localhost:5000/api/profile/recipe/${this.props.id}`, { withCredentials: true })
+            axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/recipe/${this.props.id}`, { withCredentials: true })
                 .then(response => {
                     this.props.updateMyRecipes(response)
                     

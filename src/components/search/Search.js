@@ -7,8 +7,6 @@ import Ingredients from '../ingredients/Ingredients'
 import IngredientAdded from '../ingredients/IngredientAdded'
 import Recipes from '../recipes/Recipes'
 
-
-
 export default class Search extends Component {
     constructor(props) {
         super(props)

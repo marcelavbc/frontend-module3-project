@@ -75,7 +75,7 @@ export default class AddRecipe extends Component {
     handleFormSubmit = (event) => {
         event.preventDefault()
         console.log('salvando')
-        axios.post("http://localhost:5000/api/profile/recipes", this.state.form, { withCredentials: true })
+        axios.post(`${process.env.REACT_APP_API_URL}/api/profile/recipes`, this.state.form, { withCredentials: true })
             .then(response => {
                 console.log('response', response)
                 this.setState({

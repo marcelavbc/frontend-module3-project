@@ -22,7 +22,7 @@ export default class FindUser extends Component {
         this.getAllUsers()
     }
     getAllUsers() {
-        axios.get('http://localhost:5000/api/users')
+        axios.get(`${process.env.REACT_APP_API_URL}/api/users`)
             .then(response => {
                 // console.log('response', response.data)
                 this.setState({

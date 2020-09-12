@@ -15,7 +15,7 @@ export default class MainPage extends Component {
     }
 
     getAllrecipes = () => {
-        axios.get('http://localhost:5000/api/recipes/all')
+        axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/all`)
             .then(response => {
                 this.setState({
                     allRecipes: response.data
