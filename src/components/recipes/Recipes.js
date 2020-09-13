@@ -37,8 +37,6 @@ export default class Recipes extends Component {
 
 
     open = () => {
-
-        console.log('clicked')
         this.setState({
             open: !this.state.open
         })
@@ -54,7 +52,6 @@ export default class Recipes extends Component {
                     this.props.showSavedRecipes()
 
                 })
-
         } else {
             axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
                 .then(data => {
@@ -65,14 +62,11 @@ export default class Recipes extends Component {
                         savedRecipes: copySaved
                     })
                     this.props.showSavedRecipes()
-                    console.log('state after save:', this.state.savedRecipes)
                 })
         }
 
     }
-
     render() {
-
         return (
             <div className="recipe-card col-md-3">
                 <h5 className="card-title recipe-title d-flex align-items-center justify-content-center">{this.props.title}</h5>

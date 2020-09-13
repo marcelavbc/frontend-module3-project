@@ -76,7 +76,7 @@ export default class Profile extends Component {
         console.log('upload data', event.target.files[0])
         axios.put(`${process.env.REACT_APP_API_URL}/api/profile/updateavatar`, uploadData, { withCredentials: true })
             .then(response => {
-                console.log('response:', response)
+                // console.log('response:', response)
                 this.setState({
                     loggedInUser: {
                         ...this.state.loggedInUser,
@@ -104,7 +104,7 @@ export default class Profile extends Component {
     showSavedRecipes = () => {
         axios.get(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { withCredentials: true })
             .then(response => {
-                console.log('response saved recipes', response)
+                // console.log('response saved recipes', response)
                 this.setState({
                     savedRecipes: response.data
                 })
@@ -116,7 +116,6 @@ export default class Profile extends Component {
 
 
     render() {
-        console.log(this.state)
         let quote = '';
         let pencil = ''
         if (!this.state.editQuote) {

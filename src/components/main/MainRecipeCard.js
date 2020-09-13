@@ -39,8 +39,6 @@ export default class MainRecipeCard extends Component {
                     })
                 })
         } else {
-            console.log('save button clicked')
-
             axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
                 .then(data => {
                     this.setState({

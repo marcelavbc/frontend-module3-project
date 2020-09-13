@@ -37,7 +37,7 @@ export default class App extends Component {
   showMyRecipes = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/profile/recipes`, { withCredentials: true })
       .then(response => {
-        console.log('my recipes:', response.data)
+        // console.log('my recipes:', response.data)
         this.setState({
           myRecipes: response.data
         })
@@ -69,7 +69,7 @@ export default class App extends Component {
 
 
   render() {
-    console.log('in app:', this.state)
+    // console.log('in app:', this.state)
     return (
       <div>
         <Switch>

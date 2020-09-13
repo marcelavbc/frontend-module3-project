@@ -20,7 +20,7 @@ export default class Login extends Component {
                     username: "",
                     password: "",
                 });
-                console.log('response in login component:', response)
+                // console.log('response in login component:', response)
                 this.props.getUser(response)
                 this.props.showMyRecipes()
                 this.props.showSavedRecipes()

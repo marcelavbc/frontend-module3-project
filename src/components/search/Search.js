@@ -36,17 +36,6 @@ export default class Search extends Component {
         })
     }
 
-    getSingleRecipe = (recipe) => {
-        console.log("get Single called")
-        console.log("recipe", recipe)
-        // this.setState({
-        // })
-
-        // console.log('state:', this.state)
-        // this.props.upStaterecipe(this.state.single)
-    }
-
-
     getIngredients = (event) => {
         let ingredient = event.target.value.toLowerCase()
 
@@ -86,7 +75,6 @@ export default class Search extends Component {
     letsCook = () => {
         let param = this.state.listAllIngredients.toString()
         let idsToShow = []
-        console.log('param:', param)
         axios({
             "method": "GET",
             "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients",
@@ -107,7 +95,6 @@ export default class Search extends Component {
                 response.data.map(ele => {
                     idsToShow.push(ele.id)
                 })
-                console.log('idsToShow', idsToShow.toString())
                 axios({
                     "method": "GET",
                     "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk",
@@ -121,7 +108,7 @@ export default class Search extends Component {
                     }
                 })
                     .then((responseRecipes) => {
-                        console.log('response api', responseRecipes)
+                        // console.log('response api', responseRecipes)
                         this.setState({
                             recipes: responseRecipes.data,
                             isClicked: !this.state.isClicked,
@@ -133,8 +120,6 @@ export default class Search extends Component {
 
             })
             .then(() => {
-                console.log('this.state.recipes: ', this.state.recipes)
-                // const copyRecipe = this.state.recipes
                 const copyIngredients = this.state.listAllIngredients
                 // this.props.liftUpRecipesSearched(copyRecipe)
                 this.props.ingredients(copyIngredients)
@@ -177,7 +162,7 @@ export default class Search extends Component {
         if (this.state.isClicked) {
             // console.log('recipes to map:', this.state.recipes)
             listRecipes = this.state.recipes.map((ele, i) => {
-                console.log('ele in search', ele)
+                // console.log('ele in search', ele)
                 return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} usedIngredients={ele.extendedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes} user={this.props.user} showSavedRecipes={this.props.showSavedRecipes} />
             })
         }

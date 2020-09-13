@@ -60,7 +60,7 @@ export default class RecipeDetails extends Component {
             if (this.state.origin == 'api') {
                 axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedApiRecipes/${this.state.savedId}`, { withCredentials: true })
                     .then(response => {
-                        console.log('favorito excluido', response.data)
+                        // console.log('favorito excluido', response.data)
                         this.props.showSavedRecipes()
                         this.setState({
                             saved: false
@@ -69,7 +69,7 @@ export default class RecipeDetails extends Component {
             } else  {
                 axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedInternalRecipes/${this.state.savedId}`, { withCredentials: true })
                     .then(response => {
-                        console.log('favorito excluido', response.data)
+                        // console.log('favorito excluido', response.data)
                         this.props.showSavedRecipes()
                         this.setState({
                             saved: false
@@ -99,7 +99,7 @@ export default class RecipeDetails extends Component {
         let userId;
 
         if (this.state.recipe) {
-            console.log(this.state.recipe)
+            // console.log(this.state.recipe)
 
             title = <p className="details-title mb-0">{this.state.recipe.title || this.state.recipe.recipe.title}</p>
             src = this.state.recipe.image || this.state.recipe.imagePath || this.state.recipe.recipe.imagePath

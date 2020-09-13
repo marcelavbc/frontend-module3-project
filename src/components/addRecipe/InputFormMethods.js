@@ -41,7 +41,7 @@ export default class InputFormMethods extends Component {
         values.splice(index, 1)
         const arr = [...this.state.analyzedInstructions]
         arr[0].steps = values
-        console.log('arr', arr)
+        // console.log('arr', arr)
         this.setState({
             analyzedInstructions: arr
         })

@@ -74,10 +74,10 @@ export default class AddRecipe extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault()
-        console.log('salvando')
+        // console.log('salvando')
         axios.post(`${process.env.REACT_APP_API_URL}/api/profile/recipes`, this.state.form, { withCredentials: true })
             .then(response => {
-                console.log('response', response)
+                // console.log('response', response)
                 this.setState({
                     title: '',
                     readyInMinutes: 0,
@@ -108,7 +108,7 @@ export default class AddRecipe extends Component {
     render() {
         let photo;
         if (this.state.photo) {
-            console.log(this.state.photo)
+            // console.log(this.state.photo)
             photo = this.state.photo.name
         } else {
             photo = '/images/photo.png'
