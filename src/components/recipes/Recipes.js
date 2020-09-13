@@ -54,7 +54,7 @@ export default class Recipes extends Component {
                     this.props.showSavedRecipes()
 
                 })
-                
+
         } else {
             axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
                 .then(data => {
@@ -95,8 +95,9 @@ export default class Recipes extends Component {
                 </div>
 
                 <div className={this.state.open ? "panel-collapse" : "panel-collapse panel-close"}>
+                    <p>Ingredients: </p>
                     <ul>
-                        {this.props.missing.map((ele, i) => <li className="miss-ingredients-list" key={i}>{ele.name}</li>)}
+                        {this.props.usedIngredients.map((ele, i) => <li className="miss-ingredients-list" key={i}>{ele.name}</li>)}
                     </ul>
                 </div>
             </div>
