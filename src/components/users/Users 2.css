@@ -2,7 +2,7 @@
     width: 30px;
     height: 30px;
     object-fit: cover;
-    margin: 5px 2px;
+    margin:5px 2px;
     border-radius: 50%;
     border: 2px solid var(--primary);
 }
@@ -10,12 +10,4 @@
 .list-avatar {
     /* border: 1px solid grey; */
     color: var(--text)
-}
-
-@media (min-width:600px) {
-
-    .users-div {
-        padding-top: 30px!important;
-        margin: 0 180px!important;
-    }
 }

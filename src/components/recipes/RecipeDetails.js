@@ -16,16 +16,16 @@ export default class RecipeDetails extends Component {
         if (this.props.savedRecipes) {
             saved = this.props.savedRecipes.some(ele => {
                 if (ele.recipeId) {
-                    if(ele.recipeId == this.props.match.params.id){
+                    if (ele.recipeId == this.props.match.params.id) {
                         origin = 'api'
                         savedId = ele._id
                     }
                     return ele.recipeId == this.props.match.params.id
 
                 } else {
-                    if(ele.recipe._id == this.props.match.params.id){
+                    if (ele.recipe._id == this.props.match.params.id) {
                         savedId = ele._id
-                    
+
                     }
                     return ele.recipe._id == this.props.match.params.id
                 }
@@ -36,7 +36,7 @@ export default class RecipeDetails extends Component {
             loggedInUser: this.props.user,
             id: this.props.match.params.id,
             savedRecipes: this.props.savedRecipes,
-            origin: origin, 
+            origin: origin,
             savedId: savedId
 
         }
@@ -56,32 +56,41 @@ export default class RecipeDetails extends Component {
     }
 
     save = () => {
-        if(this.state.saved){
-            if (this.state.origin == 'api') {
+        if (this.state.saved) {
+            if (this.state.origin === 'api') {
                 axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedApiRecipes/${this.state.savedId}`, { withCredentials: true })
                     .then(response => {
                         // console.log('favorito excluido', response.data)
-                        this.props.showSavedRecipes()
                         this.setState({
                             saved: false
                         })
+                        this.props.showSavedRecipes()
+
                     })
-            } else  {
+            } else {
                 axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedInternalRecipes/${this.state.savedId}`, { withCredentials: true })
                     .then(response => {
                         // console.log('favorito excluido', response.data)
-                        this.props.showSavedRecipes()
                         this.setState({
                             saved: false
                         })
+                        this.props.showSavedRecipes()
                     })
-            } 
-        }else {
-            console.log('salver favorito')
+            }
+        } else {
+            axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.state.id }, { withCredentials: true })
+                .then(data => {
+                    let copySaved = [...this.props.savedRecipes]
+                    copySaved.push(data.data)
+                    this.setState({
+                        saved: true,
+                        savedRecipes: copySaved
+                    })
+                    this.props.showSavedRecipes()
+                })
         }
-        
-    }
 
+    }
 
     editRecipe = () => {
         return <EditRecipe user={this.state.loggedInUser} recipe={this.state.recipe} />
@@ -101,25 +110,30 @@ export default class RecipeDetails extends Component {
         if (this.state.recipe) {
             // console.log(this.state.recipe)
 
-            title = <p className="details-title mb-0">{this.state.recipe.title || this.state.recipe.recipe.title}</p>
+            title = <p className="details-title m-0 mr-3">{this.state.recipe.title || this.state.recipe.recipe.title}</p>
             src = this.state.recipe.image || this.state.recipe.imagePath || this.state.recipe.recipe.imagePath
             servings = this.state.recipe.servings
             readyInMinutes = this.state.recipe.readyInMinutes
             extendedIngredients = this.state.recipe.extendedIngredients.map((ele, i) => {
                 return <li key={i}>{ele.amount} {ele.unit} {ele.name}</li>
             })
-            analyzedInstructions = this.state.recipe.analyzedInstructions[0].steps.map((ele, i) => {
-                return <li className="li-details mb-2" key={i}>{ele.number}) {ele.step}</li>
-            })
+            if (this.state.recipe.extendedIngredients[0]) {
+                analyzedInstructions = this.state.recipe.analyzedInstructions[0].steps.map((ele, i) => {
+                    return <div key={i}><li className="li-details mb-2"  >{ele.number}) {ele.step}</li><hr></hr></div>
+                })
+            } else {
+                analyzedInstructions = null
+            }
+
 
             if (!this.state.recipe.owner) {
                 owner = null
-                edit = <i className={this.state.saved ? "icon fas fa-bookmark" : "icon far fa-bookmark"} onClick={this.save}></i>
+                edit = <i className={this.state.saved ? "icon-details fas fa-bookmark" : "icon-details far fa-bookmark"} onClick={this.save}></i>
                 userId = null
             } else if (this.state.loggedInUser._id !== this.state.recipe.owner._id) {
                 userId = this.state.recipe.owner._id
-                owner = <Link to={`/users/${userId}`}><li>@{this.state.recipe.owner.username}</li></Link>//add link
-                edit = <i className={this.state.saved ? "icon fas fa-bookmark" : "icon far fa-bookmark"} onClick={this.save}></i>
+                owner = <Link className="link-user" to={`/users/${userId}`}><li className="link-user"><i className="fas fa-at"></i> {this.state.recipe.owner.username}</li></Link>//add link
+                edit = <i className={this.state.saved ? "icon-details fas fa-bookmark" : "icon-details far fa-bookmark"} onClick={this.save}></i>
             } else {
                 edit = <Link to={`/recipe/${this.state.id}/edit`}><i className="fas fa-pencil-alt" onClick={this.editRecipe}></i></Link>
             }
@@ -139,19 +153,23 @@ export default class RecipeDetails extends Component {
                         <Navbar user={this.state.loggedInUser} text='How to cook' link='/main' />
                     </div>
                     <div className="row recipe-detail-div">
-                        <div className="col-12 d-flex justify-content-around align-items-center mb-3">
-                            {title}
-                            {edit}
+                        <div className="col-12 d-flex mb-3 info-principal flex-column">
+                            <div className="d-flex align-items-center justify-content-center">
+                                {title}
+                                {edit}
+                            </div>
                         </div>
-                        <div className="col-6">
-                            <img className="img-details" src={src} alt={title} />
-                        </div>
-                        <div className="col-6">
-                            <ul className="details-list">
-                                {owner}
-                                <li><i className="far fa-clock mr-1"></i> {readyInMinutes} minutes</li>
-                                <li><i className="fas fa-utensils mr-2"></i>{servings} servings</li>
-                            </ul>
+                        <div className="d-flex row align-items-center">
+                                <div className="col-7">
+                                    <img className="img-details" src={src} alt={title} />
+                                </div>
+                                <div className="col">
+                                    <ul className="details-list">
+                                        {owner}
+                                        <li><i className="far fa-clock"></i> {readyInMinutes} minutes</li>
+                                        <li><i className="fas fa-utensils"></i> {servings} servings</li>
+                                    </ul>
+                                </div>
                         </div>
                         <div className="col-12 mt-4">
                             <p className="details-info-title">Ingredients:</p>

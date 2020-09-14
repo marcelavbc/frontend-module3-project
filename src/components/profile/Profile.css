@@ -139,20 +139,20 @@
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    color: #13c7b6 !important;
+    color: var(--primary)!important;
     background-color: #fff;
     border-color: #dee2e6 #dee2e6 #fff;
 }
 
 .nav-tabs .nav-link {
-    color: #FFB400 !important;
+    color: var(--bg) !important;
     border: 1px solid transparent;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
 }
 
 /* a {
-    color: #FFB400!important
+    color: var(--bg)!important
 } */
 
 @media (min-width:600px) {

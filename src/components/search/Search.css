@@ -6,6 +6,10 @@
     color: var(--text);
 }
 
+.main-search {
+    padding-top: 20px
+}
+
 .btn-add {
     background-color: var(--bg) !important;
 }
@@ -39,10 +43,11 @@
     margin: 5px !important;
     padding: 10px !important;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around; 
+}
 
-
-   
+.spinner-grow {
+    color: var(--bg)!important
 }
 
 @media (min-width:600px) {
@@ -53,5 +58,9 @@
 
     .input-search {
         width: 50%;
+    }
+
+    .main-search {
+        padding-top: 40px!important
     }
 }

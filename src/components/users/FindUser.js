@@ -6,6 +6,7 @@ import './Users.css'
 import FindUserSearchBar from './FindUserSearchBar';
 import FindUsersList from './FindUsersList';
 
+
 export default class FindUser extends Component {
     constructor(props) {
         super(props)
@@ -32,7 +33,6 @@ export default class FindUser extends Component {
     }
 
     filter(query) {
-        // console.log("query to filter: ", query)
         this.setState({
             filter: query
         })
@@ -46,7 +46,7 @@ export default class FindUser extends Component {
                         <Navbar user={this.state.loggedInUser} text='Cooks' link='/profile' />
                     </div>
 
-                    <div className="row">
+                    <div className="row mt-3 users-div d-flex flex-column">
                         <div className="col-12">
                             <FindUserSearchBar users={this.state.users} functionToFilter={this.filter} />
                         </div>

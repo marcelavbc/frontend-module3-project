@@ -6,6 +6,7 @@ import './Search.css'
 import Ingredients from '../ingredients/Ingredients'
 import IngredientAdded from '../ingredients/IngredientAdded'
 import Recipes from '../recipes/Recipes'
+import Loading from './Loading'
 
 export default class Search extends Component {
     constructor(props) {
@@ -14,11 +15,13 @@ export default class Search extends Component {
             ingredient: '',
             listAllIngredients: [],
             isClicked: false,
-            savedRecipes: this.props.saved
+            savedRecipes: this.props.saved,
+            loading: true
         }
         this.handleClick = this.handleClick.bind(this)
         this.getIngredients = this.getIngredients.bind(this)
     }
+
 
     handleChange = (event) => {
         this.setState({
@@ -75,6 +78,10 @@ export default class Search extends Component {
     letsCook = () => {
         let param = this.state.listAllIngredients.toString()
         let idsToShow = []
+        this.setState({
+            isClicked: true
+        })
+
         axios({
             "method": "GET",
             "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients",
@@ -111,7 +118,7 @@ export default class Search extends Component {
                         // console.log('response api', responseRecipes)
                         this.setState({
                             recipes: responseRecipes.data,
-                            isClicked: !this.state.isClicked,
+                            loading: false,
                         })
                     })
                     .catch((error) => {
@@ -123,6 +130,7 @@ export default class Search extends Component {
                 const copyIngredients = this.state.listAllIngredients
                 // this.props.liftUpRecipesSearched(copyRecipe)
                 this.props.ingredients(copyIngredients)
+
             })
             .catch((error) => {
                 console.log(error)
@@ -131,6 +139,7 @@ export default class Search extends Component {
 
 
     render() {
+
         let ingredientSearch;
         if (this.state.data) {
             ingredientSearch = this.state.data.map((ele, i) => {
@@ -160,8 +169,8 @@ export default class Search extends Component {
         }
         let listRecipes;
         if (this.state.isClicked) {
-            // console.log('recipes to map:', this.state.recipes)
-            listRecipes = this.state.recipes.map((ele, i) => {
+            console.log('recipes to map:', this.state.recipes)
+            listRecipes = this.state.loading ? <Loading /> : this.state.recipes.map((ele, i) => {
                 // console.log('ele in search', ele)
                 return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} usedIngredients={ele.extendedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes} user={this.props.user} showSavedRecipes={this.props.showSavedRecipes} />
             })
@@ -169,42 +178,42 @@ export default class Search extends Component {
 
         return (
             <div className="container-fluid">
-                <div className="mb-5 mt-1">
+                <div>
                     <div className="row">
-                        <Navbar user={this.state.loggedInUser} text='Search' link='/profile' />
+                        <Navbar user={this.state.loggedInUser}
+                            text='Search'
+                        />
                     </div>
-                    <div>
-                        <div className="row mt-5">
-                            <div className="col-12 input-type-search text-center">
-                                <p><input
-                                    placeholder="Type to search and click to select!"
-                                    autoComplete="off"
-                                    className="input-search"
-                                    type="text"
-                                    name="ingredients"
-                                    onChange={this.getIngredients}
-                                    value={this.state.ingredient}
-                                /></p>
+                    <div className="row mt-5 main-search">
+                        <div className="col-12 input-type-search text-center">
+                            <p><input
+                                placeholder="Type to search and click to select!"
+                                autoComplete="off"
+                                className="input-search"
+                                type="text"
+                                name="ingredients"
+                                onChange={this.getIngredients}
+                                value={this.state.ingredient}
+                            /></p>
 
-                            </div>
                         </div>
-                        <div className="row search-main">
-                            <div className="col col-md-3">
-                                {ingredientSearch}
-                            </div>
-                            <div className="col col-md-3">
-                                {selectedTittle}
-                                {list}
-                            </div>
+                    </div>
+                    <div className="row search-main">
+                        <div className="col col-md-3">
+                            {ingredientSearch}
                         </div>
-                        <div className="row">
-                            <div className="col cookButton-div">
-                                {cookButton}
-                            </div>
+                        <div className="col col-md-3">
+                            {selectedTittle}
+                            {list}
                         </div>
-                        <div className="row recipe-box">
-                            {listRecipes}
+                    </div>
+                    <div className="row">
+                        <div className="col cookButton-div">
+                            {cookButton}
                         </div>
+                    </div>
+                    <div className="row recipe-box py-5">
+                        {listRecipes}
                     </div>
                 </div>
                 <div className="row">

@@ -52,14 +52,14 @@ export default class InputFormMethods extends Component {
         // console.log('state in form:', this.state)
         let { analyzedInstructions } = this.state
         return (
-            <div className="inputs-ingredients">
+            <div className="inputs-ingredients row mx-2">
 
                 {analyzedInstructions[0].steps.map((ele, index) => {
 
                     return (
-                        <div key={index} className="form-group input-ingredients row">
+                        <div key={index} className="form-group input-ingredients-row align-items-center " >
                             <input
-                                className="add-input add-number col-2"
+                                className="add-input col-2 mr-3"
                                 type="number"
                                 name="number"
                                 value={ele.number}
@@ -69,7 +69,7 @@ export default class InputFormMethods extends Component {
                                 onChange={(event) => this.handleChange(index, event)}
                             />
                             <input
-                                className="add-input add-number col-7 mx-1"
+                                className="add-input col"
                                 type="text"
                                 placeholder="Instruction"
                                 name="step"
@@ -80,10 +80,10 @@ export default class InputFormMethods extends Component {
                             />
 
                             <i className="icon-add col-1 fas fa-trash text-center" onClick={() => this.removeInput(index)}></i>
-                            <i className="fas fa-plus col-1 add-ingredient" onClick={this.addInput}></i>
                         </div>
                     )
                 })}
+                <i className="fas fa-plus col-1 add-ingredient" onClick={this.addInput}></i>
             </div>
         )
     }

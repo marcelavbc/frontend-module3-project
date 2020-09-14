@@ -92,28 +92,24 @@ export default class AddRecipe extends Component {
     }
 
     handleFileUpLoad = (event) => {
-
         const uploadImage = this.state.form
-
         uploadImage.set("image", event.target.files[0])
         this.setState({
             form: uploadImage,
             photo: event.target.files[0]
         })
-
     }
 
-    
+
 
     render() {
         let photo;
         if (this.state.photo) {
             // console.log(this.state.photo)
-            photo = this.state.photo.name
+            photo = <p className="m-0">{this.state.photo.name}</p>
         } else {
-            photo = '/images/photo.png'
+            photo = <p className="m-0">Click to add a photo</p>
         }
-
         return (
             <div className="container-fluid">
                 <div className="mb-5 mt-5">
@@ -122,31 +118,14 @@ export default class AddRecipe extends Component {
                     </div>
 
                     <div className="row add">
-                        <div className="col-12">
+                        <div className="col-12 col-md-6 add-main">
                             <form onSubmit={this.handleFormSubmit} autoComplete="new-search">
                                 <div className="d-flex justify-content-around align-items-center mb-4">
-                                    <div>
-                                        <img className="file-to-upload" src={photo} alt='exemplo' onClick={() => this.handleOpen()} />
-                                        <Modal show={this.state.show} aria-labelledby="contained-modal-title-vcenter" centered>
-                                            <Modal.Header>
-                                                <Modal.Title className="w-100">
-                                                    <i className="far fa-window-close float-right" onClick={() => this.handleClose()}></i>
-                                                </Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <input type="file"
-                                                    className=""
-                                                    name="image"
-                                                    id="file"
-                                                    multiple
-                                                    onChange={e => this.handleFileUpLoad(e)} />
-                                            </Modal.Body>
-                                        </Modal>
-                                    </div>
                                     <div className="form-group">
                                         <input
                                             className="add-input w-100"
                                             type="text"
+                                            autoComplete="off"
                                             placeholder="Title"
                                             name="title"
                                             onChange={e => this.handleChange(e)}
@@ -180,13 +159,30 @@ export default class AddRecipe extends Component {
                                     <InputForm liftIngredientsState={this.liftIngredientsState} />
                                     <p className="add-titles">Methods:</p>
                                     <InputFormMethods liftMethodsState={this.liftMethodsState} />
+                                    <div>
+                                        <div className="btn add-photo mt-4" onClick={() => this.handleOpen()}>{photo}</div>
+                                        <Modal show={this.state.show} aria-labelledby="contained-modal-title-vcenter" centered>
+                                            <Modal.Header>
+                                                <Modal.Title className="w-100">
+                                                    <i className="far fa-window-close float-right" onClick={() => this.handleClose()}></i>
+                                                </Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>
+                                                <input type="file"
+                                                    className=""
+                                                    name="image"
+                                                    id="file"
+                                                    multiple
+                                                    onChange={e => this.handleFileUpLoad(e)} />
+                                            </Modal.Body>
+                                        </Modal>
+                                    </div>
                                     <div className="input-group-append">
                                         <input className="btn btn-save-add mt-3" type="submit" value="Send" onSubmit={this.handleFormSubmit} />
                                     </div>
                                 </div>
                             </form>
                         </div>
-
                     </div>
 
                 </div>

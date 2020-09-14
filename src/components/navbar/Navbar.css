@@ -1,11 +1,19 @@
 .navbar {
     background-color: var(--primary);
     color: var(--light);
+    border-bottom: 1px solid var(--bg)!important;
+    border-top: 1px solid var(--bg)!important;
+
+
 }
 
 
 nav i {
     color: var(--light) !important
+}
+
+nav {
+
 }
 
 .navbar img {

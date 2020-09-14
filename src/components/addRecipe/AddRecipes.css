@@ -1,9 +1,6 @@
 .add {
     margin: 8px !important;
-    /* display: flex;
-    flex-direction: column; */
 }
-
 
 .add-input {
     border: none;
@@ -19,7 +16,8 @@
 }
 
 .icon-add {
-    color: var(--primary)
+    color: var(--primary);
+    align-self: center;
 }
 
 .add-input::placeholder {
@@ -43,20 +41,9 @@
     color: var(--text);
 }
 
-/* .icon-add {
-    padding: 0!important;
-    color: #004e98;
-} */
-
-.input-ingredients {
-    /* display: flex;
-    align-items: center; */
-    /* border: 1px solid green; */
-}
-
 .add-font {
     display: flex;
-    color: #004e98;
+    color: var(--text);
     font-size: 14px;
 }
 
@@ -68,14 +55,26 @@
 .inputs-ingredients {
     display: flex;
     flex-direction: column;
+    /* align-items: flex-end; */
 
+}
+
+.input-ingredients-row {
+    display: flex;
+}
+
+.add-photo {
+    background-color: var(--bg)!important;
+    color: var(--light)!important
+    
 }
 
 .add-ingredient {
     font-size: 16px;
-    border-radius: 5px;
-    color: var(--text);
+    color: var(--bg);
     width: auto;
+    margin-right:-12px!important;
+    align-self: flex-end;
 }
 
 .input-group-add {
@@ -95,13 +94,30 @@
     border-radius: 15px;
     padding: 15px;
 }
-/*
-.save-recipe {
-    background-color: var(--primary)!important;
-    color: var(--light)!important;
-    margin-top: 20px;
-}
 
-.file-input-recipe {
+
+@media (min-width:600px) {
+    .add-main {
+        padding-top: 40px!important;
+    }
+
+    .add {
+        display: flex;
+        justify-content: center
+    }
+    .add-input  {
+        font-size: 18px
+    }
     
-} */
+    .add-number {
+        width: 100px;
+    }
+
+    .add-titles {
+        font-size: 18px;
+    }
+
+    .add-ingredient {
+        font-size: 20px;
+    }
+}

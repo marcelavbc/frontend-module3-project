@@ -30,6 +30,6 @@
 }
 
 .fa-trash-alt {
-    color: var(--bg)!important;
     margin-right: 8px;
+    color: red;
 }

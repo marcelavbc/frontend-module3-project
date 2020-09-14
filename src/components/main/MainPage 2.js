@@ -15,7 +15,7 @@ export default class MainPage extends Component {
     }
 
     getAllrecipes = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/all`)
+        axios.get('http://localhost:5000/api/recipes/all')
             .then(response => {
                 this.setState({
                     allRecipes: response.data
@@ -42,7 +42,6 @@ export default class MainPage extends Component {
                     servings={ele.servings}
                     readyInMinutes={ele.readyInMinutes}
                     logged={this.state.loggedInUser}
-                    showSavedRecipes={this.props.showSavedRecipes}
                 />
             })
         }
@@ -53,15 +52,15 @@ export default class MainPage extends Component {
                         <Navbar
                             user={this.props.loggedInUser}
                             text="What's new?"
-                        />
+                            link='/profile' />
                     </div>
-                    <div className="row mb-5 mt-5">
+                    <div className="row mb-5  mt-5">
                         {cards}
                     </div>
                 </div>
                 <div className="row">
-                    <Footer
-                        user={this.state.loggedInUser} />
+                    <Footer 
+                    user={this.state.loggedInUser} />
                 </div>
 
             </div>

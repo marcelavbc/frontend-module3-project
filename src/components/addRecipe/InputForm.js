@@ -48,53 +48,49 @@ export default class InputForm extends Component {
 
         let { extendedIngredients } = this.state
         return (
-            <div className="inputs-ingredients">
-
+            <div className="inputs-ingredients row mx-2 mb-4">
                 {extendedIngredients.map((ele, index) => {
 
                     return (
-                        <div key={index} className="form-group input-ingredients row" >
-                            <div className="add-font col-12 mb-0">
-                                <p>Amount:</p>
-                                <p>Unit:</p>
-                                <p>Name:</p>
-                            </div>
-
+                        <div key={index} className="form-group input-ingredients-row align-items-center " >
                             <input
-                                className="add-input add-number col-3"
+                                className="add-input add-number col-2"
                                 type="number"
                                 name="amount"
                                 key={'amount' + index}
                                 value={ele.amount}
                                 autoComplete="off"
+                                placeholder="Qt."
                                 onChange={(event) => this.handleChange(index, event)}
                             />
 
                             <input
-                                className="add-input col-3 mx-1"
+                                className="add-input col-3 mx-3"
                                 type="text"
                                 name="unit"
                                 key={'unit' + index}
                                 value={ele.unit}
                                 autoComplete="off"
+                                placeholder="Un."
                                 onChange={(event) => this.handleChange(index, event)}
                             />
 
                             <input
-                                className="add-input col mx-1"
+                                className="add-input col"
                                 type="text"
                                 name="name"
                                 key={'name' + index}
                                 value={ele.name}
                                 autoComplete="off"
+                                placeholder="Name"
                                 onChange={(event) => this.handleChange(index, event)}
                             />
                             <i className="icon-add col-1 fas fa-trash text-center" onClick={() => this.removeInput(index)}></i>
-                            <i className="fas fa-plus col-1 add-ingredient" onClick={this.addInput}></i>
                         </div>
                     )
                 })
                 }
+                <i className="fas fa-plus col-1 add-ingredient" onClick={this.addInput}></i>
             </div>
         )
     }

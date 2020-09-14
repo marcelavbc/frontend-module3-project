@@ -2,10 +2,9 @@ body {
   margin: 0;
   padding: 0;
   --primary: #507DBC;
-  --secondary: #13C7B6;
+  --secondary: #29524A;
   --text: #28190E;
   --light: #EFEDE6;
-  /* --bg: #13C7B6 */
   --bg: #FFB400
 }
 
@@ -17,5 +16,10 @@ body {
 }
 
 a {
-  text-decoration: none!important;
+  text-decoration: none !important;
+  color: var(--light)!important
+}
+
+.fa-trash {
+  color: red !important
 }
