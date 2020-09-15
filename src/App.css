@@ -23,3 +23,7 @@ a {
 .fa-trash {
   color: red !important
 }
+
+input[type="text"], input[type="password"], textarea, select { 
+  outline: none;
+}

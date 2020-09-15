@@ -79,7 +79,8 @@ class Signup extends Component {
                 {/* <a href="/auth/google">Google</a> */}
                 <div className="already d-flex flex-column mt-3">
                     <p className="m-0 mr-3 mb-3">Already have account?</p>
-                    <Link to={"/login"}>Login!</Link>
+                    <Link className="not-found-link" to={"/login"}>Login!</Link>
+                    {/* <Link to={"auth/google"}>Google</Link> */}
                 </div>
 
             </div>

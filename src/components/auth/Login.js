@@ -66,7 +66,7 @@ export default class Login extends Component {
 
                 <div className="already d-flex flex-column mt-3">
                     <p className="m-0 mr-3 mb-3">Don't have an account yet?</p>
-                    <Link to={"/signup"}>Sign up!</Link>
+                    <Link className="not-found-link" to={"/signup"}>Sign up!</Link>
                 </div>
             </div>
         )

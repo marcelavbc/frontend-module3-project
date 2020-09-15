@@ -12,10 +12,33 @@
     color: var(--text)
 }
 
-@media (min-width:600px) {
+.input-search-user {
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    padding: 5px;
+    overflow: hidden !important;
+}
 
+.recipe-div-user-profile {
+    min-width: 300px;
+    padding: 0 5px 0 0;
+}
+
+@media (min-width:600px) {
     .users-div {
-        padding-top: 30px!important;
-        margin: 0 180px!important;
+        padding-top: 30px !important;
+        margin: 0 180px !important;
+    }
+
+    .recipe-div-user-profile {
+        min-width: 600px;
+    }
+
+    .recipes-h5 {
+        font-size: 30px;
+    }
+
+    .list-avatar {
+       font-size: 20px
     }
 }

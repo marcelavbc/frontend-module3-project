@@ -5,7 +5,6 @@ import Footer from '../footer/Footer';
 import { Link } from 'react-router-dom';
 import './Recipes.css'
 import EditRecipe from './EditRecipe';
-import AddRecipe from '../addRecipe/AddRecipe';
 
 export default class RecipeDetails extends Component {
     constructor(props) {
@@ -37,8 +36,7 @@ export default class RecipeDetails extends Component {
             id: this.props.match.params.id,
             savedRecipes: this.props.savedRecipes,
             origin: origin,
-            savedId: savedId
-
+            savedId: savedId,
         }
     }
 
@@ -54,6 +52,8 @@ export default class RecipeDetails extends Component {
                 })
             })
     }
+
+
 
     save = () => {
         if (this.state.saved) {

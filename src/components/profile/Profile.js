@@ -6,7 +6,6 @@ import Navbar from '../navbar/Navbar';
 import { Modal, Tabs, Tab } from 'react-bootstrap'
 import axios from 'axios'
 import RecipesInProfile from '../recipes/RecipesInProfile'
-import MainRecipeCard from '../main/MainRecipeCard'
 export default class Profile extends Component {
     constructor(props) {
         super(props)
@@ -130,6 +129,7 @@ export default class Profile extends Component {
                         name="quote"
                         placeholder={this.state.loggedInUser.quote}
                         className="quote-input"
+                        autoComplete="off"
                         onChange={(event) => this.handleChangeQuote(event)}
                     />
                     <input type="submit" value="Save" className="save btn" />

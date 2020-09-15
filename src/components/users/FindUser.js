@@ -43,7 +43,7 @@ export default class FindUser extends Component {
             <div className="container-fluid">
                 <div>
                     <div className="row">
-                        <Navbar user={this.state.loggedInUser} text='Cooks' link='/profile' />
+                        <Navbar user={this.state.loggedInUser} text='Chefs' link='/profile' />
                     </div>
 
                     <div className="row mt-3 users-div d-flex flex-column">

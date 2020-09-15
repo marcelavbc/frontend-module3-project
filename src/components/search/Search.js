@@ -6,7 +6,7 @@ import './Search.css'
 import Ingredients from '../ingredients/Ingredients'
 import IngredientAdded from '../ingredients/IngredientAdded'
 import Recipes from '../recipes/Recipes'
-import Loading from './Loading'
+import Loading from '../extras/Loading'
 
 export default class Search extends Component {
     constructor(props) {
@@ -169,7 +169,6 @@ export default class Search extends Component {
         }
         let listRecipes;
         if (this.state.isClicked) {
-            console.log('recipes to map:', this.state.recipes)
             listRecipes = this.state.loading ? <Loading /> : this.state.recipes.map((ele, i) => {
                 // console.log('ele in search', ele)
                 return <Recipes id={ele.id} key={i} title={ele.title} src={ele.image} missed={ele.missedIngredientCount} usedIngredients={ele.extendedIngredients} minutes={ele.readyInMinutes + '\''} serving={ele.servings} recipes={ele} saved={this.state.savedRecipes} user={this.props.user} showSavedRecipes={this.props.showSavedRecipes} />

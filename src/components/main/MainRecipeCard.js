@@ -61,8 +61,8 @@ export default class MainRecipeCard extends Component {
         }
 
         return (
-            <div className="col-12 col-md-3 mt-2 d-flex mt-md-4 ">
-                <div className="main-card card">
+            <div className="col-12 col-md-4 mt-2 d-flex mt-md-4 ">
+                <div className="main-card ">
                     <div className="top-card-main">
                         <img className="avatar-main" src={this.props.avatar} alt={this.props.OwnerUsername} />
                         <Link to={`/users/${this.props.recipeOwner}`}><p className="main-card-user">{'@' + this.props.username}</p></Link>

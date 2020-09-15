@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Footer from '../footer/Footer'
 import Navbar from '../navbar/Navbar';
 import axios from 'axios'
-import RecipesInProfile from '../recipes/RecipesInProfile';
+import RecipesInUserProfile from './RecipesInUserProfile'
 
 export default class UsersProfile extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ export default class UsersProfile extends Component {
                 // console.log('array without first element:' , userRecipes)
                 this.setState({
                     user: user,
-                    recipes : userRecipes
+                    recipes: userRecipes
                 })
             })
     }
@@ -46,13 +46,13 @@ export default class UsersProfile extends Component {
             name = this.state.user.username
             quote = this.state.user.quote
             userRecipes = this.state.recipes.map((ele, i) => {
-                return <RecipesInProfile key={i} title={ele.title} src={ele.imagePath} id={ele._id}/> 
+                return <RecipesInUserProfile key={i} title={ele.title} src={ele.imagePath} id={ele._id} loggedInUser={this.props.user} />
             })
         } else {
             image = null
             name = null
             quote = null
-            userRecipes =null
+            userRecipes = null
         }
 
         return (
@@ -61,15 +61,13 @@ export default class UsersProfile extends Component {
                     <div className="row">
                         <Navbar user={this.state.loggedUser} text={name} link='/users' />
                     </div>
-
                     <div className="row mb-5 mt-5">
-                        <section className="profile-info-div">
+                        <section className="profile-info-div mt-md-5">
                             <div className="col user-data">
                                 <img className="profile-picture" src={image} alt={name} />
                             </div>
 
                             <div className="col-8 user-nickname">
-
                                 <p className="nickname">@{name}</p>
                                 <div className="d-flex align-items-center">
                                     <p>{quote}</p>
@@ -79,23 +77,16 @@ export default class UsersProfile extends Component {
                         </section>
 
                         <div className="recipe-book row">
-                            <div className="col ml-2 mt-3">
-                            <h5>Recipes</h5>
-                            {userRecipes}
+                            <div className="col ml-2 ml-md-5 mt-3 mt-md-5">
+                                <h5 className="recipes-h5 mb-4">Recipes</h5>
+                                {userRecipes}
                             </div>
-                            
                         </div>
-
                     </div>
-
-
                 </div>
                 <div className="row">
-
                     <Footer user={this.state.loggedUser} />
-
                 </div>
-
             </div>
         )
     }

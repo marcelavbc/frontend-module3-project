@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-
 export default class FindUsersList extends Component {
-
-
     render() {
         let filteredUsers;
         let rows;

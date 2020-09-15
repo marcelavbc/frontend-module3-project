@@ -55,7 +55,7 @@ export default class MainPage extends Component {
                             text="What's new?"
                         />
                     </div>
-                    <div className="row mb-5 mt-5">
+                    <div className="row main-div mb-5">
                         {cards}
                     </div>
                 </div>

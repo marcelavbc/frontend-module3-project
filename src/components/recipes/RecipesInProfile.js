@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import './Recipes.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-
-
 export default class RecipesInProfile extends Component {
     constructor(props) {
         super(props)
@@ -30,7 +28,7 @@ export default class RecipesInProfile extends Component {
             axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/recipe/${this.props.id}`, { withCredentials: true })
                 .then(response => {
                     this.props.updateMyRecipes(response)
-                    
+
                 })
         }
     }
@@ -47,7 +45,8 @@ export default class RecipesInProfile extends Component {
                     </div>
                     <div className="recipes-icons mx-2">
                         <Link to={`/recipe/${this.props.recipeId}`}><i className="fas fa-info info-icon-profile"></i></Link>
-                        <i className="info-icon-profile fas fa-trash" onClick={this.deleteRecipe}></i>                    </div>
+                        <i className="info-icon-profile fas fa-trash" onClick={this.deleteRecipe}></i>
+                    </div>
                 </div>
             </div>
         )

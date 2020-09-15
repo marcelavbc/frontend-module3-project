@@ -15,6 +15,7 @@ import FindUser from './components/users/FindUser';
 import UsersProfile from './components/users/UsersProfile';
 import MainPage from './components/main/MainPage';
 import EditRecipe from './components/recipes/EditRecipe';
+import NotFound from './components/extras/NotFound'
 
 
 export default class App extends Component {
@@ -86,6 +87,8 @@ export default class App extends Component {
           <Route path="/add" render={props => <AddRecipe {...props} user={this.state.loggedInUser} />} />
           <Route exact path="/users" render={props => <FindUser {...props} user={this.state.loggedInUser} />} />
           <Route path="/users/:id" render={props => <UsersProfile {...props} user={this.state.loggedInUser} />} />
+          <Route component={NotFound} />
+
         </Switch>
       </div>
     )
