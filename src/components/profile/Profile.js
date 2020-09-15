@@ -110,9 +110,6 @@ export default class Profile extends Component {
             })
     }
 
-    
-
-
 
     render() {
         let quote = '';

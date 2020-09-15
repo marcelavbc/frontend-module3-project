@@ -80,7 +80,12 @@ export default class RecipeDetails extends Component {
         } else {
             axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.state.id }, { withCredentials: true })
                 .then(data => {
-                    let copySaved = [...this.props.savedRecipes]
+                    let copySaved;
+                    if (this.props.savedRecipes) {
+                        copySaved = [...this.props.savedRecipes]
+                    } else {
+                        copySaved = []
+                    }
                     copySaved.push(data.data)
                     this.setState({
                         saved: true,
@@ -160,16 +165,16 @@ export default class RecipeDetails extends Component {
                             </div>
                         </div>
                         <div className="d-flex row align-items-center">
-                                <div className="col-7">
-                                    <img className="img-details" src={src} alt={title} />
-                                </div>
-                                <div className="col">
-                                    <ul className="details-list">
-                                        {owner}
-                                        <li><i className="far fa-clock"></i> {readyInMinutes} minutes</li>
-                                        <li><i className="fas fa-utensils"></i> {servings} servings</li>
-                                    </ul>
-                                </div>
+                            <div className="col-7">
+                                <img className="img-details" src={src} alt={title} />
+                            </div>
+                            <div className="col">
+                                <ul className="details-list">
+                                    {owner}
+                                    <li><i className="far fa-clock"></i> {readyInMinutes} minutes</li>
+                                    <li><i className="fas fa-utensils"></i> {servings} servings</li>
+                                </ul>
+                            </div>
                         </div>
                         <div className="col-12 mt-4">
                             <p className="details-info-title">Ingredients:</p>
