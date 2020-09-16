@@ -37,7 +37,6 @@ export default class MainRecipeCard extends Component {
                     this.setState({
                         saved: false
                     })
-                    this.props.showSavedRecipes()
                 })
         } else {
             axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
@@ -46,10 +45,10 @@ export default class MainRecipeCard extends Component {
                         saved: true,
                         savedRecipeId: data.data._id
                     })
-                    this.props.showSavedRecipes()
-
                 })
         }
+        this.props.showSavedRecipes()
+
     }
 
     render() {

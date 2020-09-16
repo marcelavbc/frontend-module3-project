@@ -42,6 +42,8 @@ export default class RecipeDetails extends Component {
 
     componentDidMount() {
         this.getRecipeDetails()
+        this.props.showSavedRecipes()
+
     }
 
     getRecipeDetails = () => {
@@ -65,7 +67,6 @@ export default class RecipeDetails extends Component {
                             saved: false
                         })
                         this.props.showSavedRecipes()
-
                     })
             } else {
                 axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedInternalRecipes/${this.state.savedId}`, { withCredentials: true })
@@ -122,7 +123,7 @@ export default class RecipeDetails extends Component {
             extendedIngredients = this.state.recipe.extendedIngredients.map((ele, i) => {
                 return <li key={i}>{ele.amount} {ele.unit} {ele.name}</li>
             })
-            if (this.state.recipe.extendedIngredients[0]) {
+            if (this.state.recipe.analyzedInstructions[0]) {
                 analyzedInstructions = this.state.recipe.analyzedInstructions[0].steps.map((ele, i) => {
                     return <div key={i}><li className="li-details mb-2"  >{ele.number}) {ele.step}</li><hr></hr></div>
                 })

@@ -55,8 +55,14 @@ export default class Recipes extends Component {
         } else {
             axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
                 .then(data => {
-                    let copySaved = [...this.state.savedRecipes]
-                    copySaved.push(data.data)
+                    let copySaved;
+
+                    if(this.state.savedRecipes){
+                        copySaved = [...this.state.savedRecipes]
+                        copySaved.push(data.data)
+                    } else {
+                        copySaved.push(data.data)
+                    }
                     this.setState({
                         saved: true,
                         savedRecipes: copySaved
