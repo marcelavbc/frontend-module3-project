@@ -28,8 +28,14 @@ export default class RecipeDetails extends Component {
                     }
                     return ele.recipe._id == this.props.match.params.id
                 }
+
             })
-        }
+            console.log('tamanho id ', this.props.match.params.id.length)
+            if(this.props.match.params.id.length < 15){
+                origin = 'api'
+            }
+        } 
+
         this.state = {
             saved: saved,
             loggedInUser: this.props.user,
@@ -90,7 +96,8 @@ export default class RecipeDetails extends Component {
                     copySaved.push(data.data)
                     this.setState({
                         saved: true,
-                        savedRecipes: copySaved
+                        savedRecipes: copySaved,
+                        savedId: data.data._id
                     })
                     this.props.showSavedRecipes()
                 })
@@ -114,12 +121,13 @@ export default class RecipeDetails extends Component {
         let userId;
 
         if (this.state.recipe) {
-            // console.log(this.state.recipe)
-
             title = <p className="details-title m-0 mr-3">{this.state.recipe.title || this.state.recipe.recipe.title}</p>
             src = this.state.recipe.image || this.state.recipe.imagePath || this.state.recipe.recipe.imagePath
             servings = this.state.recipe.servings
             readyInMinutes = this.state.recipe.readyInMinutes
+            if (this.state.extendedIngredients) {
+
+            }
             extendedIngredients = this.state.recipe.extendedIngredients.map((ele, i) => {
                 return <li key={i}>{ele.amount} {ele.unit} {ele.name}</li>
             })
@@ -138,7 +146,7 @@ export default class RecipeDetails extends Component {
                 userId = null
             } else if (this.state.loggedInUser._id !== this.state.recipe.owner._id) {
                 userId = this.state.recipe.owner._id
-                owner = <Link className="link-user" to={`/users/${userId}`}><li className="link-user"><i className="fas fa-at"></i> {this.state.recipe.owner.username}</li></Link>//add link
+                owner = <Link className="link-user" to={`/users/${userId}`}><li className="link-user"><img className="owner-avatar" src={this.state.recipe.owner.avatar} alt="owner"/> @{this.state.recipe.owner.username}</li></Link>//add link
                 edit = <i className={this.state.saved ? "icon-details fas fa-bookmark" : "icon-details far fa-bookmark"} onClick={this.save}></i>
             } else {
                 edit = <Link to={`/recipe/${this.state.id}/edit`}><i className="fas fa-pencil-alt" onClick={this.editRecipe}></i></Link>
@@ -166,10 +174,10 @@ export default class RecipeDetails extends Component {
                             </div>
                         </div>
                         <div className="d-flex row align-items-center">
-                            <div className="col-7">
+                            <div className="col-6">
                                 <img className="img-details" src={src} alt={title} />
                             </div>
-                            <div className="col">
+                            <div className="col px-0">
                                 <ul className="details-list">
                                     {owner}
                                     <li><i className="far fa-clock"></i> {readyInMinutes} minutes</li>

@@ -11,9 +11,14 @@ export default class Recipes extends Component {
         let saved = false
         let recipe;
         let recipeId;
+        let savedId = ''
+
         if (this.props.saved) {
             saved = this.props.saved.some(ele => {
                 if (ele.recipeId) {
+                    if (ele.recipeId == this.props.id) {
+                        savedId = ele._id
+                    }
                     return ele.recipeId === this.props.id
                 }
                 return false
@@ -29,7 +34,8 @@ export default class Recipes extends Component {
             open: false,
             saved: saved,
             savedRecipes: this.props.saved,
-            recipeId: recipeId
+            recipeId: recipeId,
+            savedId: savedId
         }
         this.open = this.open.bind(this)
     }
@@ -44,7 +50,7 @@ export default class Recipes extends Component {
 
     save = () => {
         if (this.state.saved) {
-            axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedApiRecipes/${this.state.recipeId}`, { withCredentials: true })
+            axios.delete(`${process.env.REACT_APP_API_URL}/api/profile/savedApiRecipes/${this.state.savedId}`, { withCredentials: true })
                 .then(data => {
                     this.setState({
                         saved: false
@@ -55,24 +61,22 @@ export default class Recipes extends Component {
         } else {
             axios.post(`${process.env.REACT_APP_API_URL}/api/profile/savedRecipes`, { recipeId: this.props.id }, { withCredentials: true })
                 .then(data => {
-                    let copySaved;
-
-                    if(this.state.savedRecipes){
-                        copySaved = [...this.state.savedRecipes]
-                        copySaved.push(data.data)
-                    } else {
-                        copySaved.push(data.data)
-                    }
+                    let copySaved = [...this.state.savedRecipes]
+                    copySaved.push(data.data)
                     this.setState({
                         saved: true,
-                        savedRecipes: copySaved
+                        savedRecipes: copySaved, 
+                        savedId: data.data._id
                     })
                     this.props.showSavedRecipes()
                 })
         }
-
     }
+
     render() {
+        // console.log('state', this.state)
+        // console.log('props', this.state)
+
         return (
             <div className="recipe-card col-md-3">
                 <h5 className="card-title recipe-title d-flex align-items-center justify-content-center">{this.props.title}</h5>

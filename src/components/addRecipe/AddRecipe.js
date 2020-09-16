@@ -22,7 +22,7 @@ export default class AddRecipe extends Component {
             servings: 0,
             extendedIngredients: [],
             analyzedInstructions: [],
-            imagePath: '',
+            image: '',
             owner: this.props.user._id,
             form: form,
             show: false
@@ -84,7 +84,7 @@ export default class AddRecipe extends Component {
                     servings: 0,
                     extendedIngredients: [],
                     analyzedInstructions: [],
-                    imagePath: ''
+                    image: ''
                 })
                 this.props.history.push('/main')
             })
@@ -93,7 +93,7 @@ export default class AddRecipe extends Component {
 
     handleFileUpLoad = (event) => {
         const uploadImage = this.state.form
-        uploadImage.set("imagePath", event.target.files[0])
+        uploadImage.set("image", event.target.files[0])
         this.setState({
             form: uploadImage,
             photo: event.target.files[0]
@@ -170,9 +170,8 @@ export default class AddRecipe extends Component {
                                             <Modal.Body>
                                                 <input type="file"
                                                     className=""
-                                                    name="imagePath"
+                                                    name="image"
                                                     id="file"
-                                                    multiple
                                                     onChange={e => this.handleFileUpLoad(e)} />
                                             </Modal.Body>
                                         </Modal>

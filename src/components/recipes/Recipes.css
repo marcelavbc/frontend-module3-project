@@ -225,6 +225,13 @@
     padding-bottom: 5px
 }
 
+.owner-avatar {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--primary);
+    border-radius: 50%
+}
+
 li {
     list-style: none;
 }
@@ -265,5 +272,14 @@ ul {
     .img-details {
         max-height: 250px;
         object-fit: contain
+    }
+
+    .owner-avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .link-user {
+        font-size: 20px !important
     }
 }

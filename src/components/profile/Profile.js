@@ -161,7 +161,6 @@ export default class Profile extends Component {
         let savedRecipeList;
         if (this.state.savedRecipes) {
             savedRecipeList = this.state.savedRecipes.slice(0).reverse().map((ele, i) => {
-                console.log(ele)
                 return (<RecipesInProfile
                     key={i}
                     title={ele.title || ele.recipe.title}
