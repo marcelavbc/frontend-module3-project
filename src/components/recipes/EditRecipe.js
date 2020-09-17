@@ -68,7 +68,7 @@ export default class EditRecipe extends Component {
         }
         axios.put(`${process.env.REACT_APP_API_URL}/api/recipe/${this.state.id}`, body, { withCredentials: true })
             .then(response => {
-                console.log('response', response)
+              
                 this.props.history.push('/profile')
                 this.getRecipeDetails()
             })

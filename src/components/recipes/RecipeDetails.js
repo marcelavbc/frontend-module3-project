@@ -30,11 +30,10 @@ export default class RecipeDetails extends Component {
                 }
 
             })
-            console.log('tamanho id ', this.props.match.params.id.length)
-            if(this.props.match.params.id.length < 15){
+            if (this.props.match.params.id.length < 15) {
                 origin = 'api'
             }
-        } 
+        }
 
         this.state = {
             saved: saved,
@@ -121,17 +120,27 @@ export default class RecipeDetails extends Component {
         let userId;
 
         if (this.state.recipe) {
+            if(this.state.recipe.imagePath === null) {
+                src = 'https://cdn0.iconfinder.com/data/icons/christmas-2379/60/dish__food__hot__meal__hotel-512.png'
+            } else {
+                src = this.state.recipe.image || this.state.recipe.imagePath || this.state.recipe.recipe.imagePath
+            }
+
             title = <p className="details-title m-0 mr-3">{this.state.recipe.title || this.state.recipe.recipe.title}</p>
-            src = this.state.recipe.image || this.state.recipe.imagePath || this.state.recipe.recipe.imagePath
             servings = this.state.recipe.servings
             readyInMinutes = this.state.recipe.readyInMinutes
             if (this.state.extendedIngredients) {
 
             }
-            extendedIngredients = this.state.recipe.extendedIngredients.map((ele, i) => {
-                return <li key={i}>{ele.amount} {ele.unit} {ele.name}</li>
-            })
-            if (this.state.recipe.analyzedInstructions[0]) {
+            if(this.state.extendedIngredients){
+                extendedIngredients = this.state.recipe.extendedIngredients.map((ele, i) => {
+                    return <li key={i}>{ele.amount} {ele.unit} {ele.name}</li>
+                })
+            } else {
+                extendedIngredients = null
+            }
+            
+            if (this.state.recipe.analyzedInstructions) {
                 analyzedInstructions = this.state.recipe.analyzedInstructions[0].steps.map((ele, i) => {
                     return <div key={i}><li className="li-details mb-2"  >{ele.number} {ele.step}</li><hr></hr></div>
                 })
@@ -146,7 +155,7 @@ export default class RecipeDetails extends Component {
                 userId = null
             } else if (this.state.loggedInUser._id !== this.state.recipe.owner._id) {
                 userId = this.state.recipe.owner._id
-                owner = <Link className="link-user" to={`/users/${userId}`}><li className="link-user"><img className="owner-avatar" src={this.state.recipe.owner.avatar} alt="owner"/> @{this.state.recipe.owner.username}</li></Link>//add link
+                owner = <Link className="link-user" to={`/users/${userId}`}><li className="link-user"><img className="owner-avatar" src={this.state.recipe.owner.avatar} alt="owner" /> @{this.state.recipe.owner.username}</li></Link>//add link
                 edit = <i className={this.state.saved ? "icon-details fas fa-bookmark" : "icon-details far fa-bookmark"} onClick={this.save}></i>
             } else {
                 edit = <Link to={`/recipe/${this.state.id}/edit`}><i className="fas fa-pencil-alt" onClick={this.editRecipe}></i></Link>

@@ -59,15 +59,22 @@ export default class MainRecipeCard extends Component {
             bookmark = (<p><i className={this.state.saved ? "icon-main fas fa-bookmark" : "icon-main far fa-bookmark"} onClick={this.save}></i></p>)
         }
 
+       let src;
+       if(this.props.src === null){
+           src = 'https://cdn0.iconfinder.com/data/icons/christmas-2379/60/dish__food__hot__meal__hotel-512.png'
+       } else {
+           src = this.props.src
+       }
+       
         return (
             <div className="col-12 col-md-4 col-lg-3 mt-2 d-flex mt-md-4 ">
                 <div className="main-card ">
                     <div className="top-card-main">
                         <img className="avatar-main" src={this.props.avatar} alt={this.props.OwnerUsername} />
-                        <Link to={`/users/${this.props.recipeOwner}`}><p className="main-card-user">{'@' + this.props.username}</p></Link>
+                        <Link to={`/users/${this.props.recipeOwner}`}><p className="main-card-user">{'@' + this.props.username} </p></Link>
                     </div>
 
-                    <Link to={`/recipe/${this.props.id}`}><img className="recipe-image-main" src={this.props.src} alt={this.props.title} /></Link>
+                    <Link to={`/recipe/${this.props.id}`}><img className="recipe-image-main" src={src} alt={this.props.title} /></Link>
                     <div className="card-body main-recipe-description">
                         <p className="recipe-title-main text-center">{this.props.title}</p>
                         <div className="main-icons">

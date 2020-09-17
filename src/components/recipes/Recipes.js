@@ -74,8 +74,7 @@ export default class Recipes extends Component {
     }
 
     render() {
-        // console.log('state', this.state)
-        // console.log('props', this.state)
+  
 
         return (
             <div className="recipe-card col-md-3">

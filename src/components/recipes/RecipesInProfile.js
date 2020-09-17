@@ -36,11 +36,17 @@ export default class RecipesInProfile extends Component {
 
 
     render() {
+        let src;
+        if(this.props.src === null) {
+            src = 'https://cdn0.iconfinder.com/data/icons/christmas-2379/60/dish__food__hot__meal__hotel-512.png'
+        } else {
+            src = this.props.src
+        }
         return (
             <div>
                 <div className="recipe-div">
                     <div className="info-file">
-                        <img className="my-recipe-image mr-2" src={this.props.src} alt={this.props.title} />
+                        <img className="my-recipe-image mr-2" src={src} alt={this.props.title} />
                         <p className="m-0 text-title">{this.props.title}</p>
                     </div>
                     <div className="recipes-icons mx-2">
