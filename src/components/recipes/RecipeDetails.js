@@ -120,6 +120,7 @@ export default class RecipeDetails extends Component {
         let userId;
 
         if (this.state.recipe) {
+            console.log(this.state.recipe.analyzedInstructions[0])
             if(this.state.recipe.imagePath === null) {
                 src = 'https://cdn0.iconfinder.com/data/icons/christmas-2379/60/dish__food__hot__meal__hotel-512.png'
             } else {
@@ -132,14 +133,14 @@ export default class RecipeDetails extends Component {
             if (this.state.extendedIngredients) {
 
             }
-            if(this.state.extendedIngredients){
+            if(this.state.recipe.extendedIngredients){
                 extendedIngredients = this.state.recipe.extendedIngredients.map((ele, i) => {
                     return <li key={i}>{ele.amount} {ele.unit} {ele.name}</li>
                 })
             } else {
                 extendedIngredients = null
             }
-            
+
             if (this.state.recipe.analyzedInstructions) {
                 analyzedInstructions = this.state.recipe.analyzedInstructions[0].steps.map((ele, i) => {
                     return <div key={i}><li className="li-details mb-2"  >{ele.number} {ele.step}</li><hr></hr></div>
