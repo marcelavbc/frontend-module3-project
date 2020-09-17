@@ -172,6 +172,7 @@ export default class AddRecipe extends Component {
                                                     className=""
                                                     name="image"
                                                     id="file"
+                                                    multiple
                                                     onChange={e => this.handleFileUpLoad(e)} />
                                             </Modal.Body>
                                         </Modal>

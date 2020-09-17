@@ -31,7 +31,12 @@ class Signup extends Component {
                 this.props.getUser(response)//método do pai App.js, enviado a SignUp via props. Usamos aqui para enviar de volta ao pai o objeto de Signup
                 this.props.history.push(`/main/`);
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                this.setState({
+                    error: error.response.data.message
+                })
+            })
     }
 
     handleChange = (event) => {
@@ -40,6 +45,13 @@ class Signup extends Component {
     }
 
     render() {
+        let message;
+        if (this.state.error) {
+            message = <p className="text-center mb-4 error-message">{this.state.error}</p>
+        } else {
+            message = null
+        }
+
         return (
             <div className="container-fluid auth">
                 <h2>Sign up!</h2>
@@ -70,7 +82,7 @@ class Signup extends Component {
                         value={this.state.password}
                         onChange={e => this.handleChange(e)}
                     />
-                
+                    {message}
                     <button className="btn log-btn" type="submit">
                         Let's Cook!
                     </button>

@@ -229,7 +229,8 @@
     width: 20px;
     height: 20px;
     border: 1px solid var(--primary);
-    border-radius: 50%
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 li {

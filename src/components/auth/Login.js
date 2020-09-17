@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: '', password: ''};
+        this.state = {
+            username: '',
+            password: '',
+        };
         this.service = new AuthService();
     }
 
@@ -13,7 +16,6 @@ export default class Login extends Component {
         event.preventDefault();
         const username = this.state.username;
         const password = this.state.password;
-
         this.service.login(username, password)
             .then(response => {
                 this.setState({
@@ -26,7 +28,12 @@ export default class Login extends Component {
                 this.props.showSavedRecipes()
                 this.props.history.push(`/main`);
             })
-            .catch(error => console.log("the error:", error))
+            .catch(error => {
+                console.log("the error:", error)
+                this.setState({
+                    error: error.response.data.message
+                })
+            })
     }
 
     handleChange = (event) => {
@@ -38,6 +45,13 @@ export default class Login extends Component {
 
 
     render() {
+        let message;
+        if (this.state.error) {
+            message = <p className="error-message">{this.state.error}</p>
+        } else {
+            message = null
+        }
+
         return (
             <div className="container-fluid auth">
                 <h2>Login!</h2>
@@ -62,6 +76,7 @@ export default class Login extends Component {
                     <button className="btn log-btn" type="submit">
                         Let's Cook!
                     </button>
+                    {message}
                 </form>
 
                 <div className="already d-flex flex-column mt-3">

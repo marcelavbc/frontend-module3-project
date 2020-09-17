@@ -133,7 +133,7 @@ export default class RecipeDetails extends Component {
             })
             if (this.state.recipe.analyzedInstructions[0]) {
                 analyzedInstructions = this.state.recipe.analyzedInstructions[0].steps.map((ele, i) => {
-                    return <div key={i}><li className="li-details mb-2"  >{ele.number}) {ele.step}</li><hr></hr></div>
+                    return <div key={i}><li className="li-details mb-2"  >{ele.number} {ele.step}</li><hr></hr></div>
                 })
             } else {
                 analyzedInstructions = null
