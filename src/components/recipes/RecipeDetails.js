@@ -120,7 +120,6 @@ export default class RecipeDetails extends Component {
         let userId;
 
         if (this.state.recipe) {
-            console.log(this.state.recipe.analyzedInstructions[0])
             if(this.state.recipe.imagePath === null) {
                 src = 'https://cdn0.iconfinder.com/data/icons/christmas-2379/60/dish__food__hot__meal__hotel-512.png'
             } else {
